@@ -16,8 +16,8 @@ VALUES (3, 'Sport Fields', 'Places to meet and have fun with friends', 'Nature',
 
 
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (2, 1, 41.40338, 2.17403, "Carrer de Sardenya", "Some random building in Barcelona");
+VALUES (2, 1, 41.40338, 2.17403, 'Carrer de Sardenya', 'Some random building in Barcelona');
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (1, 3, 21.40338, 22.17403, "Cool Mountain Place", "Some random rockface in Libya");
+VALUES (1, 3, 21.40338, 22.17403, 'Cool Mountain Place', 'Some random rockface in Libya');
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (3, 2, 71.40338, 52.17403, "Russian Island Peninsula", "Middle of a body of water in Russia");
+VALUES (3, 2, 71.40338, 52.17403, 'Russian Island Peninsula', 'Middle of a body of water in Russia');

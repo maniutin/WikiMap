@@ -20,7 +20,7 @@ CREATE TABLE maps (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   category VARCHAR(255) NOT NULL,
-  map_image_url VARCHAR(255) NOT NULL DEFAULT "https://short.xcoder.io/WXjAKP5"
+  map_image_url VARCHAR(255) NOT NULL DEFAULT 'https://short.xcoder.io/WXjAKP5'
 );
 
 
@@ -33,23 +33,23 @@ CREATE TABLE map_points (
   title VARCHAR(255),
   description TEXT,
   address VARCHAR(255),
-  map_point_image_url VARCHAR(255) DEFAULT "https://short.xcoder.io/WXjAKP5"
+  map_point_image_url VARCHAR(255) DEFAULT 'https://short.xcoder.io/WXjAKP5'
 );
 
 CREATE TABLE favourites (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
+  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE
 );
 
 CREATE TABLE map_users (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE,
+  map_id INTEGER REFERENCES maps(id) ON DELETE CASCADE
 );
 
 CREATE TABLE point_favourites (
   id SERIAL PRIMARY KEY NOT NULL,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  point_id INTEGER REFERENCES map_points(id) ON DELETE CASCADE,
+  point_id INTEGER REFERENCES map_points(id) ON DELETE CASCADE
 );
