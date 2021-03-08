@@ -7,13 +7,3 @@ const findUser = (emailID, users) => {
   }
   return false;
 };
-
-const findUserName = (username, users) => {
-  for (const userID in users) {
-    const userEmail = users[userID].username;
-    if (userEmail === username) {
-      return users[userID];
-    }
-  }
-  return false;
-};

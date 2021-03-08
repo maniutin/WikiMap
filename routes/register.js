@@ -7,6 +7,7 @@ const { findUser, findUserName } = require("../helpers");
 // const { response } = require("express");
 
 module.exports = (db) => {
+  router.get("/", (req, res) => res.render("register"));
   router.post("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
