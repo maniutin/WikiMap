@@ -12,7 +12,7 @@ VALUES (1, 'Healthy Food', 'Healthy food spots in Tor', 'Food', 'https://images.
 INSERT INTO maps (owner_id, title, description, category, map_image_url)
 VALUES (2, 'BC Hikes', 'Great weekend Hiking trips', 'Nature', 'https://images.unsplash.com/photo-1470770903676-69b98201ea1c');
 INSERT INTO maps (owner_id, title, description, category, map_image_url)
-VALUES (3, 'Sport Fields', 'Places to meet and have fun with friends', 'Nature', 'https://images.unsplash.com/photo-1500871872539-d3fff9af3ce7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D');
+VALUES (3, 'Sport Fields', 'Places to meet and have fun with friends', 'Nature', 'https://images.unsplash.com/photo-1500871872539-d3fff9af3ce7');
 INSERT INTO maps (owner_id, title, description, category, map_image_url)
 VALUES (1, 'Parquor Spots', 'Cityscapes for ideal parqouring', 'Outdoor Recreation', 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd');
 

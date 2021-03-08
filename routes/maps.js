@@ -30,16 +30,30 @@ module.exports = (db) => {
     //   return res.redirect("/")
     // }
 
-    console.log("Response is: ", res);
+    // console.log("Response is: ", res);
     res.render("new");
   });
+
   router.post("/new", (req, res) => {
     const data = req.body;
-    const values = [];
-    db.query(`
-    INSERT INTO maps (title, description, category, map_image_url)
-    VALUES ($1, $2, $3, $4);
-    `, values)
+    const queryParams = [];
+    console.log(data)
+
+    for (const key of Object.keys(data)) {
+      queryParams.push(data[key]);
+    }
+
+    const queryString = `
+    INSERT INTO maps (owner_id, title, category, description, map_image_url)
+    VALUES (1, $1, $2, $3, $4);
+    `
+
+    console.log(queryParams);
+    db.query(queryString, queryParams)
+      .then(res => console.log(res.rows))
+      .catch(err => console.error("query insert error:", err));
+
+    res.redirect("/maps/new");
   });
 
   router.get("/:mapID", (req, res) => {
