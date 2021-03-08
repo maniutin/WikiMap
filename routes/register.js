@@ -44,6 +44,7 @@ module.exports = (db) => {
             queryParams
           ).then((response) => {
             const user = response.rows[0];
+            console.log(user);
             // req.session.user_id = user.id;
             const data = {
               error: false,
