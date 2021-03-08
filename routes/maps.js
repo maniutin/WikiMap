@@ -29,15 +29,21 @@ module.exports = (db) => {
     // if (!currentUser) {
     //   return res.redirect("/")
     // }
+    // const templateVars = {
+    //   user: currentUser,
+    // };
 
-    // console.log("Response is: ", res);
     res.render("new");
   });
 
   router.post("/new", (req, res) => {
+    // const currentUser = req.session.userId;
+    // if (!currentUser) {
+    //   return res.redirect("/")
+    // }
     const data = req.body;
     const queryParams = [];
-    console.log(data)
+    console.log(data);
 
     for (const key of Object.keys(data)) {
       queryParams.push(data[key]);
@@ -46,14 +52,13 @@ module.exports = (db) => {
     const queryString = `
     INSERT INTO maps (owner_id, title, category, description, map_image_url)
     VALUES (1, $1, $2, $3, $4);
-    `
+    `;
 
-    console.log(queryParams);
     db.query(queryString, queryParams)
       .then(res => console.log(res.rows))
       .catch(err => console.error("query insert error:", err));
 
-    res.redirect("/maps/new");
+    res.redirect("/");
   });
 
   router.get("/:mapID", (req, res) => {
