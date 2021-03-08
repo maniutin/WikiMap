@@ -11,20 +11,26 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
+
     db.query(`SELECT * FROM maps;`)
       .then(data => {
-        const maps = data.rows;
-        res.json({ maps });
+        const templateVars = {
+          maps: data.rows
+        }
+        res.render("maps", templateVars);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
     });
 
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
+    // req.session.userId would be assigned to a random string on successful post to /register
+
     // const currentUser = req.session.userId;
     // if (!currentUser) {
     //   return res.redirect("/")
