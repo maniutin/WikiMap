@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const dbParams = require('./../lib/db.js');
 const express = require('express');
 const router  = express.Router();
 
@@ -54,8 +55,11 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
       .then(data => {
-        const map = data.rows[0];
-        res.json({ map });
+        const templateVars = {
+          map: data.rows[0],
+          key: dbParams.api
+        }
+        res.render("map-viewer", templateVars);
       })
       .catch(err => {
         res
