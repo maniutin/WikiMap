@@ -17,9 +17,6 @@ module.exports = (db) => {
         const templateVars = {
           maps: data.rows
         }
-        // res.json({ maps });
-        // return maps;
-        console.log(templateVars);
         res.render("maps", templateVars);
       })
       .catch(err => {
@@ -32,12 +29,13 @@ module.exports = (db) => {
 
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
+    // req.session.userId would be assigned to a random string on successful post to /register
+
     // const currentUser = req.session.userId;
     // if (!currentUser) {
     //   return res.redirect("/")
     // }
 
-    // console.log("Response is: ", res);
     res.render("new");
   });
 
