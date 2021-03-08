@@ -8,18 +8,17 @@ const { findUser, findUserName } = require("../helpers");
 
 module.exports = (db) => {
   router.get("/", (req, res) => res.render("register"));
+
   router.post("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
 
         const getUser = findUser(req.body.email, users);
-        const getUserName = findUserName(req.body.username, users);
         const password = req.body.password;
         req.body.canRegister = false;
 
-        console.log("CU", getUser, "CUNAME", getUserName);
-        if (!getUser && !getUserName) {
+        if (!getUsere) {
           req.body.canRegister = true;
         }
 
