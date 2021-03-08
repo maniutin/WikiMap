@@ -3,7 +3,7 @@ const router = express.Router();
 
 // const bcrypt = require("bcrypt");
 
-const { findUser, findUserName } = require("../helpers");
+const { findUser } = require("../helpers");
 // const { response } = require("express");
 
 module.exports = (db) => {
