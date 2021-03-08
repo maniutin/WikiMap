@@ -11,16 +11,23 @@ const router  = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
+
     db.query(`SELECT * FROM maps;`)
       .then(data => {
-        const maps = data.rows;
-        res.json({ maps });
+        const templateVars = {
+          maps: data.rows
+        }
+        // res.json({ maps });
+        // return maps;
+        console.log(templateVars);
+        res.render("maps", templateVars);
       })
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
     });
 
   router.get("/new", (req, res) => {
@@ -30,9 +37,10 @@ module.exports = (db) => {
     //   return res.redirect("/")
     // }
 
-    console.log("Response is: ", res);
+    // console.log("Response is: ", res);
     res.render("new");
   });
+
   router.post("/new", (req, res) => {
     const data = req.body;
     const values = [];
