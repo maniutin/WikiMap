@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/new", (req, res) => {
+  router.get("/", (req, res) => {
     // const currentUser = req.session.userId;
 
     // if (!currentUser) {
@@ -19,8 +19,8 @@ module.exports = (db) => {
     // res.send("get");
     res.render("new");
   });
-  router.post("/new", (req, res) => {
-    const data = req.body
+  router.post("new", (req, res) => {
+    const data = req.body;
     const values = [];
     db.query(`
     INSERT INTO maps (title, description, category, map_image_url)
