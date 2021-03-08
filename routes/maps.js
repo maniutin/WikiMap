@@ -25,6 +25,7 @@ module.exports = (db) => {
 
 // Paste /maps/new below as...
 //router.get("/new")
+//router.post("/new")
 
   router.get("/:mapID", (req, res) => {
 
