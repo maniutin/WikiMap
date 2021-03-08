@@ -23,9 +23,23 @@ module.exports = (db) => {
       });
     });
 
-// Paste /maps/new below as...
-//router.get("/new")
-//router.post("/new")
+  router.get("/", (req, res) => {
+    // Uncomment when we get session login updated
+    // const currentUser = req.session.userId;
+    // if (!currentUser) {
+    //   return res.redirect("/")
+    // }
+    console.log("Response is: ", res);
+    res.render("new");
+  });
+  router.post("new", (req, res) => {
+    const data = req.body;
+    const values = [];
+    db.query(`
+    INSERT INTO maps (title, description, category, map_image_url)
+    VALUES ($1, $2, $3, $4);
+    `, values)
+  });
 
   router.get("/:mapID", (req, res) => {
 
