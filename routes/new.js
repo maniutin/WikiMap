@@ -9,12 +9,23 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/maps/new", (req, res) => {
+  router.get("/new", (req, res) => {
+    // const currentUser = req.session.userId;
+
+    // if (!currentUser) {
+    //   return res.redirect("/")
+    // }
     console.log("Response is: ", res);
-    res.render("maps-new")
+    // res.send("get");
+    res.render("new");
   });
-  router.post("/maps/new", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+  router.post("/new", (req, res) => {
+    const data = req.body
+    const values = [];
+    db.query(`
+    INSERT INTO maps (title, description, category, map_image_url)
+    VALUES ($1, $2, $3, $4);
+    `, values)
       .then(data => {
         const users = data.rows;
         res.json({ users });
