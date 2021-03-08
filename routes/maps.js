@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
+
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM maps;`)
       .then(data => {
@@ -20,10 +21,29 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+    });
 
-//Put /maps/new below as...
+// Paste /maps/new below as...
 //router.get("/new")
 
+  router.get("/:mapID", (req, res) => {
+
+    const queryParams = [req.params.mapID];
+
+    db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
+      .then(data => {
+        const map = data.rows[0];
+        res.json({ map });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
+
+
   return router;
 };
+
+
