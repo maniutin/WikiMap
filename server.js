@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 8080;
 const ENV = process.env.ENV || "development";
 const express = require("express");
 const bodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require("morgan");
@@ -23,6 +24,17 @@ app.use(morgan("dev"));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [
+      "7f69fa85-caec-4d9c-acd7-eebdccb368d5",
+      "f13b4d38-41c4-46d3-9ef6-8836d03cd8eb",
+    ],
+  })
+);
+
 app.use(
   "/styles",
   sass({
@@ -37,6 +49,7 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
+const mapRoutes = require("./routes/maps");
 const widgetsRoutes = require("./routes/widgets");
 const registerRoutes = require("./routes/register");
 
@@ -46,12 +59,14 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/register", registerRoutes(db));
 // Note: mount other resources here, using the same pattern above
+app.use("/maps", mapRoutes(db));
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  // res.render("index");
+  res.redirect("/maps");
 });
 
 app.listen(PORT, () => {
