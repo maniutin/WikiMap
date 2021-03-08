@@ -23,16 +23,17 @@ module.exports = (db) => {
       });
     });
 
-  router.get("/", (req, res) => {
+  router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
     // const currentUser = req.session.userId;
     // if (!currentUser) {
     //   return res.redirect("/")
     // }
+
     console.log("Response is: ", res);
     res.render("new");
   });
-  router.post("new", (req, res) => {
+  router.post("/new", (req, res) => {
     const data = req.body;
     const values = [];
     db.query(`
