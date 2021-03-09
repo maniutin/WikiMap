@@ -27,7 +27,6 @@ module.exports = (db) => {
           user: userID ? user[0].email : null,
         };
         const isAjaxReq = req.xhr;
-        // console.log("USER: ", templateVars.user);
         if (isAjaxReq) {
           res.json(templateVars.maps);
         } else {
@@ -117,7 +116,7 @@ module.exports = (db) => {
     // }
     const data = req.body;
     const queryParams = [];
-    console.log(data);
+    // console.log(data);
 
     for (const key of Object.keys(data)) {
       queryParams.push(data[key]);
@@ -136,23 +135,50 @@ module.exports = (db) => {
   });
 
   router.get("/:mapID", (req, res) => {
-    const queryParams = [req.params.mapID];
+    // const queryParams = [req.params.mapID];
+    const userID = req.session.user_id ? req.session.user_id : 0;
 
-    db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
-      .then((data) => {
-        const templateVars = {
-          map: data.rows[0],
+    Promise.all([
+      Promise.resolve(
+        db.query(`SELECT * FROM maps WHERE id = ${req.params.mapID};`)
+      ),
+      Promise.resolve(db.query(`SELECT * FROM users WHERE id = ${userID};`)),
+    ])
+      .then((all) => {
+        const map = all[0].rows[0];
+        const user = all[1].rows;
+        let templateVars = {
+          map: map,
+          latitude: map.start_lat,
+          longitude: map.start_long,
           key: dbParams.api,
-          latitude: data.rows[0].start_lat,
-          longitude: data.rows[0].start_long,
-          user: req.session.user_id,
+          user: userID ? user[0].email : null,
         };
-
-        res.render("map-viewer", templateVars);
+        const isAjaxReq = req.xhr;
+        if (isAjaxReq) {
+          res.json(templateVars.maps);
+        } else {
+          res.render("map-viewer", templateVars);
+        }
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
+    // db.query(`SELECT * FROM maps WHERE id = ${req.parms.mapID};`)
+    //   .then((data) => {
+    //     const templateVars = {
+    //       map: data.rows[0],
+    //       key: dbParams.api,
+    //       latitude: data.rows[0].start_lat,
+    //       longitude: data.rows[0].start_long,
+    //       user: req.session.user_id,
+    //     };
+
+    //     res.render("map-viewer", templateVars);
+    //   })
+    //   .catch((err) => {
+    //     res.status(500).json({ error: err.message });
+    //   });
   });
 
   return router;
