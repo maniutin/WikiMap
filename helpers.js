@@ -7,6 +7,7 @@ const findUserByEmail = (emailID, users) => {
   }
   return false;
 };
+
 module.exports = {
   findUserByEmail,
 };
