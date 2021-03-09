@@ -17,22 +17,33 @@
   <body>
     <main>
       <div class="owners-maps-container">
-        <% for (const row of rows) { %>
-          <div class="owners-map">
-            <img src="<%= row.map_image_url %>" alt="<%= row.title %>" class="owners-map-img">
-            <div class="owners-map-content">
-              <%= row.title %>
-              <%= row.description %>
-              <%= row.category %>
+        <section>
+          <header>
+            <h4>My Maps</h4>
+            <h4>My Favourites</h4>
+          </header>
+        </section>
+        <div id="favourites">
+
+        </div>
+        <div id="my-maps">
+          <% for (const row of ownerMaps) { %>
+            <div class="owners-map">
+              <img src="<%= row.map_image_url %>" alt="<%= row.title %>" class="owners-map-img">
+              <div class="owners-map-content">
+                <%= row.title %>
+                <%= row.description %>
+                <%= row.category %>
+              </div>
+              <div>
+                <a class="btn btn-primary" href="/maps/<%= row.id %>">View</a>
+                <form action="">
+                  <button class="btn btn-danger" id="map-delete">Delete</button>
+                </form>
+              </div>
             </div>
-            <div>
-              <a class="btn btn-primary" href="/maps/<%= row.id %>">Edit</a>
-              <form action="">
-                <button class="btn btn-danger">Delete</button>
-              </form>
-            </div>
+            <% } %>
           </div>
-          <% } %>
         </div>
 
     </main>

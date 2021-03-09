@@ -6,7 +6,6 @@ main {
 
     .owners-map {
       width: 100%;
-      background-color: blanchedalmond;
       // display: flex;
 
       .owners-map-img {
@@ -14,26 +13,30 @@ main {
       }
 
       // .owners-maps-content {
-      //   width: 75%
-      // }
-      // .owners-maps-btns {
-      //   width: 10%;
-      // }
+        //   width: 75%
+        // }
+        // .owners-maps-btns {
+          //   width: 10%;
+          // }
     }
 
   }
 }
 
 
-@media only screen and (min-width: 900px) {
+
+@media only screen and (min-width: 1024px) {
   main {
+    max-width: 1600px;
+    margin: auto;
+    background-color: blue;
+
     .owners-maps-container {
       width: 90%;
       margin: auto;
 
       .owners-map {
         width: 100%;
-        background-color: blanchedalmond;
         display: flex;
 
         .owners-map-img {

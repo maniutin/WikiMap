@@ -17,16 +17,29 @@ module.exports = (db) => {
       currentUser,
     };
 
-    const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    // const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    // const queryString = `SELECT * FROM favourites WHERE user_id = $1;`;
+    const queries = [
+      `SELECT * FROM maps WHERE owner_id = $1;`,
+      `SELECT * FROM favourites WHERE user_id = $1;`
+    ]
+
     const queryParams = [currentUser];
 
-    db.query(queryString, queryParams)
-    .then(response => {
-      console.log(response.rows);
-      templateVars.rows = response.rows;
-      console.log(templateVars);
-      res.render("profile", templateVars);
-    })
+    // Run all promises/queries and add them to the templateVars to be rendered
+    Promise.all([
+      db.query(queries[0], queryParams),
+      db.query(queries[1], queryParams)
+    ])
+    .then(([
+      mapsResponse,
+      favouritesResponse
+    ]) => {
+      templateVars.ownerMaps = mapsResponse.rows;
+      templateVars.favourites = favouritesResponse.rows;
+        console.log(templateVars);
+        res.render("profile", templateVars);
+      })
     .catch(err => console.error("query error:", err));
 
   });
