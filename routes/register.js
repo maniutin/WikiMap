@@ -16,7 +16,10 @@ const { findUserByEmail } = require("../helpers");
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("register");
+    const templateVars = {
+      user: null,
+    };
+    res.render("register", templateVars);
   });
 
   router.post("/", (req, res) => {
