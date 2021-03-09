@@ -6,9 +6,10 @@
  */
 
 const dbParams = require("./../lib/db.js");
-const express = require("express");
 const { use } = require("bcrypt/promises");
 const { user } = require("pg/lib/defaults");
+const { getMapPoints } = require("./../lib/getMapPoints.js");
+const express = require("express");
 const router = express.Router();
 
 module.exports = (db) => {
@@ -24,7 +25,7 @@ module.exports = (db) => {
         const user = all[1].rows;
         let templateVars = {
           maps: maps,
-          user: userID ? user[0].email : null,
+          user: userID ? user[0].name : null,
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
@@ -36,41 +37,6 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-    //   db.query(`SELECT * FROM maps;`)
-    //     .then((data) => {
-    //       const userID = req.session.user_id;
-    //       let templateVars = {
-    //         maps: data.rows,
-    //         user: userID ? userID : null,
-    //       };
-    //       if (userID) {
-    //         console.log("USER ID: ", getUserByID(userID));
-    //         templateVars.user = getUserByID(userID).email;
-    //         // db.query(`SELECT * FROM users WHERE id = ${userID};`).then(
-    //         //   (resTwo) => {
-    //         //     console.log(resTwo.rows[0].email);
-    //         //     templateVars = { ...templateVars, user: resTwo.rows[0].email };
-    //         //   }
-    //         // );
-    //       }
-    //       const isAjaxReq = req.xhr;
-    //       // console.log("USER: ", templateVars.user);
-    //       if (isAjaxReq) {
-    //         res.json(templateVars.maps);
-    //       } else {
-    //         res.render("maps", templateVars);
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       res.status(500).json({ error: err.message });
-    //     });
-    // });
-    // const getUserByID = function (id) {
-    //   return db.query(`SELECT * FROM users WHERE id = ${id};`).then((resTwo) => {
-    //     console.log("IN THE FUNC", resTwo.rows[0]);
-    //     return resTwo.rows[0];
-    //   });
-    // };
   });
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
@@ -86,7 +52,7 @@ module.exports = (db) => {
         const user = all[1].rows;
         let templateVars = {
           maps: maps,
-          user: userID ? user[0].email : null,
+          user: userID ? user[0].name : null,
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
@@ -115,7 +81,7 @@ module.exports = (db) => {
     //   return res.redirect("/")
     // }
     const data = req.body;
-    const queryParams = [];
+    const queryParams = [req.session.user_id];
     // console.log(data);
 
     for (const key of Object.keys(data)) {
@@ -124,7 +90,7 @@ module.exports = (db) => {
 
     const queryString = `
     INSERT INTO maps (owner_id, title, category, description, map_image_url)
-    VALUES (1, $1, $2, $3, $4);
+    VALUES ($1, $2, $3, $4, $5);
     `;
 
     db.query(queryString, queryParams)
@@ -136,22 +102,24 @@ module.exports = (db) => {
 
   router.get("/:mapID", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
+    const queryParams = [req.params.mapID];
+    const queryUserID = [userID];
 
     Promise.all([
       Promise.resolve(
-        db.query(`SELECT * FROM maps WHERE id = ${req.params.mapID};`)
+        db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
       ),
-      Promise.resolve(db.query(`SELECT * FROM users WHERE id = ${userID};`)),
+      Promise.resolve(
+        db.query(`SELECT * FROM users WHERE id = $1;`, queryUserID)
+      ),
     ])
       .then((all) => {
         const map = all[0].rows[0];
         const user = all[1].rows;
         let templateVars = {
           map: map,
-          latitude: map.start_lat,
-          longitude: map.start_long,
           key: dbParams.api,
-          user: userID ? user[0].email : null,
+          user: userID ? user[0].name : null,
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
@@ -159,6 +127,27 @@ module.exports = (db) => {
         } else {
           res.render("map-viewer", templateVars);
         }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get("/:mapID/start_coordinates", (req, res) => {
+    const queryParams = [req.params.mapID];
+    const mapData = {};
+    const mapPoints = getMapPoints(db, queryParams);
+    const startCoords = db.query(
+      `SELECT * FROM maps WHERE id = $1;`,
+      queryParams
+    );
+
+    Promise.all([mapPoints, startCoords])
+      .then(([pointsRes, startCoordRes]) => {
+        mapData.points = pointsRes.rows;
+        mapData.startLat = startCoordRes.rows[0].start_lat;
+        mapData.startLng = startCoordRes.rows[0].start_long;
+        res.json(mapData);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

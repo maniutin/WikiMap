@@ -16,40 +16,35 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
-    <!-- <script type="text/javascript" src="/scripts/initMap.js"></script> -->
-    <script type="text/javascript">
-
-      // Initialize and add the map
-      function initMap() {
-        // The location of start coordinates for map
-        const startCoordinates = { lat: <%= latitude %>, lng: <%= longitude %> };
-        // The map, centered at start coordinates
-        const map = new google.maps.Map(document.getElementById("map-viewport"), {
-          zoom: 4,
-          center: startCoordinates,
-        });
-        // The marker, positioned at start coordinates
-        const marker = new google.maps.Marker({
-          position: startCoordinates,
-          map: map,
-        });
-      };
-
-      window.onload= initMap;
-    </script>
+    <script type="text/javascript" src="/scripts/initMap.js"></script>
   </head>
   <body>
     <%- include('partials/_header') %>
 
     <h1><%= map.title %></h1>
 
-    <div id="map-viewport"></div>
+    <div class="container">
 
-    <aside>map points</aside>
+      <div id="map-viewport"></div>
 
-    <script
-      async
-      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap"
-    ></script>
+      <aside>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </aside>
+
+    </div>
+    <p id="mapID"><%= map.id %></p>
+
+    <script async
+      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
+    </script>
   </body>
 </html>

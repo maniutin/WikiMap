@@ -15,7 +15,7 @@
     />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
   </head>
 
   <body>
@@ -34,7 +34,7 @@
                   <img src="<%= map.map_image_url %>" />
                   <h2>
                     <a href="/maps/<%= map.id %>"><%= map.title %></a> by
-                    username
+                    <a href="/maps"><%= map.owner_id %></a>
                   </h2>
                 </div>
                 <p><%= map.description %></p>
