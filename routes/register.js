@@ -15,7 +15,9 @@ app.use(
 const { findUserByEmail } = require("../helpers");
 
 module.exports = (db) => {
-  router.get("/", (req, res) => res.render("register"));
+  router.get("/", (req, res) => {
+    res.render("register");
+  });
 
   router.post("/", (req, res) => {
     db.query(`SELECT * FROM users;`)

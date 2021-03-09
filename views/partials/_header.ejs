@@ -12,9 +12,11 @@
             <form class="form-inline" id="logout-form">
               <div class="input-group mr-sm-20">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">Logged In As: <%= user.name%></div>
+                  <div class="input-group-text">Logged In As: <%= user%></div>
                 </div>
-                <button id="logout-button" class="btn btn-danger">Logout</button>
+                <form method="POST" action="/logout" class="form-inline" id="logout-form">
+                  <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+                </form>
               </div>
             </form>
             <% } %>
