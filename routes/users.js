@@ -17,8 +17,6 @@ module.exports = (db) => {
       currentUser,
     };
 
-    // const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
-    // const queryString = `SELECT * FROM favourites WHERE user_id = $1;`;
     const queries = [
       `SELECT * FROM maps WHERE owner_id = $1;`,
       `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`
@@ -40,7 +38,12 @@ module.exports = (db) => {
         console.log(templateVars);
         res.render("profile", templateVars);
       })
-    .catch(err => console.error("query error:", err));
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+    // .catch(err => console.error("query error:", err));
 
   });
 
@@ -52,11 +55,6 @@ module.exports = (db) => {
   //       // res.json({ users });
   //       return users;
   //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
   // });
   return router;
 };
