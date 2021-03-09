@@ -16,20 +16,24 @@
   </head>
   <body>
     <main>
-
-      <% for (const row of rows) { %>
-        <div>
-          <img src="<%= row.map_image_url %>" alt="<%= row.title %>" class="owners-map">
-          <%= row.title %>
-
-          <%= row.description %>
-          <%= row.category %>
-          <a class="btn btn-primary" href="#">Edit</a>
-          <form action="">
-            <button class="btn btn-danger">Delete</button>
-          </form>
+      <div class="owners-maps-container">
+        <% for (const row of rows) { %>
+          <div class="owners-map">
+            <img src="<%= row.map_image_url %>" alt="<%= row.title %>" class="owners-map-img">
+            <div class="owners-map-content">
+              <%= row.title %>
+              <%= row.description %>
+              <%= row.category %>
+            </div>
+            <div>
+              <a class="btn btn-primary" href="/maps/<%= row.id %>">Edit</a>
+              <form action="">
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </div>
+          </div>
+          <% } %>
         </div>
-      <% } %>
 
     </main>
 

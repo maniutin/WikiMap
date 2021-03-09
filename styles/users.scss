@@ -1,3 +1,54 @@
-.owners-map {
-  width: 150px
+
+main {
+  .owners-maps-container {
+    width: 90%;
+    margin: auto;
+
+    .owners-map {
+      width: 100%;
+      background-color: blanchedalmond;
+      // display: flex;
+
+      .owners-map-img {
+        width: 100%
+      }
+
+      // .owners-maps-content {
+      //   width: 75%
+      // }
+      // .owners-maps-btns {
+      //   width: 10%;
+      // }
+    }
+
+  }
 }
+
+
+@media only screen and (min-width: 900px) {
+  main {
+    .owners-maps-container {
+      width: 90%;
+      margin: auto;
+
+      .owners-map {
+        width: 100%;
+        background-color: blanchedalmond;
+        display: flex;
+
+        .owners-map-img {
+          width: 20%
+        }
+
+        .owners-maps-content {
+          width: 70%
+        }
+        .owners-maps-btns {
+          width: 10%;
+        }
+      }
+
+    }
+  }
+}
+
