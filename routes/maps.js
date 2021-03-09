@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const { response } = require('express');
 const express = require('express');
 const router  = express.Router();
 
@@ -26,6 +27,29 @@ module.exports = (db) => {
       });
 
     });
+
+
+  router.get("/users/:userId", (req, res) => {
+    // const currentUser = req.session.userId;
+    const currentUser = req.params.userId;
+    console.log(currentUser);
+    const templateVars = {
+      currentUser,
+    };
+
+    const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    const queryParams = [currentUser];
+
+    db.query(queryString, queryParams)
+    .then(response => {
+      console.log(response.rows);
+      templateVars.rows = response.rows;
+      console.log(templateVars);
+      res.render("profile", templateVars);
+    })
+    .catch(err => console.error("query error:", err));
+
+  });
 
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
