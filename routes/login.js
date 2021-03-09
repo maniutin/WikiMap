@@ -1,14 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const cookieSession = require("cookie-session");
+const app = express();
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [
+      "7f69fa85-caec-4d9c-acd7-eebdccb368d5",
+      "f13b4d38-41c4-46d3-9ef6-8836d03cd8eb",
+    ],
+  })
+);
 
 const bcrypt = require("bcrypt");
 
 const { findUserByEmail, checkPassword } = require("../helpers");
 
 module.exports = (db) => {
-  router.get("/", (req, res) => res.render("login"));
+  router.get("/", (req, res) => {
+    const templateVars = {
+      user: null,
+    };
+    res.render("login", templateVars);
+  });
 
   router.post("/", (req, res) => {
+    let templateVars = {};
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const result = {
@@ -26,8 +43,19 @@ module.exports = (db) => {
           );
           if (findPass) {
             req.session.user_id = findUser.id;
+            let userIDArr = [];
+            for (let user of users) {
+              userIDArr.push(Object.values(user)[0]);
+            }
+            const foundUserId = userIDArr.find(
+              (el) => el === req.session.user_id
+            );
+            templateVars = {
+              user: foundUserId,
+            };
             result.authPass = true;
-            res.redirect("/");
+            res.render("register", templateVars);
+            return;
           }
         }
         res.json(result);

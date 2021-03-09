@@ -5,27 +5,22 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 
 module.exports = (db) => {
-
   router.get("/", (req, res) => {
-
     db.query(`SELECT * FROM maps;`)
-      .then(data => {
+      .then((data) => {
         const templateVars = {
-          maps: data.rows
-        }
+          maps: data.rows,
+        };
         res.render("maps", templateVars);
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
-
-    });
+  });
 
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
@@ -42,30 +37,27 @@ module.exports = (db) => {
   router.post("/new", (req, res) => {
     const data = req.body;
     const values = [];
-    db.query(`
+    db.query(
+      `
     INSERT INTO maps (title, description, category, map_image_url)
     VALUES ($1, $2, $3, $4);
-    `, values)
+    `,
+      values
+    );
   });
 
   router.get("/:mapID", (req, res) => {
-
     const queryParams = [req.params.mapID];
 
     db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
-      .then(data => {
+      .then((data) => {
         const map = data.rows[0];
         res.json({ map });
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
       });
   });
 
-
   return router;
 };
-
-

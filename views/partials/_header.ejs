@@ -5,8 +5,19 @@
         <a href="#">Favourites</a>
         <a href="#">My Maps</a>
         <a href="#">New Map</a>
+        <% if (!user) { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
+          <% } else { %>
+            <form class="form-inline" id="logout-form">
+              <div class="input-group mr-sm-20">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Logged In As: <%= user.name%></div>
+                </div>
+                <button id="logout-button" class="btn btn-danger">Logout</button>
+              </div>
+            </form>
+            <% } %>
     </nav>
   </div>
 </header>
