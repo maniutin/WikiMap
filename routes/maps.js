@@ -17,16 +17,29 @@ module.exports = (db) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
 
     Promise.all([
-      Promise.resolve(db.query(`SELECT * FROM maps;`)),
+      Promise.resolve(
+        db.query(
+          `SELECT maps.*, users.name FROM maps JOIN users ON owner_id = users.id`
+        )
+      ),
       Promise.resolve(db.query(`SELECT * FROM users WHERE id = ${userID};`)),
+      Promise.resolve(
+        db.query(
+          `SELECT maps.id, maps.title, maps.owner_id, users.name FROM maps JOIN users ON owner_id = users.id`
+        )
+      ),
     ])
       .then((all) => {
         const maps = all[0].rows;
         const user = all[1].rows;
+        const mapOwner = all[2].rows;
+        console.log("OWNER:", mapOwner);
         let templateVars = {
           maps: maps,
+          owner: mapOwner[0].name,
           user: userID ? user[0].name : null,
         };
+        console.log(templateVars.owner);
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
           res.json(templateVars.maps);
