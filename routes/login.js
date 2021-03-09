@@ -25,7 +25,7 @@ module.exports = (db) => {
   });
 
   router.post("/", (req, res) => {
-    let templateVars = {};
+    // let templateVars = {};
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const result = {
@@ -43,19 +43,19 @@ module.exports = (db) => {
           );
           if (findPass) {
             req.session.user_id = findUser.id;
-            let userIDArr = [];
-            for (let user of users) {
-              userIDArr.push(Object.values(user)[0]);
-            }
-            const foundUserId = userIDArr.find(
-              (el) => el === req.session.user_id
-            );
-            templateVars = {
-              user: foundUserId,
-              maps: data.rows,
-            };
+            // let userIDArr = [];
+            // for (let user of users) {
+            //   userIDArr.push(Object.values(user)[0]);
+            // }
+            // const foundUserId = userIDArr.find(
+            //   (el) => el === req.session.user_id
+            // );
+            // templateVars = {
+            //   user: foundUserId,
+            //   maps: data.rows,
+            // };
             result.authPass = true;
-            res.render("maps", templateVars);
+            res.redirect("maps");
             return;
           }
         }

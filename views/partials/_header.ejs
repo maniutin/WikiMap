@@ -3,13 +3,13 @@
       <div><a href="/maps">WikiMap</a></div>
       <div>
         <a href="#">Favourites</a>
-        <a href="#">My Maps</a>
+        <a href="/profile">My Maps</a>
         <a href="/maps/new">New Map</a>
         <% if (!user) { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
         <% } else { %>
-          <label for="user" style="margin-bottom: 0;">Logged In As: <%= %></label>
+          <label for="user" style="margin-bottom: 0;">Logged In As: <a href="/maps"><%= user %></a></label>
           <form method="POST" action="/logout" class="form-inline">
             <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
           </form>
