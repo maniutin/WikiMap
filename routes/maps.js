@@ -20,7 +20,6 @@ module.exports = (db) => {
       Promise.resolve(db.query(`SELECT * FROM users WHERE id = ${userID};`)),
     ])
       .then((all) => {
-        console.log("ALL: ", all);
         const maps = all[0].rows;
         const user = all[1].rows;
         let templateVars = {
@@ -77,16 +76,38 @@ module.exports = (db) => {
   router.get("/new", (req, res) => {
     // Uncomment when we get session login updated
     // req.session.userId would be assigned to a random string on successful post to /register
+    const userID = req.session.user_id ? req.session.user_id : 0;
 
+    Promise.all([
+      Promise.resolve(db.query(`SELECT * FROM maps;`)),
+      Promise.resolve(db.query(`SELECT * FROM users WHERE id = ${userID};`)),
+    ])
+      .then((all) => {
+        const maps = all[0].rows;
+        const user = all[1].rows;
+        let templateVars = {
+          maps: maps,
+          user: userID ? user[0].email : null,
+        };
+        const isAjaxReq = req.xhr;
+        if (isAjaxReq) {
+          res.json(templateVars.maps);
+        } else {
+          res.render("new", templateVars);
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
     const currentUser = req.session.user_id;
     if (!currentUser) {
       return res.redirect("/");
     }
-    const templateVars = {
-      user: currentUser,
-    };
+    // const templateVars = {
+    //   user: currentUser,
+    // };
 
-    res.render("new", templateVars);
+    // res.render("new", templateVars);
   });
 
   router.post("/new", (req, res) => {
