@@ -1,18 +1,18 @@
 
 main {
-  .owners-maps-container {
+  div .profile-maps-container {
     width: 90%;
     margin: auto;
 
-    .owners-map {
+    .profile-map {
       width: 100%;
       // display: flex;
 
-      .owners-map-img {
+      .profile-map-img {
         width: 100%
       }
 
-      // .owners-maps-content {
+      // .profile-maps-content {
         //   width: 75%
         // }
         // .owners-maps-btns {
@@ -31,22 +31,22 @@ main {
     margin: auto;
     background-color: blue;
 
-    .owners-maps-container {
+    .profile-maps-container {
       width: 90%;
       margin: auto;
 
-      .owners-map {
+      .profile-map {
         width: 100%;
         display: flex;
 
-        .owners-map-img {
+        .profile-map-img {
           width: 20%
         }
 
-        .owners-maps-content {
+        .profile-maps-content {
           width: 70%
         }
-        .owners-maps-btns {
+        .profile-maps-btns {
           width: 10%;
         }
       }

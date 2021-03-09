@@ -21,7 +21,7 @@ module.exports = (db) => {
     // const queryString = `SELECT * FROM favourites WHERE user_id = $1;`;
     const queries = [
       `SELECT * FROM maps WHERE owner_id = $1;`,
-      `SELECT * FROM favourites WHERE user_id = $1;`
+      `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`
     ]
 
     const queryParams = [currentUser];
@@ -44,19 +44,19 @@ module.exports = (db) => {
 
   });
 
-  // skeleton code
-  router.get("/api", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        // res.json({ users });
-        return users;
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // // skeleton code
+  // router.get("/api", (req, res) => {
+  //   db.query(`SELECT * FROM users;`)
+  //     .then(data => {
+  //       const users = data.rows;
+  //       // res.json({ users });
+  //       return users;
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
   return router;
 };

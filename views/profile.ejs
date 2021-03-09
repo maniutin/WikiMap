@@ -16,7 +16,7 @@
   </head>
   <body>
     <main>
-      <div class="owners-maps-container">
+      <div class="profile-maps-container">
         <section>
           <header>
             <h4>My Maps</h4>
@@ -24,19 +24,34 @@
           </header>
         </section>
         <div id="favourites">
-
-        </div>
-        <div id="my-maps">
-          <% for (const row of ownerMaps) { %>
-            <div class="owners-map">
-              <img src="<%= row.map_image_url %>" alt="<%= row.title %>" class="owners-map-img">
-              <div class="owners-map-content">
-                <%= row.title %>
-                <%= row.description %>
-                <%= row.category %>
+          <% for (const fav of favourites) { %>
+            <div class="profile-map">
+              <img src="<%= fav.map_image_url %>" alt="<%= fav.title %>" class="profile-map-img">
+              <div class="profile-map-content">
+                <%= fav.title %>
+                <%= fav.description %>
+                <%= fav.category %>
               </div>
               <div>
-                <a class="btn btn-primary" href="/maps/<%= row.id %>">View</a>
+                <a class="btn btn-primary" href="/maps/<%= fav.map_id %>">View</a>
+                <form action="">
+                  <button class="btn btn-danger">Remove Favourite</button>
+                </form>
+              </div>
+            </div>
+          <% } %>
+          </div>
+        <div id="my-maps">
+          <% for (const ownerMap of ownerMaps) { %>
+            <div class="profile-map">
+              <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
+              <div class="profile-map-content">
+                <%= ownerMap.title %>
+                <%= ownerMap.description %>
+                <%= ownerMap.category %>
+              </div>
+              <div>
+                <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
                 <form action="">
                   <button class="btn btn-danger" id="map-delete">Delete</button>
                 </form>
