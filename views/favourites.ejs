@@ -19,22 +19,22 @@
       <div class="profile-maps-container">
         <section>
           <header>
-            <h4>My Maps</h4>
+            <h4>My Favourites</h4>
           </header>
         </section>
-        <div id="my-maps">
-          <% for (const ownerMap of ownerMaps) { %>
+        <div id="favourites">
+          <% for (const fav of favourites) { %>
             <div class="profile-map">
-              <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
+              <img src="<%= fav.map_image_url %>" alt="<%= fav.title %>" class="profile-map-img">
               <div class="profile-map-content">
-                <%= ownerMap.title %>
-                <%= ownerMap.description %>
-                <%= ownerMap.category %>
+                <%= fav.title %>
+                <%= fav.description %>
+                <%= fav.category %>
               </div>
               <div>
-                <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
+                <a class="btn btn-primary" href="/maps/<%= fav.map_id %>">View</a>
                 <form action="">
-                  <button class="btn btn-danger" id="map-delete">Delete</button>
+                  <button class="btn btn-danger">Remove Favourite</button>
                 </form>
               </div>
             </div>
