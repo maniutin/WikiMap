@@ -13,7 +13,7 @@ app.use(
 );
 
 module.exports = (db) => {
-  router.post("/logout", (req, res) => {
+  router.post("/", (req, res) => {
     console.log(req.session.user_id);
     req.session = null;
     res.redirect("/");

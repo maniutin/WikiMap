@@ -1,25 +1,22 @@
 <header>
     <nav>
-      <div><a href="/">WikiMap</a></div>
+      <div><a href="/maps">WikiMap</a></div>
       <div>
         <a href="#">Favourites</a>
         <a href="#">My Maps</a>
-        <a href="#">New Map</a>
+        <a href="/maps/new">New Map</a>
         <% if (!user) { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
-          <% } else { %>
-            <form class="form-inline" id="logout-form">
-              <div class="input-group mr-sm-20">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Logged In As: <%= user%></div>
-                </div>
-                <form method="POST" action="/logout" class="form-inline" id="logout-form">
-                  <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
-                </form>
+        <% } else { %>
+          <label for="user" style="margin-bottom: 0;">Logged In As: <%= %></label>
+          <form method="POST" action="/logout" class="form-inline">
+            <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
+          </form>
+          <% } %>
+
               </div>
             </form>
-            <% } %>
     </nav>
   </div>
 </header>

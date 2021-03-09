@@ -5,6 +5,7 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
+const dbParams = require("./../lib/db.js");
 const express = require("express");
 const router = express.Router();
 
@@ -14,8 +15,15 @@ module.exports = (db) => {
       .then((data) => {
         const templateVars = {
           maps: data.rows,
+          user: null,
         };
-        res.render("maps", templateVars);
+        const isAjaxReq = req.xhr;
+
+        if (isAjaxReq) {
+          res.json(templateVars.maps);
+        } else {
+          res.render("maps", templateVars);
+        }
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -26,24 +34,40 @@ module.exports = (db) => {
     // Uncomment when we get session login updated
     // req.session.userId would be assigned to a random string on successful post to /register
 
+    const currentUser = req.session.user_id;
+    if (!currentUser) {
+      return res.redirect("/");
+    }
+    const templateVars = {
+      user: currentUser,
+    };
+
+    res.render("new", templateVars);
+  });
+
+  router.post("/new", (req, res) => {
     // const currentUser = req.session.userId;
     // if (!currentUser) {
     //   return res.redirect("/")
     // }
-
-    res.render("new");
-  });
-
-  router.post("/new", (req, res) => {
     const data = req.body;
-    const values = [];
-    db.query(
-      `
-    INSERT INTO maps (title, description, category, map_image_url)
-    VALUES ($1, $2, $3, $4);
-    `,
-      values
-    );
+    const queryParams = [];
+    console.log(data);
+
+    for (const key of Object.keys(data)) {
+      queryParams.push(data[key]);
+    }
+
+    const queryString = `
+    INSERT INTO maps (owner_id, title, category, description, map_image_url)
+    VALUES (1, $1, $2, $3, $4);
+    `;
+
+    db.query(queryString, queryParams)
+      .then((res) => console.log(res.rows))
+      .catch((err) => console.error("query insert error:", err));
+
+    res.redirect("/");
   });
 
   router.get("/:mapID", (req, res) => {
@@ -51,8 +75,15 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
       .then((data) => {
-        const map = data.rows[0];
-        res.json({ map });
+        const templateVars = {
+          map: data.rows[0],
+          key: dbParams.api,
+          latitude: data.rows[0].start_lat,
+          longitude: data.rows[0].start_long,
+          user: null,
+        };
+
+        res.render("map-viewer", templateVars);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });

@@ -52,9 +52,10 @@ module.exports = (db) => {
             );
             templateVars = {
               user: foundUserId,
+              maps: data.rows,
             };
             result.authPass = true;
-            res.render("register", templateVars);
+            res.render("maps", templateVars);
             return;
           }
         }
