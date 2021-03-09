@@ -135,7 +135,6 @@ module.exports = (db) => {
   });
 
   router.get("/:mapID", (req, res) => {
-    // const queryParams = [req.params.mapID];
     const userID = req.session.user_id ? req.session.user_id : 0;
 
     Promise.all([
@@ -164,21 +163,6 @@ module.exports = (db) => {
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-    // db.query(`SELECT * FROM maps WHERE id = ${req.parms.mapID};`)
-    //   .then((data) => {
-    //     const templateVars = {
-    //       map: data.rows[0],
-    //       key: dbParams.api,
-    //       latitude: data.rows[0].start_lat,
-    //       longitude: data.rows[0].start_long,
-    //       user: req.session.user_id,
-    //     };
-
-    //     res.render("map-viewer", templateVars);
-    //   })
-    //   .catch((err) => {
-    //     res.status(500).json({ error: err.message });
-    //   });
   });
 
   return router;
