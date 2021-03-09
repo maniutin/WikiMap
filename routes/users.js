@@ -10,38 +10,85 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/:userId/maps", (req, res) => {
-    // const currentUser = req.session.userId;
-    const currentUser = req.params.userId;
+    const currentUser = req.session.user_id;
+    // const currentUser = req.params.userId;
     console.log(currentUser);
     const templateVars = {
-      currentUser,
+      user: currentUser,
     };
 
     const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
     const queryParams = [currentUser];
 
     db.query(queryString, queryParams)
-    .then(response => {
-      console.log(response.rows);
-      templateVars.rows = response.rows;
-      console.log(templateVars);
-      res.render("profile", templateVars);
-    })
-    .catch(err => console.error("query error:", err));
-
-  });
-
-  // skeleton code
-  router.get("/api", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then((data) => {
-        const users = data.rows;
-        // res.json({ users });
-        return users;
+    .then(mapsResponse => {
+      templateVars.ownerMaps = mapsResponse.rows;
+        console.log(templateVars);
+        res.render("profile", templateVars);
       })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+    // // This is for stretch to include both my maps and favourites on the same page
+    // // Run all promises/queries and add them to the templateVars to be rendered
+    // Promise.all([
+    //   db.query(queries[0], queryParams),
+    //   db.query(queries[1], queryParams)
+    // ])
+    // .then(([
+    //   mapsResponse,
+    //   favouritesResponse
+    // ]) => {
+    //   templateVars.ownerMaps = mapsResponse.rows;
+    //   templateVars.favourites = favouritesResponse.rows;
+    //     console.log(templateVars);
+    //     res.render("profile", templateVars);
+    //   })
+    // .catch(err => {
+    //   res
+    //     .status(500)
+    //     .json({ error: err.message });
+    // });
+    // .catch(err => console.error("query error:", err));
+
   });
+
+  router.get("/:userId/favourites", (req, res) => {
+    const currentUser = req.session.user_id;
+    // const currentUser = req.params.userId;
+    console.log(currentUser);
+    const templateVars = {
+      user: currentUser,
+    };
+
+    const queryString = `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`;
+    const queryParams = [currentUser];
+
+    db.query(queryString, queryParams)
+    .then(favouritesResponse => {
+      templateVars.favourites = favouritesResponse.rows;
+        console.log(templateVars);
+        res.render("favourites", templateVars);
+      })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+  });
+
+  // // skeleton code
+  // router.get("/api", (req, res) => {
+  //   db.query(`SELECT * FROM users;`)
+  //     .then(data => {
+  //       const users = data.rows;
+  //       // res.json({ users });
+  //       return users;
+  //     })
+  // });
   return router;
 };

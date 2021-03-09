@@ -1,10 +1,10 @@
 -- Users table seeds here (Example)
 INSERT INTO users (name, email, password, thumbnail_url)
-VALUES ('Alice Glass', 'glass@example.com', 'password', 'https://ph-files.imgix.net/1dedf6e6-bd75-4d14-9a94-f5fafbbc7415?auto=format&auto=compress&codec=mozjpeg&cs=strip');
+VALUES ('Alice Glass', 'glass@example.com', '$2b$10$cx0LCM6I8GWlvrSIq4Z3KOFtgjxGJEVVFs6eXnggw1AdpC2z8lfZa', 'https://ph-files.imgix.net/1dedf6e6-bd75-4d14-9a94-f5fafbbc7415?auto=format&auto=compress&codec=mozjpeg&cs=strip');
 INSERT INTO users (name, email, password, thumbnail_url)
-VALUES ('John Dough', 'dough@example.com', 'password', 'https://koolinus.files.wordpress.com/2019/03/avataaars-e28093-koolinus-1-12mar2019.png');
+VALUES ('John Dough', 'dough@example.com', '$2b$10$cx0LCM6I8GWlvrSIq4Z3KOFtgjxGJEVVFs6eXnggw1AdpC2z8lfZa', 'https://koolinus.files.wordpress.com/2019/03/avataaars-e28093-koolinus-1-12mar2019.png');
 INSERT INTO users (name, email, password, thumbnail_url)
-VALUES ('Mary Jane', 'mj@example.com', 'password', 'http://happyfacesparty.com/wp-content/uploads/2019/06/avataaars-Frances.png');
+VALUES ('Mary Jane', 'mj@example.com', '$2b$10$cx0LCM6I8GWlvrSIq4Z3KOFtgjxGJEVVFs6eXnggw1AdpC2z8lfZa', 'http://happyfacesparty.com/wp-content/uploads/2019/06/avataaars-Frances.png');
 
 
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
@@ -26,3 +26,8 @@ INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description
 VALUES (2, 1, 43.17967373431558, -79.15131027709444, 'Another Place', 'another place for healthy food');
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
 VALUES (2, 1, 43.97967373431558, -79.85131027709444, 'Yet Another Place', 'Yet another place for healthy food');
+
+INSERT INTO favourites (user_id, map_id) VALUES (2, 1);
+INSERT INTO favourites (user_id, map_id) VALUES (2, 4);
+INSERT INTO favourites (user_id, map_id) VALUES (1, 3);
+INSERT INTO favourites (user_id, map_id) VALUES (3, 2);
