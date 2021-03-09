@@ -8,27 +8,45 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/maps-new.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
   <body>
     <main>
-      <div>
-        <form action="/maps/new" method="POST">
-          <label for="map-title">Map Title</label>
-          <input type="text" name="map-title" placeholder="Map Name">
-          <select name="map-category" id="">
-            <option value="nature">nature</option>
-            <option value="nature">nature</option>
-            <option value="nature">nature</option>
-            <option value="nature">nature</option>
-            <option value="nature">nature</option>
-          </select>
-
-          <input type="text">
-          <button type="submit">Create</button>
-        </form>
+      <div class="map-new">
+        <div>
+          <h1>Create New Map</h1>
+        </div>
+        <div>
+          <form action="/maps/new" method="POST">
+            <div class="mb-3">
+              <label for="map-title">Map Title</label>
+              <input type="text" name="map-title" placeholder="Map Name">
+            </div>
+            <div class="mb-3">
+              <label for="map-category">Category</label>
+              <select name="map-category" id="map-category">
+                <option value="">Please Select a Category...</option>
+                <option value="city">City</option>
+                <option value="food">Food</option>
+                <option value="nature">Nature</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="map-description">Description</label>
+              <textarea name="map-description" id="map-description" rows="3" placeholder="Map Description"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="map-img-url">Thumbnail Photo URL</label>
+              <input type="text" name="map-img-url" placeholder="Map thumbnail url">
+            </div>
+            <button type="submit" class="btn btn-primary">Create Map</button>
+          </form>
+        </div>
       </div>
     </main>
 

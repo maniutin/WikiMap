@@ -9,7 +9,30 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
+  router.get("/:userId/maps", (req, res) => {
+    // const currentUser = req.session.userId;
+    const currentUser = req.params.userId;
+    console.log(currentUser);
+    const templateVars = {
+      currentUser,
+    };
+
+    const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    const queryParams = [currentUser];
+
+    db.query(queryString, queryParams)
+    .then(response => {
+      console.log(response.rows);
+      templateVars.rows = response.rows;
+      console.log(templateVars);
+      res.render("profile", templateVars);
+    })
+    .catch(err => console.error("query error:", err));
+
+  });
+
+  // skeleton code
+  router.get("/api", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
         const users = data.rows;
