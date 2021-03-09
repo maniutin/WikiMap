@@ -6,6 +6,7 @@
  */
 
 const dbParams = require('./../lib/db.js');
+const { getMapPoints } = require('./../lib/getMapPoints.js');
 const express = require('express');
 const router  = express.Router();
 
@@ -78,17 +79,16 @@ module.exports = (db) => {
   router.get("/:mapID", (req, res) => {
 
     const queryParams = [req.params.mapID];
+    const templateVars = {
+      key: dbParams.api
+    };
 
     db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
       .then(data => {
-
-        const templateVars = {
-          map: data.rows[0],
-          key: dbParams.api,
-          latitude: data.rows[0].start_lat,
-          longitude: data.rows[0].start_long,
-        }
-
+        templateVars.map = data.rows[0];
+        templateVars.startLat = data.rows[0].start_lat;
+        templateVars.startLng = data.rows[0].start_long;
+        // templateVars.points = getMapPoints(db, queryParams);
         res.render("map-viewer", templateVars);
       })
       .catch(err => {
@@ -98,6 +98,26 @@ module.exports = (db) => {
       });
   });
 
+  router.get("/:mapID/start_coordinates", (req, res) => {
+
+    const queryParams = [req.params.mapID];
+    const mapData = {};
+    const mapPoints = getMapPoints(db, queryParams);
+    const startCoords = db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams);
+
+    Promise.all([mapPoints, startCoords])
+    .then(( [pointsRes, startCoordRes] ) => {
+      mapData.points = pointsRes.rows;
+      mapData.startLat = startCoordRes.rows[0].start_lat;
+      mapData.startLng = startCoordRes.rows[0].start_long;
+      res.json(mapData);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
   return router;
 };

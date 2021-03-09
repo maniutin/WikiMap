@@ -22,3 +22,7 @@ INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description
 VALUES (1, 3, 43.69013188839061, -80.36310397360107, 'Rec Center Complex', 'It has a soccer field and baseball diamond');
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
 VALUES (3, 2, 54.08602088317381, -126.16173755038751, 'Rocky Mountain Hike', 'Hardest hike in BC by far');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
+VALUES (2, 1, 43.17967373431558, -79.15131027709444, 'Another Place', 'another place for healthy food');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
+VALUES (2, 1, 43.97967373431558, -79.85131027709444, 'Yet Another Place', 'Yet another place for healthy food');
