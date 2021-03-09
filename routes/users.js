@@ -18,7 +18,6 @@ module.exports = (db) => {
     };
 
     const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
-
     const queryParams = [currentUser];
 
     db.query(queryString, queryParams)
@@ -66,9 +65,7 @@ module.exports = (db) => {
     };
 
     const queryString = `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`;
-
     const queryParams = [currentUser];
-
 
     db.query(queryString, queryParams)
     .then(favouritesResponse => {
