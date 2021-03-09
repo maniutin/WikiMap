@@ -1,3 +1,20 @@
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/maps"
+//   })
+//   .done((data) => {
+//     console.log("Got some data! ", data);
+//   })
+//   .fail(function(error) {
+//     console.log("Error: ", error);
+//   })
+//   .always(function() {
+//     console.log("AJAX GET mapID from server completed.");
+//   });
+// });
+
+
 // Initialize and add the map
 function initMap() {
   // The location of Uluru

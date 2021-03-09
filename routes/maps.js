@@ -17,8 +17,14 @@ module.exports = (db) => {
       .then(data => {
         const templateVars = {
           maps: data.rows
+        };
+        const isAjaxReq = req.xhr;
+
+        if (isAjaxReq) {
+          res.json(templateVars.maps);
+        } else {
+          res.render("maps", templateVars);
         }
-        res.render("maps", templateVars);
       })
       .catch(err => {
         res
@@ -55,10 +61,14 @@ module.exports = (db) => {
 
     db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
       .then(data => {
+
         const templateVars = {
           map: data.rows[0],
-          key: dbParams.api
+          key: dbParams.api,
+          latitude: data.rows[0].start_lat,
+          longitude: data.rows[0].start_long,
         }
+
         res.render("map-viewer", templateVars);
       })
       .catch(err => {

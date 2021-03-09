@@ -10,11 +10,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/initMap.js"></script>
-  </head>
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+    <!-- <script type="text/javascript" src="/scripts/initMap.js"></script> -->
+    <script type="text/javascript">
 
+        // Initialize and add the map
+        function initMap() {
+          // The location of start coordinates for map
+          const startCoordinates = { lat: <%= latitude %>, lng: <%= longitude %> };
+          // The map, centered at start coordinates
+          const map = new google.maps.Map(document.getElementById("map-viewport"), {
+            zoom: 4,
+            center: startCoordinates,
+          });
+          // The marker, positioned at start coordinates
+          const marker = new google.maps.Marker({
+            position: startCoordinates,
+            map: map,
+          });
+        };
+
+        window.onload= initMap;
+    </script>
+  </head>
   <body>
+
 
     <h1><%= map.title %></h1>
 
