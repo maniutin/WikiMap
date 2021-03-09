@@ -20,8 +20,8 @@ CREATE TABLE maps (
   title VARCHAR(255) NOT NULL,
   description TEXT,
   category VARCHAR(255) NOT NULL,
-  start_lat DECIMAL NOT NULL,
-  start_long DECIMAL NOT NULL,
+  start_lat DECIMAL NOT NULL DEFAULT 43.67967373431558,
+  start_long DECIMAL NOT NULL DEFAULT -79.35131027709444,
   map_image_url VARCHAR(255) NOT NULL DEFAULT 'https://short.xcoder.io/WXjAKP5'
 );
 
