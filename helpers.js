@@ -1,4 +1,4 @@
-const findUser = (emailID, users) => {
+const findUserByEmail = (emailID, users) => {
   for (const userID in users) {
     const userEmail = users[userID].email;
     if (userEmail === emailID) {
@@ -8,5 +8,5 @@ const findUser = (emailID, users) => {
   return false;
 };
 module.exports = {
-  findUser,
+  findUserByEmail,
 };
