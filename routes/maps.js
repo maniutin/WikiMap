@@ -9,7 +9,6 @@ const dbParams = require("./../lib/db");
 const { use } = require("bcrypt/promises");
 const { user } = require("pg/lib/defaults");
 const { getMapPoints } = require('./../lib/getMapPoints');
-const { getCoords } = require('../lib/getCoords');
 const axios = require('axios');
 const express = require('express');
 const { response } = require("express");
@@ -189,13 +188,15 @@ module.exports = (db) => {
               console.log(insert.rows);
               res.redirect(`/maps/${req.params.mapID}`);
             })
-            .catch((err) => console.error("query insert error:", err));
+            .catch((err) => {
+              console.error("query insert error:", err);
+              res.redirect(`/maps/${req.params.mapID}`);
+            });
         })
         .catch(err => {
           console.log('Geocode error: ', err);
+          res.redirect(`/maps/${req.params.mapID}`);
         });
-
-
 
     });
 
