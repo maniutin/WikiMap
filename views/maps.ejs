@@ -40,7 +40,7 @@
                 <p><%= map.description %></p>
                 <small><%= map.category %></small>
                 <!-- Test button: remove after the route is done -->
-                <form
+                <!-- <form
                   method="POST"
                   action="/favourites"
                   class="favourite-button"
@@ -50,7 +50,7 @@
                   <button type="submit" class="btn btn-block btn-primary">
                     <b class="fa fa-thumbs-up">Favourite</b>
                   </button>
-                </form>
+                </form> -->
               </td>
             </tr>
             <% } %>
@@ -59,7 +59,8 @@
       </section>
     </main>
   </body>
-  <script>
+  <!-- TEST SCRIPT FOR FAVOURITES BUTTON -->
+  <!-- <script>
     $(document).ready(function () {
       $(".favourite-button").on("submit", function (event) {
         event.preventDefault();
@@ -76,5 +77,5 @@
         });
       });
     });
-  </script>
+  </script> -->
 </html>
