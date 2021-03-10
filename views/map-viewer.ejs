@@ -4,6 +4,7 @@
     <title>Wiki Maps</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/map-viewer.css" type="text/css" />
@@ -14,7 +15,7 @@
       crossorigin="anonymous"
     />
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/geocode.js"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/initMap.js"></script>
   </head>
   <body>
@@ -26,6 +27,17 @@
     <div class="container">
 
       <div id="map-viewport"></div>
+
+      <div class="options">
+        <button class="addLoc" data-placement="top" title="Add a Location!">
+          Contribute
+        </button>
+        <button class="favMap" data-placement="top" title="Add Map to Favourites!">
+          <i class="fa fa-heart"></i>
+        </button>
+
+      </div>
+
 
       <div id="addLocation">
         <form method="POST" action="/maps/<%= map.id %>/edit">
@@ -60,6 +72,7 @@
 
     </div>
     <p id="mapID"><%= map.id %></p>
+    <p id="userID"><%= user %></p>
 
     <script async
       src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
