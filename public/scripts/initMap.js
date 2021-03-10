@@ -16,7 +16,7 @@ function initMap() {
       });
       // The map points (markers) for this map, from the database
       for (const point of data.points) {
-        console.log(point);
+        // console.log(point);
         let marker = new google.maps.Marker({
           position: { lat: Number(point.latitude), lng: Number(point.longitude) },
           map: map,
@@ -30,7 +30,7 @@ function initMap() {
 
     })
     .fail(function(error) {
-      console.log("Error: ", error);
+      console.log("AJAX Error: ", error);
     })
     .always(function() {
       console.log("AJAX GET mapID from server completed.");

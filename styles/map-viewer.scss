@@ -1,4 +1,4 @@
-h1 {
+h2 {
   width: 66%;
   margin: 0 auto;
 }
@@ -11,21 +11,58 @@ h1 {
   width: 100%;
 
   #map-viewport {
-    width: 66%;
+    width: 80%;
     height: 500px;
     border: 3px solid cadetblue;
     margin-bottom: 1em;
   }
 
-  aside {
-    width: 66%;
+  #addLocation {
+    width: 80%;
     border: 3px solid cadetblue;
-
-    tbody {
-      border: 2px solid cadetblue;
+    margin-bottom: 1em;
+    padding: 1em;
+    form {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      input {
+        border: 1px solid cadetblue;
+        margin-bottom: 1em;
+      }
+      textarea {
+        border: 1px solid cadetblue;
+        margin-bottom: 1em;
+      }
+      button {
+        border: 1px solid cadetblue;
+      }
     }
   }
 
+  aside {
+    width: 80%;
+    height: 400px;
+    border: 3px solid cadetblue;
+    overflow: scroll;
+
+    tbody {
+      .marker-info {
+        display: flex;
+        align-items: center;
+        img {
+          width: 100px;
+          height: 100px;
+        }
+        h4 {
+          margin-left: 1em;
+        }
+      }
+      p {
+        margin-top: 10px;
+      }
+    }
+  }
 }
 
 #mapID {
