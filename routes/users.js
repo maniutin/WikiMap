@@ -23,7 +23,7 @@ module.exports = (db) => {
       FROM map_points JOIN maps ON map_id = maps.id WHERE user_id = $1;`
     ]
 
-    const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    // const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
     const queryParams = [currentUser];
 
     Promise.all([

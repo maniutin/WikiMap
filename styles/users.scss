@@ -1,4 +1,13 @@
 
+#my-maps:hover {
+  cursor: pointer;
+}
+
+#my-contributions:hover {
+  cursor: pointer;
+
+}
+
 main {
   div .profile-maps-container {
     width: 90%;
@@ -22,6 +31,21 @@ main {
 
   }
 }
+
+.show {
+  display: flex;
+
+}
+
+.hide {
+  display: none;
+}
+
+// #owner-maps-container {
+// }
+
+// #contribution-maps-container {
+// }
 
 
 

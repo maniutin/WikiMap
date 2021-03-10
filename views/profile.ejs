@@ -18,18 +18,15 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/profile-favourites.js"></script>
   </head>
   <body>
     <%- include('partials/_header') %>
     <main>
       <div class="profile-maps-container">
-        <section>
-          <header>
-            <h1>My Maps</h1>
-            <h1>My Contributions</h1>
-          </header>
-        </section>
-        <div id="my-maps">
+        <h1 id="my-maps">My Maps</h1>
+        <h1 id="my-contributions">My Contributions</h1>
+        <section id="owner-maps-container" class="show">
           <% for (const ownerMap of ownerMaps) { %>
             <div class="profile-map">
               <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
@@ -46,8 +43,8 @@
               </div>
             </div>
           <% } %>
-        </div>
-        <div id="map-contributions">
+        </section>
+        <section id="contribution-maps-container" class="hide">
           <% for (const contributionMap of contributionMaps) { %>
             <div class="profile-map">
               <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
@@ -61,7 +58,7 @@
               </div>
             </div>
           <% } %>
-        </div>
+        </section>
       </div>
     </main>
   </body>
