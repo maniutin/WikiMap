@@ -33,6 +33,12 @@ h2 {
         color: rgb(247, 50, 1);
       }
     }
+    .favourited {
+      .fa-heart {
+        color: rgb(247, 50, 1);
+        border: 0px;
+      }
+    }
     .addLoc {
       border-radius: 3px;
       font-family: Arial, sans-serif;

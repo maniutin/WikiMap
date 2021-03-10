@@ -2,7 +2,7 @@ $(() => {
   setTimeout(() => {
     console.log('app.js is ready!');
 
-    const map = $('#map-viewport');
+    // const map = $('#map-viewport');
     const mapID = $('#mapID').html();
     const favBtn = $('.favMap'); // Favourites button '<3'
     const locBtn = $('.addLoc'); // button for 'Add Location'
@@ -11,19 +11,28 @@ $(() => {
     favBtn.on('click', (e) => {
       e.preventDefault();
 
-      $.ajax({
-        method: "POST",
-        url: "/", // path to "add to favourites" route
-        data: { mapID: mapID }
-      })
-      .done(response => {
-        console.log(response);
-        //alert("Map added to favourites!");
-      })
-      .fail(err => console.log(err));
+      let classes = Object.values(favBtn[0].classList);
 
-      favBtn.blur();
-      alert("Map added to favourites!");
+      if (!classes.includes('favourited')) {
+        $.ajax({
+          method: "POST",
+          url: "/", // path to "add to favourites" route
+          data: { mapID: mapID }
+        })
+        .done(response => {
+          isFav = true; // ensures you can't click favourite twice
+          console.log(response);
+          favBtn.addClass('favourited');
+          alert("Map added to favourites!");
+        })
+        .fail(err => console.log(err));
+
+        favBtn.blur();
+      } else {
+        favBtn.blur();
+        alert('This map was already added to your favourites!');
+      }
+
     });
 
 

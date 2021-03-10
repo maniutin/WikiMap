@@ -20,19 +20,23 @@ VALUES (1, 'Parquor Spots', 'Cityscapes for ideal parqouring', 'Outdoor Recreati
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
 VALUES (4, 'Parquor Spots', 'Cityscapes for ideal parqouring', 'Outdoor Recreation', 51.50280339972994, -0.2474303699636878, 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd');
 
-INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (2, 1, 43.37967373431558, -79.05131027709444, 'Carrer de Sardenya', 'The healthiest food in Toronto, hands down');
-INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (1, 3, 43.69013188839061, -80.36310397360107, 'Rec Center Complex', 'It has a soccer field and baseball diamond');
-INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (3, 2, 54.08602088317381, -126.16173755038751, 'Rocky Mountain Hike', 'Hardest hike in BC by far');
-INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (2, 1, 43.17967373431558, -79.15131027709444, 'Another Place', 'another place for healthy food');
-INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-VALUES (2, 1, 43.97967373431558, -79.85131027709444, 'Yet Another Place', 'Yet another place for healthy food');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+VALUES (2, 1, 43.68234793251599, -79.32528046252345, 'Carrer de Sardenya', 'The healthiest food in Toronto, hands down', '1153 Craven Rd, Toronto, ON M4J 4V7, Canada');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+VALUES (1, 3, 43.26244161530249, -79.91768044760742, 'Rec Center Complex', 'It has a soccer field and baseball diamond', 'STERLING at UNIVERSITY, Hamilton, ON L8S 4E8, Canada');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+VALUES (3, 2, 49.78322723310748, -122.44748388603935, 'Fraser Valley Hike', 'Leisure hike, not too strenuous, beautiful sights.', 'Fraser Valley C, BC, Canada');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+VALUES (2, 1, 43.64737973021612, -79.41381454467773, 'Trinity Bellwoods Bar', 'Not the healthiest but so freakin hype!', 'Trinity Cir, Toronto, ON M6J 2V5, Canada');
+INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+VALUES (2, 1, 43.64689134798197, -79.39717470222169, 'Hole in the Wall', 'This place is off the beaten path, but most authentic ethiopian food you will find', '29 Camden St, Toronto, ON M5V 3N3, Canada');
 
 INSERT INTO favourites (user_id, map_id) VALUES (2, 1);
 INSERT INTO favourites (user_id, map_id) VALUES (2, 4);
 INSERT INTO favourites (user_id, map_id) VALUES (1, 3);
 INSERT INTO favourites (user_id, map_id) VALUES (3, 2);
 INSERT INTO favourites (user_id, map_id) VALUES (4, 2);
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO labber;
+GRANT ALL ON sequence users_id_seq to labber;
+GRANT ALL ON sequence map_points_id_seq to labber;

@@ -14,19 +14,25 @@ function initMap() {
         zoom: 8,
         center: startCoordinates,
       });
-      // The map points (markers) for this map, from the database
+      // Place map points (markers) for this map, and set click listeners for each point
       for (const point of data.points) {
-        // console.log(point);
+        let markerInfo;
+        let position = { lat: Number(point.latitude), lng: Number(point.longitude) }
         let marker = new google.maps.Marker({
-          position: { lat: Number(point.latitude), lng: Number(point.longitude) },
+          position: position,
           map: map,
         });
+        marker.addListener("click", (e) => {
+          markerInfo = new google.maps.InfoWindow({
+            content: `${point.title} @ ${point.address}`,
+            position: position,
+          });
+          markerInfo.open(map);
+          map.setZoom(13);
+          map.setCenter(marker.getPosition());
+        });
+
       }
-      // Start coordinates - from original map
-      const marker = new google.maps.Marker({
-        position: startCoordinates,
-        map: map,
-      });
       // Create the initial InfoWindow.
       let infoWindow = new google.maps.InfoWindow({
         content: "Click the map to find a location!",
@@ -38,6 +44,7 @@ function initMap() {
         // Close the current InfoWindow.
         infoWindow.close();
         let coords = `${mapsMouseEvent.latLng.lat()},${mapsMouseEvent.latLng.lng()}`;
+        console.log(coords);
         // Call server to request a Reverse geocode to get address
         $.ajax({
           method: "GET",

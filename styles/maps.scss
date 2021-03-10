@@ -44,6 +44,12 @@ tbody {
         color: rgb(247, 50, 1);
       }
     }
+    .favourited {
+      .fa-heart {
+        color: rgb(247, 50, 1);
+        border: 0px;
+      }
+    }
     .mapID {
       display: none;
     }

@@ -192,10 +192,10 @@ module.exports = (db) => {
     })
       .then(response => {
         const coords = response.data.results[0].geometry.location;
-        const queryParams = [userID, req.params.mapID, coords.lat, coords.lng, data.markerTitle, data.markerDesc];
+        const queryParams = [userID, req.params.mapID, coords.lat, coords.lng, data.markerTitle, data.markerDesc, address];
         const queryString = `
-        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-        VALUES ($1, $2, $3, $4, $5, $6);`;
+        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+        VALUES ($1, $2, $3, $4, $5, $6, $7);`;
         // Insert new map marker into db
         db.query(queryString, queryParams)
           .then((insert) => {
