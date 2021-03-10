@@ -17,7 +17,41 @@ h2 {
     margin-bottom: 1em;
   }
 
+  .options {
+    width: 80%;
+    margin-bottom: 1em;
+    button {
+      border: 2px solid cadetblue;
+      border-radius: 50%;
+      background-color: mediumturquoise;
+      font-size: 1.5em;
+      .fa-heart {
+        color: rgba(247, 50, 1, 0.482);
+        border: 0px;
+      }
+      .fa-heart:hover {
+        color: rgb(247, 50, 1);
+      }
+    }
+    .favourited {
+      .fa-heart {
+        color: rgb(247, 50, 1);
+        border: 0px;
+      }
+    }
+    .addLoc {
+      border-radius: 3px;
+      font-family: Arial, sans-serif;
+    }
+    .addLoc:hover {
+      background-color: rgb(24, 165, 24);
+      color: white;
+    }
+  }
+
+
   #addLocation {
+    display: none;
     width: 80%;
     border: 3px solid cadetblue;
     margin-bottom: 1em;
@@ -65,6 +99,7 @@ h2 {
   }
 }
 
-#mapID {
+#mapID,
+#userID {
   display: none;
 }

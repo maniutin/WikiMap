@@ -35,7 +35,7 @@ CREATE TABLE map_points (
   title VARCHAR(255),
   description TEXT,
   address VARCHAR(255),
-  map_point_image_url VARCHAR(255) DEFAULT 'https://short.xcoder.io/WXjAKP5'
+  map_point_image_url VARCHAR(255) DEFAULT 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
 );
 
 CREATE TABLE favourites (
@@ -55,3 +55,7 @@ CREATE TABLE point_favourites (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   point_id INTEGER REFERENCES map_points(id) ON DELETE CASCADE
 );
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO labber;
+GRANT ALL ON sequence users_id_seq to labber;
+GRANT ALL ON sequence map_points_id_seq to labber;

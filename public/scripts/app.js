@@ -1,6 +1,62 @@
 $(() => {
-  console.log('App.js is ready');
+  setTimeout(() => {
+    console.log('app.js is ready!');
 
-});
+    // const map = $('#map-viewport');
+    const mapID = $('#mapID').html();
+    const favBtn = $('.favMap'); // Favourites button '<3'
+    const locBtn = $('.addLoc'); // button for 'Add Location'
+    const isUser = $('#userID').html(); // hidden p tag containing current user
+
+    favBtn.on('click', (e) => {
+      e.preventDefault();
+
+      let classes = Object.values(favBtn[0].classList);
+
+      if (!classes.includes('favourited')) {
+        $.ajax({
+          method: "POST",
+          url: "/", // path to "add to favourites" route
+          data: { mapID: mapID }
+        })
+        .done(response => {
+          isFav = true; // ensures you can't click favourite twice
+          console.log(response);
+          favBtn.addClass('favourited');
+          alert("Map added to favourites!");
+        })
+        .fail(err => console.log(err));
+
+        favBtn.blur();
+      } else {
+        favBtn.blur();
+        alert('This map was already added to your favourites!');
+      }
+
+    });
 
 
+    locBtn.on("click", function(event) {
+
+      const $addLocation = $('#addLocation');
+
+      if (isUser) {
+        console.log(isUser);
+        $addLocation.slideToggle({
+          duration: 400,
+          start: function() {
+            $(this).css('display', 'flex');
+          }
+        });
+        $('#location').focus();
+      } else {
+        alert("You must be a registered user to contribute to a map!");
+      }
+
+    });
+
+
+
+
+  }, 100);
+})

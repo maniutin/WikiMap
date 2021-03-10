@@ -202,10 +202,11 @@ module.exports = (db) => {
           coords.lng,
           data.markerTitle,
           data.markerDesc,
+          address
         ];
         const queryString = `
-        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
-        VALUES ($1, $2, $3, $4, $5, $6);`;
+        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
+        VALUES ($1, $2, $3, $4, $5, $6, $7);`;
         // Insert new map marker into db
         db.query(queryString, queryParams)
           .then((insert) => {
