@@ -3,7 +3,7 @@ function initMap() {
     const mapID = $('#mapID').html();
     $.ajax({
       method: "GET",
-      url: `/maps/${mapID}/start_coordinates`
+      url: `/maps/${mapID}/initMap`
     })
     .done((data) => {
       console.log("Got some data! ", data);
@@ -27,10 +27,42 @@ function initMap() {
         position: startCoordinates,
         map: map,
       });
+      // Create the initial InfoWindow.
+      let infoWindow = new google.maps.InfoWindow({
+        content: "Click the map to find a location!",
+        position: startCoordinates,
+      });
+      infoWindow.open(map);
+      // Configure the click listener.
+      map.addListener("click", (mapsMouseEvent) => {
+        // Close the current InfoWindow.
+        infoWindow.close();
+        let coords = `${mapsMouseEvent.latLng.lat()},${mapsMouseEvent.latLng.lng()}`;
+        // Call server to request a Reverse geocode to get address
+        $.ajax({
+          method: "GET",
+          url: `/maps/${mapID}/getAddress`,
+          data: { coords: coords }
+        })
+        .done(address => {
+          // Create a new InfoWindow.
+          infoWindow = new google.maps.InfoWindow({ position: mapsMouseEvent.latLng });
+          infoWindow.setContent(address);
+          infoWindow.open(map);
+          // Update the address input element in form
+          $('#location').val(address);
+          console.log(address);
+        })
+        .fail(function(error) {
+          console.log("Reverse Geocode Error: ", error);
+        })
+        .always()
+
+      });
 
     })
     .fail(function(error) {
-      console.log("AJAX Error: ", error);
+      console.log("AJAX Error from server: ", error);
     })
     .always(function() {
       console.log("AJAX GET mapID from server completed.");
