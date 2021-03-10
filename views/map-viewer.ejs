@@ -21,21 +21,40 @@
   <body>
     <%- include('partials/_header') %>
 
-    <h1><%= map.title %></h1>
+    <h2><%= map.title %></h2>
+
 
     <div class="container">
 
       <div id="map-viewport"></div>
 
+      <div id="addLocation">
+        <form method="POST" action="/maps/<%= map.id %>/edit">
+          <label for="address">Address</label>
+          <input name="address" type="text">
+          <label for="markerTitle">Title</label>
+          <input name="markerTitle">
+          <label for="markerDesc">Description</label>
+          <textarea name="markerDesc"></textarea>
+          <button class="btn btn-primary">Add Location</button>
+        </form>
+      </div>
+
       <aside>
         <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-            </tr>
-          </thead>
           <tbody>
+            <% for (const point of points) { %>
+            <tr>
+              <td>
+                <div class="marker-info">
+                  <img src="<%= point.image %>" />
+                  <h4><%= point.title %></h4>
+                </div>
+                <p><%= point.address %></p>
+                <small><%= point.descr %></small>
+              </td>
+            </tr>
+            <% } %>
           </tbody>
         </table>
       </aside>
