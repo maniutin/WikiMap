@@ -29,6 +29,12 @@ main {
     section {
       flex-direction: column;
       padding: 1em;
+      display: none;
+
+      .show {
+        display: flex;
+
+      }
     }
 
     .profile-map {
@@ -55,10 +61,6 @@ main {
   }
 }
 
-.show {
-  display: flex;
-
-}
 
 .hide {
   display: none;
@@ -93,7 +95,8 @@ main {
           width: 70%
         }
         .profile-maps-btns {
-          width: 10%;
+          width: 100%;
+          flex-direction: row;
         }
       }
 

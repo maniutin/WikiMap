@@ -8,12 +8,12 @@ $(document).ready(function() {
   // })
 
 
+  const $myMaps = $("#owner-maps-container");
+  const $favouriteMaps = $("#favourite-maps-container");
+  const $contributionMaps = $("#contribution-maps-container");
 
 
   $("#my-maps").on("click", () => {
-    const $myMaps = $(this).find("#owner-maps-container");
-    const $favouriteMaps = $(this).find("#favourite-maps-container")
-    const $contributionMaps = $(this).find("#contribution-maps-container")
     $myMaps.addClass("show");
     $myMaps.removeClass("hide");
     $favouriteMaps.addClass("hide");
@@ -22,9 +22,6 @@ $(document).ready(function() {
     $contributionMaps.removeClass("show");
   })
   $("#my-favourites").on("click", () => {
-    const $myMaps = $(this).find("#owner-maps-container");
-    const $favouriteMaps = $(this).find("#favourite-maps-container")
-    const $contributionMaps = $(this).find("#contribution-maps-container")
     $myMaps.addClass("hide");
     $myMaps.removeClass("show");
     $favouriteMaps.addClass("show");
@@ -33,9 +30,6 @@ $(document).ready(function() {
     $contributionMaps.removeClass("show");
   })
   $("#my-contributions").on("click", () => {
-    const $myMaps = $(this).find("#owner-maps-container");
-    const $favouriteMaps = $(this).find("#favourite-maps-container")
-    const $contributionMaps = $(this).find("#contribution-maps-container")
     $myMaps.addClass("hide");
     $myMaps.removeClass("show");
     $favouriteMaps.addClass("hide");

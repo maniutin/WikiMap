@@ -55,9 +55,9 @@
               <div class="profile-map-content">
                 <%= ownerMap.description %>
               </div>
-              <div>
+              <div class="profile-map-btns">
                 <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
-                <form action="">
+                <form action="" class="">
                   <button class="btn btn-danger" id="map-delete">Delete</button>
                 </form>
               </div>
@@ -78,7 +78,7 @@
               <div class="profile-map-content">
                 <%= favMap.description %>
               </div>
-              <div>
+              <div class="profile-map-btns">
                 <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>">View</a>
                 <form action="">
                   <button class="btn btn-danger">Remove Favourite</button>
@@ -101,7 +101,7 @@
               <div class="profile-map-content">
                 <%= contributionMap.description %>
               </div>
-              <div>
+              <div class="profile-map-btns">
                 <a class="btn btn-primary" href="/maps/<%= contributionMap.id %>">View</a>
               </div>
             </div>
