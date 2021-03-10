@@ -1,10 +1,12 @@
 <header>
-    <nav>
-      <div><a href="/maps">WikiMap</a></div>
-      <div>
+    <nav class="navbar navbar-light bg-light">
+      <div><a href="/maps">WikiMap</a>
+
         <a href="/users/<%= user %>/favourites">Favourites</a>
         <a href="/users/<%= user %>/maps">My Maps</a>
         <a href="/maps/new">New Map</a>
+      </div>
+        <div>
         <% if (!user) { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -17,6 +19,7 @@
 
               </div>
             </form>
+
     </nav>
   </div>
 </header>
