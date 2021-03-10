@@ -40,3 +40,4 @@ INSERT INTO favourites (user_id, map_id) VALUES (4, 2);
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO labber;
 GRANT ALL ON sequence users_id_seq to labber;
 GRANT ALL ON sequence map_points_id_seq to labber;
+GRANT ALL ON sequence favourites_id_seq to labber;

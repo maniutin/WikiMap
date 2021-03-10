@@ -6,7 +6,8 @@ $(() => {
     const mapID = $('#mapID').html();
     const favBtn = $('.favMap'); // Favourites button '<3'
     const locBtn = $('.addLoc'); // button for 'Add Location'
-    const isUser = $('#userID').html(); // hidden p tag containing current user
+    const userName = $('#userName').html(); // hidden p tag containing current user
+    const userID = $('#userID').html(); // hidden p tag containing current user
 
     favBtn.on('click', (e) => {
       e.preventDefault();
@@ -16,7 +17,7 @@ $(() => {
       if (!classes.includes('favourited')) {
         $.ajax({
           method: "POST",
-          url: "/", // path to "add to favourites" route
+          url: `/users/${userID}/favourites`,
           data: { mapID: mapID }
         })
         .done(response => {
@@ -40,8 +41,8 @@ $(() => {
 
       const $addLocation = $('#addLocation');
 
-      if (isUser) {
-        console.log(isUser);
+      if (userName) {
+        console.log(userName);
         $addLocation.slideToggle({
           duration: 400,
           start: function() {

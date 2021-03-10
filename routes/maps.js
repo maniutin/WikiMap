@@ -140,6 +140,7 @@ module.exports = (db) => {
           points: points,
           key: dbParams.api,
           user: userID ? user[0].name : null,
+          userID: userID,
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
@@ -236,12 +237,12 @@ module.exports = (db) => {
   });
 
   //delete point on a map
-  app.post("/urls/:shortURL/delete", (req, res) => {
-    if (urlDatabase[req.params.shortURL].userID === req.session.user_id) {
-      delete urlDatabase[req.params.shortURL];
-    }
-    res.redirect("/urls");
-  });
+  // app.post("/urls/:shortURL/delete", (req, res) => {
+  //   if (urlDatabase[req.params.shortURL].userID === req.session.user_id) {
+  //     delete urlDatabase[req.params.shortURL];
+  //   }
+  //   res.redirect("/urls");
+  // });
 
   return router;
 };

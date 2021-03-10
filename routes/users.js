@@ -74,6 +74,7 @@ module.exports = (db) => {
   });
 
   router.post("/:userId/favourites", (req, res) => {
+    console.log("got the post req!");
     const currentUser = req.session.user_id ? req.session.user_id : 0;
     if (!currentUser) {
       return res.redirect("/");
@@ -83,7 +84,9 @@ module.exports = (db) => {
     const queryString = `INSERT INTO favourites (user_id, map_id) VALUES ($1, $2);`;
     const queryParams = [currentUser, mapID];
     db.query(queryString, queryParams)
-      .then((res) => console.log(res.rows))
+      .then((queryRes) => {
+        res.send(queryRes.rows);
+      })
       .catch((err) => console.error("query insert error:", err));
     // Stretch: make a query to check if user already added the map to favs
     // db.query(
