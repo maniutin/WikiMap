@@ -25,7 +25,8 @@
       <div class="profile-maps-container">
         <section>
           <header>
-            <h4>My Maps</h4>
+            <h1>My Maps</h1>
+            <h1>My Contributions</h1>
           </header>
         </section>
         <div id="my-maps">
@@ -42,6 +43,21 @@
                 <form action="">
                   <button class="btn btn-danger" id="map-delete">Delete</button>
                 </form>
+              </div>
+            </div>
+          <% } %>
+        </div>
+        <div id="map-contributions">
+          <% for (const contributionMap of contributionMaps) { %>
+            <div class="profile-map">
+              <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
+              <div class="profile-map-content">
+                <%= contributionMap.title %>
+                <%= contributionMap.description %>
+                <%= contributionMap.category %>
+              </div>
+              <div>
+                <a class="btn btn-primary" href="/maps/<%= contributionMap.id %>">View</a>
               </div>
             </div>
           <% } %>
