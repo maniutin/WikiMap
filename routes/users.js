@@ -63,12 +63,14 @@ module.exports = (db) => {
       user: currentUser,
     };
 
-    const queryString = `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`;
+    const queryString = `SELECT favourites.*, maps.*, users.name FROM favourites JOIN maps ON map_id = maps.id JOIN users on users.id = user_id WHERE user_id = $1;`;
     const queryParams = [currentUser];
 
     db.query(queryString, queryParams)
       .then((favouritesResponse) => {
         templateVars.favourites = favouritesResponse.rows;
+        templateVars.user = favouritesResponse.rows[0].name;
+
         console.log(templateVars);
         res.render("favourites", templateVars);
       })
