@@ -79,6 +79,29 @@ module.exports = (db) => {
       });
   });
 
+  router.post("/:userId/favourites", (req, res) => {
+    const currentUser = req.session.user_id ? req.session.user_id : 0;
+    if (!currentUser) {
+      return res.redirect("/");
+    }
+    const mapID = req.body.mapID;
+
+    const queryString = `INSERT INTO favourites (user_id, map_id) VALUES ($1, $2);`;
+    const queryParams = [currentUser, mapID];
+    db.query(queryString, queryParams)
+      .then((res) => console.log(res.rows))
+      .catch((err) => console.error("query insert error:", err));
+    // Stretch: make a query to check if user already added the map to favs
+    // db.query(
+    //   `SELECT user_id, map_id, COUNT(*)
+    //     FROM favourites
+    //     GROUP BY user_id, map_id
+    //     HAVING COUNT(*)>1`
+    // )
+    //   .then((res) => console.log("RES: ", res.rows))
+    //   .catch((err) => console.error("query insert error:", err));
+  });
+
   // // skeleton code
   // router.get("/api", (req, res) => {
   //   db.query(`SELECT * FROM users;`)

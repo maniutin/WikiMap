@@ -39,6 +39,18 @@
                 </div>
                 <p><%= map.description %></p>
                 <small><%= map.category %></small>
+                <!-- Test button: remove after the route is done -->
+                <form
+                  method="POST"
+                  action="/favourites"
+                  class="favourite-button"
+                  data-userID="<%= userID %>"
+                >
+                  <input type="hidden" name="mapID" value="<%=map.id%>" />
+                  <button type="submit" class="btn btn-block btn-primary">
+                    <b class="fa fa-thumbs-up">Favourite</b>
+                  </button>
+                </form>
               </td>
             </tr>
             <% } %>
@@ -47,4 +59,22 @@
       </section>
     </main>
   </body>
+  <script>
+    $(document).ready(function () {
+      $(".favourite-button").on("submit", function (event) {
+        event.preventDefault();
+        const userID = $(this).attr("data-userID");
+        let formContext = $(this);
+        $.ajax({
+          url: `/users/${userID}/favourites`,
+          method: "POST",
+          data: $(this).serialize(),
+          success: (data) => {
+            console.log(data);
+            formContext.find("button");
+          },
+        });
+      });
+    });
+  </script>
 </html>

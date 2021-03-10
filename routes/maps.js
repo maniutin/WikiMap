@@ -11,12 +11,10 @@ const { user } = require("pg/lib/defaults");
 const { getMapPoints } = require("./../lib/getMapPoints.js");
 const express = require("express");
 const router = express.Router();
-const axios = require('axios');
+const axios = require("axios");
 const { response } = require("express");
 
-
 module.exports = (db) => {
-
   router.get("/", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
 
@@ -42,6 +40,7 @@ module.exports = (db) => {
           maps: maps,
           owner: mapOwner[0].name,
           user: userID ? user[0].name : null,
+          userID: userID,
         };
         console.log(templateVars.owner);
         const isAjaxReq = req.xhr;
@@ -124,9 +123,13 @@ module.exports = (db) => {
     const queryUserID = [userID];
 
     Promise.all([
-      Promise.resolve(db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)),
-      Promise.resolve(db.query(`SELECT * FROM users WHERE id = $1;`, queryUserID)),
-      getMapPoints(db, queryParams)
+      Promise.resolve(
+        db.query(`SELECT * FROM maps WHERE id = $1;`, queryParams)
+      ),
+      Promise.resolve(
+        db.query(`SELECT * FROM users WHERE id = $1;`, queryUserID)
+      ),
+      getMapPoints(db, queryParams),
     ])
       .then((all) => {
         const map = all[0].rows[0];
@@ -174,7 +177,6 @@ module.exports = (db) => {
 
   // This route is for adding new map points to the database, which then reloads the map-viewer
   router.post("/:mapID/edit", (req, res) => {
-
     const userID = req.session.user_id ? req.session.user_id : 0;
 
     if (!userID) {
@@ -184,15 +186,23 @@ module.exports = (db) => {
     const data = req.body;
     const address = req.body.address;
 
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
-      params: {
-        address: address,
-        key: dbParams.api
-      }
-    })
-      .then(response => {
+    axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+        params: {
+          address: address,
+          key: dbParams.api,
+        },
+      })
+      .then((response) => {
         const coords = response.data.results[0].geometry.location;
-        const queryParams = [userID, req.params.mapID, coords.lat, coords.lng, data.markerTitle, data.markerDesc];
+        const queryParams = [
+          userID,
+          req.params.mapID,
+          coords.lat,
+          coords.lng,
+          data.markerTitle,
+          data.markerDesc,
+        ];
         const queryString = `
         INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description)
         VALUES ($1, $2, $3, $4, $5, $6);`;
@@ -207,20 +217,21 @@ module.exports = (db) => {
             res.redirect(`/maps/${req.params.mapID}`);
           });
       })
-      .catch(err => {
-        console.log('Geocode error: ', err);
+      .catch((err) => {
+        console.log("Geocode error: ", err);
         res.redirect(`/maps/${req.params.mapID}`);
       });
-
   });
 
   // Route from initMap ajax request to reverse geocode for address
-  router.get('/:mapID/getAddress', (req, res) => {
+  router.get("/:mapID/getAddress", (req, res) => {
     const geo = req.query.coords;
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo}&key=${dbParams.api}`)
-    .then(response => res.send(response.data.results[0].formatted_address))
-    .catch(err => res.send(err));
-
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${geo}&key=${dbParams.api}`
+      )
+      .then((response) => res.send(response.data.results[0].formatted_address))
+      .catch((err) => res.send(err));
   });
 
   return router;
