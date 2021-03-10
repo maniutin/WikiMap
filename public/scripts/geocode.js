@@ -1,3 +1,3 @@
 $(() => {
-  console.log('ready');
+  console.log("Geocode is ready");
 })
