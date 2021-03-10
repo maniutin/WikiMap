@@ -140,6 +140,7 @@ module.exports = (db) => {
           points: points,
           key: dbParams.api,
           user: userID ? user[0].name : null,
+          userID: userID
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {

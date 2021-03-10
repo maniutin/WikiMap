@@ -4,9 +4,11 @@ $(() => {
     console.log('favourites is ready!');
 
     const favBtn = $('.favMap'); // Favourites button '<3'
+    const isUser = $('.userID').html();
 
     favBtn.on('click', (e) => {
       e.preventDefault();
+      console.log(isUser);
 
       let thisBtn = $(e.target.parentElement);
       let mapID = thisBtn.siblings('.mapID').html();
@@ -15,7 +17,7 @@ $(() => {
       if (!classes.includes('favourited')) {
         $.ajax({
           method: "POST",
-          url: "/", // path to "add to favourites" route
+          url: `/users/${isUser}/favourites`, // path to "add to favourites" route
           data: { mapID: mapID }
         })
         .done(response => {
