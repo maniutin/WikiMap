@@ -1,27 +1,75 @@
+#my-maps:hover {
+  cursor: pointer;
+}
+
+#my-favourites:hover {
+  cursor: pointer;
+
+}
+
+#my-contributions:hover {
+  cursor: pointer;
+
+}
 
 main {
-  div .profile-maps-container {
+  .profile-maps-container {
     width: 90%;
     margin: auto;
 
-    .profile-map {
+    .profile-header-views {
       width: 100%;
+      margin: auto;
+
+      h4 {
+        padding: 0;
+      }
+    }
+
+    section {
+      flex-direction: column;
+      padding: 1em;
+
+    }
+
+    .profile-map {
+      border: black 1px solid;
+      border-radius: 8px;
+      width: 100%;
+      overflow: hidden;
       // display: flex;
 
       .profile-map-img {
-        width: 100%
+        width: 100%;
       }
 
-      // .profile-maps-content {
-        //   width: 75%
-        // }
-        // .owners-maps-btns {
-          //   width: 10%;
-          // }
+      .profile-map-content {
+        width: 75%;
+        padding: 1em;
+      }
+      .profile-map-btns {
+        width: 50%;
+        display: flex;
+      }
     }
 
   }
 }
+
+.show {
+  display: flex;
+
+}
+
+.hide {
+  display: none;
+}
+
+// #owner-maps-container {
+// }
+
+// #contribution-maps-container {
+// }
 
 
 
@@ -46,7 +94,8 @@ main {
           width: 70%
         }
         .profile-maps-btns {
-          width: 10%;
+          width: 100%;
+          flex-direction: row;
         }
       }
 
