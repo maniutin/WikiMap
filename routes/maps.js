@@ -33,7 +33,7 @@ module.exports = (db) => {
         const maps = all[0].rows;
         const user = all[1].rows;
         const mapOwner = all[2].rows;
-        console.log("OWNER:", mapOwner);
+        console.log("OWNER:", user);
         let templateVars = {
           maps: maps,
           owner: mapOwner[0].name,

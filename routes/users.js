@@ -17,20 +17,20 @@ module.exports = (db) => {
       user: currentUser,
     };
 
-    const queryString = `SELECT * FROM maps WHERE owner_id = $1;`;
+    const queryString = `SELECT maps.*, users.name FROM maps JOIN users ON owner_id = users.id WHERE owner_id = $1;`;
     const queryParams = [currentUser];
 
     db.query(queryString, queryParams)
-    .then(mapsResponse => {
-      templateVars.ownerMaps = mapsResponse.rows;
-        console.log(templateVars);
+      .then((mapsResponse) => {
+        templateVars.ownerMaps = mapsResponse.rows;
+        templateVars.user = mapsResponse.rows[0].name;
+        console.log("TEMPLATE: ", templateVars.ownerMaps[0].name);
+
         res.render("profile", templateVars);
       })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
 
     // // This is for stretch to include both my maps and favourites on the same page
     // // Run all promises/queries and add them to the templateVars to be rendered
@@ -53,7 +53,6 @@ module.exports = (db) => {
     //     .json({ error: err.message });
     // });
     // .catch(err => console.error("query error:", err));
-
   });
 
   router.get("/:userId/favourites", (req, res) => {
@@ -68,17 +67,14 @@ module.exports = (db) => {
     const queryParams = [currentUser];
 
     db.query(queryString, queryParams)
-    .then(favouritesResponse => {
-      templateVars.favourites = favouritesResponse.rows;
+      .then((favouritesResponse) => {
+        templateVars.favourites = favouritesResponse.rows;
         console.log(templateVars);
         res.render("favourites", templateVars);
       })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
   });
 
   // // skeleton code
