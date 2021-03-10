@@ -1,14 +1,54 @@
 tbody {
+  background-color: gainsboro;
 
-  .map-info {
+  td {
+
     display: flex;
-    align-items: center;
-    img {
-      width: 100px;
-      height: 100px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 300px;
+
+
+    .map-info {
+      display: flex;
+      align-items: center;
+      h2 {
+        a {
+          color: #244751;
+        }
+        a:hover {
+          color: #0fbeee;
+          text-decoration: none;
+        }
+      }
+      img {
+        width: 100px;
+        height: 100px;
+        margin-right: 1em;
+
+      }
+    }
+
+    .favMap {
+      width: 5%;
+      border: 2px solid cadetblue;
+      border-radius: 50%;
+      background-color: mediumturquoise;
+      font-size: 1.5em;
+      margin-top: 5px;
+      .fa-heart {
+        color: rgba(247, 50, 1, 0.482);
+        border: 0px;
+      }
+      .fa-heart:hover {
+        color: rgb(247, 50, 1);
+      }
+    }
+    .mapID {
+      display: none;
     }
   }
-
 }
+
 
 

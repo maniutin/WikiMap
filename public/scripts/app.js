@@ -13,7 +13,7 @@ $(() => {
 
       $.ajax({
         method: "POST",
-        url: "/",
+        url: "/", // path to "add to favourites" route
         data: { mapID: mapID }
       })
       .done(response => {
