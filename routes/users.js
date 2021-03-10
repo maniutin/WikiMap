@@ -19,6 +19,7 @@ module.exports = (db) => {
 
     const queries = [
       `SELECT * FROM maps WHERE owner_id = $1;`,
+      `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`,
       `SELECT DISTINCT map_points.user_id AS user_id, maps.id AS map_id, maps.title AS title, maps.description AS description, maps.category AS category, maps.map_image_url AS map_image
       FROM map_points JOIN maps ON map_id = maps.id WHERE user_id = $1;`
     ]
@@ -28,13 +29,16 @@ module.exports = (db) => {
 
     Promise.all([
       db.query(queries[0], queryParams),
-      db.query(queries[1], queryParams)
+      db.query(queries[1], queryParams),
+      db.query(queries[2], queryParams)
     ])
     .then(([
       mapsResponse,
+      favouritesResponse,
       contributionResponse
     ]) => {
       templateVars.ownerMaps = mapsResponse.rows;
+      templateVars.favouriteMaps = favouritesResponse.rows;
       templateVars.contributionMaps = contributionResponse.rows;
       console.log(templateVars);
       res.render("profile", templateVars);
@@ -45,17 +49,6 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
 
-    // db.query(queryString, queryParams)
-    // .then(mapsResponse => {
-    //   templateVars.ownerMaps = mapsResponse.rows;
-    //     console.log(templateVars);
-    //     res.render("profile", templateVars);
-    //   })
-    // .catch(err => {
-    //   res
-    //     .status(500)
-    //     .json({ error: err.message });
-    // });
 
     // // This is for stretch to include both my maps and favourites on the same page
     // // Run all promises/queries and add them to the templateVars to be rendered
