@@ -202,7 +202,7 @@ module.exports = (db) => {
           coords.lng,
           data.markerTitle,
           data.markerDesc,
-          address
+          address,
         ];
         const queryString = `
         INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
@@ -233,6 +233,14 @@ module.exports = (db) => {
       )
       .then((response) => res.send(response.data.results[0].formatted_address))
       .catch((err) => res.send(err));
+  });
+
+  //delete point on a map
+  app.post("/urls/:shortURL/delete", (req, res) => {
+    if (urlDatabase[req.params.shortURL].userID === req.session.user_id) {
+      delete urlDatabase[req.params.shortURL];
+    }
+    res.redirect("/urls");
   });
 
   return router;

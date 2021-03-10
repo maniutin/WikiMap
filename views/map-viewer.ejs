@@ -4,7 +4,10 @@
     <title>Wiki Maps</title>
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/map-viewer.css" type="text/css" />
@@ -19,34 +22,32 @@
     <script type="text/javascript" src="/scripts/initMap.js"></script>
   </head>
   <body>
-    <header>
-      <%- include('partials/_header') %>
-    </header>
+    <header><%- include('partials/_header') %></header>
 
     <h2><%= map.title %></h2>
 
-
     <div class="container">
-
       <div id="map-viewport"></div>
 
       <div class="options">
         <button class="addLoc" data-placement="top" title="Add a Location!">
           Contribute
         </button>
-        <button class="favMap" data-placement="top" title="Add Map to Favourites!">
+        <button
+          class="favMap"
+          data-placement="top"
+          title="Add Map to Favourites!"
+        >
           <i class="fa fa-heart"></i>
         </button>
-
       </div>
-
 
       <div id="addLocation">
         <form method="POST" action="/maps/<%= map.id %>/edit">
           <label for="address">Address/Location</label>
-          <input id="location" name="address" type="text">
+          <input id="location" name="address" type="text" />
           <label for="markerTitle">Title</label>
-          <input name="markerTitle">
+          <input name="markerTitle" />
           <label for="markerDesc">Description</label>
           <textarea name="markerDesc"></textarea>
           <button class="btn btn-primary">Add Location</button>
@@ -65,19 +66,25 @@
                 </div>
                 <p><%= point.address %></p>
                 <small><%= point.descr %></small>
+                <div>
+                  <form method="POST" action="/maps/<%= map.id %>/edit">
+                    <button type="button" class="btn btn-primary">Edit</button>
+                  </form>
+                  <button type="button" class="btn btn-danger">Remove</button>
+                </div>
               </td>
             </tr>
             <% } %>
           </tbody>
         </table>
       </aside>
-
     </div>
     <p id="mapID"><%= map.id %></p>
     <p id="userID"><%= user %></p>
 
-    <script async
-      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
-    </script>
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap"
+    ></script>
   </body>
 </html>
