@@ -18,34 +18,95 @@
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/profile-favourites.js"></script>
   </head>
   <body>
     <%- include('partials/_header') %>
     <main>
       <div class="profile-maps-container">
-        <section>
-          <header>
-            <h4>My Maps</h4>
-          </header>
-        </section>
-        <div id="my-maps">
+        <div class="profile-header-views mb-3">
+          <!-- <ul class="nav justify-content-center">
+            <li id="my-maps" class="nav-item">My Maps</li>
+            <li id="my-contributions" class="nav-item">My Contributions</li>
+          </ul> -->
+          <ul class="nav justify-content-center">
+            <li class="nav-item nav-link">
+              <h4 id="my-maps">My Maps</h4>
+            </li>
+            <li class="nav-item nav-link">
+              <h4 id="my-favourites">My Favourites</h4>
+            </li>
+            <li class="nav-item nav-link">
+              <h4 id="my-contributions">My Contributions</h4>
+            </li>
+          </ul>
+        </div>
+        <section id="owner-maps-container" class="show">
           <% for (const ownerMap of ownerMaps) { %>
-            <div class="profile-map">
+            <header>
+              <h5><%= ownerMap.title %></h5>
+              <span>Category: </span>
+              <small class="badge bg-info text-dark">
+                <%= ownerMap.category %>
+              </small>
+            </header>
+            <div class="profile-map mb-3">
               <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
               <div class="profile-map-content">
-                <%= ownerMap.title %>
                 <%= ownerMap.description %>
-                <%= ownerMap.category %>
               </div>
-              <div>
+              <div class="profile-map-btns">
                 <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
-                <form action="">
+                <form action="" class="">
                   <button class="btn btn-danger" id="map-delete">Delete</button>
                 </form>
               </div>
             </div>
           <% } %>
-        </div>
+        </section>
+        <section id="favourite-maps-container" class="hide">
+          <% for (const favMap of favouriteMaps) { %>
+            <header>
+              <h5><%= favMap.title %></h5>
+              <span>Category: </span>
+              <small class="badge bg-info text-dark">
+                <%= favMap.category %>
+              </small>
+            </header>
+            <div class="profile-map">
+              <img src="<%= favMap.map_image_url %>" alt="<%= favMap.title %>" class="profile-map-img">
+              <div class="profile-map-content">
+                <%= favMap.description %>
+              </div>
+              <div class="profile-map-btns">
+                <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>">View</a>
+                <form action="">
+                  <button class="btn btn-danger">Remove Favourite</button>
+                </form>
+              </div>
+            </div>
+            <% } %>
+          </section>
+          <section id="contribution-maps-container" class="hide">
+          <% for (const contributionMap of contributionMaps) { %>
+            <header>
+              <h5><%= contributionMap.title %></h5>
+              <span>Category: </span>
+              <small class="badge bg-info text-dark">
+                <%= contributionMap.category %>
+              </small>
+            </header>
+            <div class="profile-map">
+              <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
+              <div class="profile-map-content">
+                <%= contributionMap.description %>
+              </div>
+              <div class="profile-map-btns">
+                <a class="btn btn-primary" href="/maps/<%= contributionMap.id %>">View</a>
+              </div>
+            </div>
+          <% } %>
+        </section>
       </div>
     </main>
   </body>
