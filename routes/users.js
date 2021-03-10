@@ -74,7 +74,6 @@ module.exports = (db) => {
   });
 
   router.post("/:userId/favourites", (req, res) => {
-    console.log("got the post req!");
     const currentUser = req.session.user_id ? req.session.user_id : 0;
     if (!currentUser) {
       return res.redirect("/");
