@@ -9,6 +9,9 @@ h1.pageTitle {
   align-items: center;
   .map-view {
     width: 50%;
+    .map-element:hover {
+      box-shadow: 1px 1px 1px 1px #c6cbe1;
+    }
     .map-element {
       display: flex;
       flex-direction: column;
