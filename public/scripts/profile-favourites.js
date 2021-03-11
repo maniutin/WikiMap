@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
   const loadFavourites = (mapId) => {
-    let $removeFav = $(".remove-fav");
-
     $.ajax({
       method: "POST",
       url: "/users/favourites/delete",
@@ -18,26 +16,19 @@ $(document).ready(function() {
   };
   const $favouritesSection = $("#favourite-maps-container");
   $favouritesSection.on("click",(event) => {
-    event.preventDefault();
     const mapId = event.target.value
     if (event.target.className === "btn btn-danger remove-fav") {
+      event.preventDefault();
       console.log("favourite removed");
       $("#favourite-maps-container").empty();
       loadFavourites(mapId);
     }
   })
-  // $(".remove-fav").on("click", (event) => {
-  //   console.log("clicked");
-  //   event.preventDefault();
-  //   $("#favourite-maps-container").empty();
-  //   loadFavourites();
-  // })
 
 
   const $myMaps = $("#owner-maps-container");
   const $favouriteMaps = $("#favourite-maps-container");
   const $contributionMaps = $("#contribution-maps-container");
-
 
   $("#my-maps").on("click", () => {
     $myMaps.addClass("show");
@@ -79,21 +70,23 @@ const renderFavourites = (favouriteObjs) => {
 
 const createFavouriteElement = (favouriteObj) => {
   return `
-  <header>
-    <h5>${favouriteObj.title}</h5>
-    <span>Category: </span>
-    <small class="badge bg-info text-dark">
-      ${favouriteObj.category}
-    </small>
-  </header>
-  <div class="profile-map">
-    <img src="${favouriteObj.map_image_url}" alt="${favouriteObj.title}" class="profile-map-img">
-    <div class="profile-map-content">
-      ${favouriteObj.description}
-    </div>
-    <div class="profile-map-btns">
-      <a class="btn btn-primary" href="/maps/${favouriteObj.map_id}">View</a>
-      <button class="btn btn-danger remove-fav" value="${favouriteObj.map_id}">Remove Favourite</button>
+  <div class="mb-3">
+    <div class="profile-map">
+      <img src="${favouriteObj.map_image_url}" alt="${favouriteObj.title}" class="profile-map-img">
+      <div class="profile-map-content">
+        <header>
+          <h5>${favouriteObj.title}</h5>
+          <span>Category: </span>
+          <small class="badge bg-info text-dark">
+            ${favouriteObj.category}
+          </small>
+        </header>
+        ${favouriteObj.description}
+      </div>
+      <div class="profile-map-btns">
+        <a class="btn btn-primary" href="/maps/${favouriteObj.map_id}">View</a>
+        <button class="btn btn-danger remove-fav" value="${favouriteObj.map_id}">Remove Favourite</button>
+      </div>
     </div>
   </div>`;
 };
