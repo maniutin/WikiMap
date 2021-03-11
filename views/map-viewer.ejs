@@ -2,13 +2,19 @@
 <html lang="en">
   <head>
     <title>Wiki Maps - <%= map.title %></title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/map-viewer.css" type="text/css" />
-    <link rel="icon" type="image/ico" href="/images/map.ico"/>
+    <link rel="icon" type="image/ico" href="/images/map.ico" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -20,33 +26,36 @@
     <script type="text/javascript" src="/scripts/initMap.js"></script>
   </head>
   <body>
-      <%- include('partials/_header') %>
-
+    <%- include('partials/_header') %>
 
     <h2 class="pageTitle"><%= map.title %></h2>
 
-
     <div class="container">
-
       <div id="map-viewport"></div>
 
       <div class="options">
-        <button class="addLoc btn btn-outline-primary" data-placement="top" title="Add a Location!">
+        <button
+          class="addLoc btn btn-outline-primary"
+          data-placement="top"
+          title="Add a Location!"
+        >
           Contribute
         </button>
-        <button class="favMap btn" data-placement="top" title="Add Map to Favourites!">
+        <button
+          class="favMap btn"
+          data-placement="top"
+          title="Add Map to Favourites!"
+        >
           <i class="fa fa-heart"></i>
         </button>
-
       </div>
-
-
-      <div id="addLocation">
+      <!-- Add Point Form -->
+      <div id="addLocation" class="location-form">
         <form method="POST" action="/maps/<%= map.id %>/edit">
           <label for="address">Address/Location</label>
-          <input id="location" name="address" type="text">
+          <input id="location" name="address" type="text" />
           <label for="markerTitle">Title</label>
-          <input name="markerTitle">
+          <input name="markerTitle" />
           <label for="markerDesc">Description</label>
           <textarea name="markerDesc"></textarea>
           <label for="img">Location Image URL</label>
@@ -60,6 +69,7 @@
           <tbody>
             <% for (const point of points) { %>
             <tr>
+              <!-- <div><%= point.title %></div> -->
               <td>
                 <div class="marker-info">
                   <img src="<%= point.image %>" />
@@ -67,20 +77,90 @@
                 </div>
                 <p><%= point.address %></p>
                 <small><%= point.descr %></small>
+                <% if (userID) { %>
+                <div>
+                  <!-- EDIT POINT FORM -->
+                  <div class="location-form edit-point-form">
+                    <form>
+                      <label for="address">Address/Location</label>
+                      <input class="address-field" name="address" type="text" />
+                      <label for="markerTitle">Title</label>
+                      <input class="title-field" name="markerTitle" />
+                      <label for="markerDesc">Description</label>
+                      <textarea
+                        class="description-field"
+                        name="markerDesc"
+                      ></textarea>
+                      <button
+                        type="button"
+                        class="btn btn-primary edit-point"
+                        data-map-id="<%= map.id %>"
+                        data-point-id="<%= point.id %>"
+                      >
+                        Edit Point
+                      </button>
+                    </form>
+                  </div>
+                  <button type="button" class="btn btn-primary edit-point-btn">
+                    Edit
+                  </button>
+
+                  <button
+                    onclick="deletePoint('<%= map.id %>', '<%= point.id %>')"
+                    type="button"
+                    class="btn btn-danger delete-point"
+                  >
+                    Remove
+                  </button>
+                </div>
+                <% } %>
               </td>
             </tr>
             <% } %>
           </tbody>
         </table>
       </aside>
-
     </div>
     <p id="mapID"><%= map.id %></p>
     <p id="userName"><%= user %></p>
     <p id="userID"><%= userID %></p>
 
-    <script async
-      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap">
+    <script
+      async
+      src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap"
+    ></script>
+    <script>
+      const deletePoint = (mapID, pointTitle) => {
+        $.ajax({
+          url: `/maps/delete/${mapID}/points/${pointTitle}`,
+          type: "POST",
+          success: function (result) {
+            window.location.reload();
+          },
+          error: function (err) {
+            console.log("ERROR");
+          },
+        });
+      };
+
+      // const editPoint = (mapID, pointTitle) => {
+      //   const data = {
+      //     address: $(".address-field").val(),
+      //     title: $(".title-field").val(),
+      //     description: $(".description-field").val(),
+      //   };
+      //   $.ajax({
+      //     url: `/maps/edit/${mapID}/points/${pointTitle}`,
+      //     type: "POST",
+      //     data: data,
+      //     success: function (result) {
+      //       window.location.reload();
+      //     },
+      //     error: function (err) {
+      //       console.log("ERROR");
+      //     },
+      //   });
+      // };
     </script>
   </body>
 </html>

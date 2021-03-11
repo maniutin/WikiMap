@@ -5,7 +5,6 @@ h2 {
 }
 
 .container {
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -68,8 +67,7 @@ h2 {
     }
   }
 
-
-  #addLocation {
+  .location-form {
     display: none;
     width: 80%;
     border: 3px solid cadetblue;

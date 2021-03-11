@@ -23,6 +23,12 @@ nav.navbar {
       margin: 1em;
       color: #244751;
     }
+
+  #exampleInputEmail1 {
+    width: 200px;
+  }
+  #exampleInputPassword1 {
+    width: 200px;
   }
 
 }
@@ -31,7 +37,10 @@ nav.navbar {
 
 html > body,
 header > nav {
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     color: #244751;
   }
 }

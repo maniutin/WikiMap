@@ -95,27 +95,28 @@ module.exports = (db) => {
     const currentUser = req.session.user_id;
 
     if (!currentUser) {
-      return res.redirect("/")
+      return res.redirect("/");
     }
 
     const data = req.body;
 
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+    axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {
           address: data.address,
           key: dbParams.api,
-        }
+        },
       })
       .then((response) => {
         const coords = response.data.results[0].geometry.location;
         const queryParams = [
           currentUser,
-          data['map-title'],
-          data['map-category'],
-          data['map-description'],
+          data["map-title"],
+          data["map-category"],
+          data["map-description"],
           coords.lat,
           coords.lng,
-          data['map-img-url']
+          data["map-img-url"],
         ];
         const queryString = `
         INSERT INTO maps (owner_id, title, category, description, start_lat, start_long, map_image_url)
@@ -124,7 +125,7 @@ module.exports = (db) => {
         // Insert into Maps
         db.query(queryString, queryParams)
           .then((insertRes) => {
-            console.log('Successful insertion', insertRes.rows);
+            console.log("Successful insertion", insertRes.rows);
             res.redirect("/");
           })
           .catch((err) => console.error("query insert error:", err));
@@ -132,6 +133,62 @@ module.exports = (db) => {
       .catch((err) => {
         console.log("Geocode error: ", err);
         res.redirect(`/maps/new`);
+      });
+  });
+
+  //delete point on a map
+  router.post("/delete/:mapID/points/:id", (req, res) => {
+    const mapID = req.params.mapID;
+    const pointId = req.params.id;
+    const queryParams = [pointId];
+    const queryString = `DELETE FROM map_points WHERE map_points.id = $1`;
+    db.query(queryString, queryParams)
+      .then((response) => res.json({}))
+      .catch((err) => console.error("query insert error:", err));
+  });
+
+  // Edit Point
+  router.post("/edit/:mapID/points/:id", (req, res) => {
+    const newAddress = req.body.address;
+    const newTitle = req.body.title;
+    const newDescription = req.body.description;
+    const pointId = req.params.id;
+    axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+        params: {
+          address: newAddress,
+          key: dbParams.api,
+        },
+      })
+      .then((response) => {
+        const coords = response.data.results[0].geometry.location;
+        const queryParams = [
+          coords.lat,
+          coords.lng,
+          newTitle,
+          newDescription,
+          newAddress,
+          pointId,
+        ];
+        const queryString = `UPDATE map_points
+        SET latitude = $1,
+        longitude = $2,
+        title = $3,
+        description = $4,
+        address = $5
+        WHERE map_points.id = $6;
+        `;
+        // Update map marker in db
+        db.query(queryString, queryParams)
+          .then((edit) => {
+            res.json({});
+          })
+          .catch((err) => {
+            console.error("query update error:", err);
+          });
+      })
+      .catch((err) => {
+        console.log("Geocode error: ", err.response);
       });
   });
 
@@ -153,12 +210,13 @@ module.exports = (db) => {
         const map = all[0].rows[0];
         const user = all[1].rows;
         const points = all[2].rows;
+        console.log(points);
         let templateVars = {
           map: map,
           points: points,
           key: dbParams.api,
           user: userID ? user[0].name : null,
-          userID: userID
+          userID: userID,
         };
         const isAjaxReq = req.xhr;
         if (isAjaxReq) {
@@ -222,7 +280,7 @@ module.exports = (db) => {
           data.markerTitle,
           data.markerDesc,
           data.img,
-          address
+          address,
         ];
         const queryString = `
         INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, map_point_image_url, address)
