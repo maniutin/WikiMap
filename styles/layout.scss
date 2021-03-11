@@ -15,7 +15,6 @@ header.partial {
 }
 
 nav.navbar {
-
   div.navlinks {
     display: flex;
     justify-content: space-evenly;
@@ -31,10 +30,7 @@ nav.navbar {
   #exampleInputPassword1 {
     width: 200px;
   }
-
 }
-
-
 
 html > body,
 header > nav {
@@ -51,9 +47,7 @@ button:focus {
   box-shadow: none;
 }
 
-
 @media only screen and (max-width: 620px) {
-
   header.partial {
     height: 100px;
   }
@@ -63,7 +57,6 @@ button:focus {
   }
 
   nav.navbar {
-
     div.navlinks {
       display: block;
       // justify-content: space-evenly;
@@ -72,6 +65,5 @@ button:focus {
         color: #e40a0a;
       }
     }
-
   }
 }
