@@ -14,14 +14,20 @@ header.partial {
   margin-top: 100px;
 }
 
-div.navlinks {
-  display: flex;
-  justify-content: space-evenly;
-  a {
-    margin: 1em;
-    color: #244751;
+nav.navbar {
+
+  div.navlinks {
+    display: flex;
+    justify-content: space-evenly;
+    a {
+      margin: 1em;
+      color: #244751;
+    }
   }
+
 }
+
+
 
 html > body,
 header > nav {
@@ -33,4 +39,29 @@ header > nav {
 button:focus {
   outline: none;
   box-shadow: none;
+}
+
+
+@media only screen and (max-width: 620px) {
+
+  header.partial {
+    height: 100px;
+  }
+
+  .pageTitle {
+    margin-top: 120px;
+  }
+
+  nav.navbar {
+
+    div.navlinks {
+      display: block;
+      // justify-content: space-evenly;
+      a {
+        margin: 1em;
+        color: #e40a0a;
+      }
+    }
+
+  }
 }
