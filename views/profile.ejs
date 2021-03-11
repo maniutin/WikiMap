@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Wiki Maps - My Profile</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +10,8 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/users.css" type="text/css" />
+    <link rel="icon" type="image/ico" href="/images/map.ico"/>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -25,10 +28,6 @@
     <main>
       <div class="profile-maps-container">
         <div class="profile-header-views mb-3">
-          <!-- <ul class="nav justify-content-center">
-            <li id="my-maps" class="nav-item">My Maps</li>
-            <li id="my-contributions" class="nav-item">My Contributions</li>
-          </ul> -->
           <ul class="nav justify-content-center">
             <li class="nav-item nav-link">
               <h4 id="my-maps">My Maps</h4>
@@ -42,6 +41,9 @@
           </ul>
         </div>
         <section id="owner-maps-container" class="show">
+          <% if (!ownerMaps.length) { %>
+            <h3>No maps created. Add a new map <a href="/maps/new">here</a></h3>
+          <% } %>
           <% for (const ownerMap of ownerMaps) { %>
             <header>
               <h5><%= ownerMap.title %></h5>
@@ -65,29 +67,35 @@
           <% } %>
         </section>
         <section id="favourite-maps-container" class="hide">
+          <% if (!favouriteMaps.length) { %>
+            <h3>You have no favourites. View maps <a href="/">here</a></h3>
+          <% } %>
           <% for (const favMap of favouriteMaps) { %>
-            <header>
-              <h5><%= favMap.title %></h5>
-              <span>Category: </span>
-              <small class="badge bg-info text-dark">
-                <%= favMap.category %>
-              </small>
-            </header>
-            <div class="profile-map">
-              <img src="<%= favMap.map_image_url %>" alt="<%= favMap.title %>" class="profile-map-img">
-              <div class="profile-map-content">
-                <%= favMap.description %>
-              </div>
-              <div class="profile-map-btns">
-                <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>">View</a>
-                <form action="">
-                  <button class="btn btn-danger">Remove Favourite</button>
-                </form>
+            <div>
+              <header>
+                <h5><%= favMap.title %></h5>
+                <span>Category: </span>
+                <small class="badge bg-info text-dark">
+                  <%= favMap.category %>
+                </small>
+              </header>
+              <div class="profile-map">
+                <img src="<%= favMap.map_image_url %>" alt="<%= favMap.title %>" class="profile-map-img">
+                <div class="profile-map-content">
+                  <%= favMap.description %>
+                </div>
+                <div class="profile-map-btns">
+                  <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>">View</a>
+                  <button class="btn btn-danger remove-fav" value="<%= favMap.map_id %>">Remove Favourite</button>
+                </div>
               </div>
             </div>
-            <% } %>
-          </section>
-          <section id="contribution-maps-container" class="hide">
+          <% } %>
+        </section>
+        <section id="contribution-maps-container" class="hide">
+          <% if (!contributionMaps.length) { %>
+            <h3>You have no contributions. View maps <a href="/">here</a></h3>
+          <% } %>
           <% for (const contributionMap of contributionMaps) { %>
             <header>
               <h5><%= contributionMap.title %></h5>

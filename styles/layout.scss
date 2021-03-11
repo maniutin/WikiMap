@@ -1,12 +1,27 @@
 // See: https://sass-lang.com/
 
-nav {
-  background-color: gainsboro;
+header.partial {
+  margin-bottom: 1em;
 }
 
-body {
-  background-color: gainsboro;
+div.navlinks {
+  display: flex;
+  justify-content: space-evenly;
+  a {
+    margin: 1em;
+    color: #244751;
+  }
+}
+
+html > body,
+header > nav {
+  background-color: rgba(179, 215, 129, 0.406);
   h1, h2, h3, h4 {
     color: #244751;
   }
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
 }

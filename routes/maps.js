@@ -17,7 +17,6 @@ const { response } = require("express");
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
-
     Promise.all([
       Promise.resolve(
         db.query(

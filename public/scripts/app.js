@@ -14,25 +14,29 @@ $(() => {
       e.preventDefault();
 
       let classes = Object.values(favBtn[0].classList);
-
-      if (!classes.includes("favourited")) {
-        $.ajax({
-          method: "POST",
-          url: `/users/${userID}/favourites`,
-          data: { mapID: mapID },
-        })
-          .done((response) => {
-            isFav = true; // ensures you can't click favourite twice
-            console.log(response);
-            favBtn.addClass("favourited");
-            alert("Map added to favourites!");
+      if (userID && userName) {
+        if (!classes.includes("favourited")) {
+          $.ajax({
+            method: "POST",
+            url: `/users/${userID}/favourites`,
+            data: { mapID: mapID },
           })
-          .fail((err) => console.log(err));
+            .done((response) => {
+              isFav = true; // ensures you can't click favourite twice
+              console.log(response);
+              favBtn.addClass("favourited");
+              alert("Map added to favourites!");
+            })
+            .fail((err) => console.log(err));
 
-        favBtn.blur();
+          favBtn.blur();
+        } else {
+          favBtn.blur();
+          alert("This map was already added to your favourites!");
+        }
       } else {
         favBtn.blur();
-        alert("This map was already added to your favourites!");
+        alert("You must be logged in to favourite a map!");
       }
     });
 
