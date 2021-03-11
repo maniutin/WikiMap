@@ -8,16 +8,19 @@ h1.pageTitle {
   flex-direction: column;
   align-items: center;
   .map-view {
-    width: 70%;
+    width: 50%;
     .map-element {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
       height: 350px;
       padding: 1em;
-      border: solid black 5px;
+      border: rgba(146, 146, 146, 0.185) 1px solid;
+      border-radius: 9px;
+      margin-bottom: 20px;
       .map-info {
         display: flex;
+        flex-direction: column;
         align-items: center;
         margin-bottom: 0.8em;
         .map-info-text {
@@ -38,6 +41,9 @@ h1.pageTitle {
         .imgContainer {
           margin-right: 1em;
           width: 250px;
+          border: rgba(146, 146, 146, 0.185) 5px solid;
+          border-radius: 5px;
+
           img {
             max-width: 100%;
           }
