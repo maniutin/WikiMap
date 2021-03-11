@@ -39,23 +39,23 @@
 
     <main class="show-maps">
       <section id="map-container">
-        <table class="table table-striped">
-          <tbody>
+        <div>
+          <div>
             <% for (const map of maps) { %>
-            <tr>
-              <td>
+            <div class="map-view">
+              <div class="map-element">
                 <div class="map-info">
                   <div class="imgContainer">
                     <img src="<%= map.map_image_url %>" />
                   </div>
-                  <h2>
+                  <h2 class="map-info-text">
                     <b
                       ><a class="map-title" href="/maps/<%= map.id %>"
                         ><%= map.title %></a
                       ></b
                     >
-                    by
-                    <a href="/maps"><%= map.name %></a>
+                    <p class="by">by</p>
+                    <a class="map-creator" href="/maps"><%= map.name %></a>
                   </h2>
                 </div>
                 <div>
@@ -71,11 +71,11 @@
                 <small class="badge text-dark"><%= map.category %></small>
                 <small class="mapID"><%= map.id %></small>
                 <small class="userID"><%= userID %></small>
-              </td>
-            </tr>
+              </div>
+            </div>
             <% } %>
-          </tbody>
-        </table>
+          </div>
+        </div>
       </section>
     </main>
   </body>

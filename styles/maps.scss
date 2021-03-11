@@ -3,22 +3,20 @@ h1.pageTitle {
   padding-bottom: 14px;
 }
 
-tbody {
-
-  td {
-
+.map-view {
+  .map-element {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 350px;
     padding: 1em;
 
-
     .map-info {
       display: flex;
       align-items: center;
       margin-bottom: 0.8em;
-      h2 {
+      .map-info-text {
+        display: flex;
         a {
           color: #244751;
         }
@@ -27,12 +25,23 @@ tbody {
           text-decoration: none;
         }
       }
+      .map-title {
+        font-family: "Rubik", sans-serif;
+        font-weight: bold;
+      }
       .imgContainer {
         margin-right: 1em;
         width: 250px;
         img {
           max-width: 100%;
         }
+      }
+      .by {
+        font-family: "Rubik", sans-serif;
+        font-weight: 300;
+      }
+      .map-creator {
+        font-family: "Rubik", sans-serif;
       }
     }
 
@@ -67,6 +76,3 @@ tbody {
     }
   }
 }
-
-
-
