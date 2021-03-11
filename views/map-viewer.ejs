@@ -59,6 +59,7 @@
           <tbody>
             <% for (const point of points) { %>
             <tr>
+              <div><%= point.title %></div>
               <td>
                 <div class="marker-info">
                   <img src="<%= point.image %>" />
@@ -66,12 +67,20 @@
                 </div>
                 <p><%= point.address %></p>
                 <small><%= point.descr %></small>
+                <% if (userID) { %>
                 <div>
                   <form method="POST" action="/maps/<%= map.id %>/edit">
                     <button type="button" class="btn btn-primary">Edit</button>
                   </form>
-                  <button type="button" class="btn btn-danger">Remove</button>
+                  <button
+                    onclick="deletePoint('<%= map.id %>', '<%= map.title %>')"
+                    type="button"
+                    class="btn btn-danger delete-point"
+                  >
+                    Remove
+                  </button>
                 </div>
+                <% } %>
               </td>
             </tr>
             <% } %>
@@ -87,5 +96,15 @@
       async
       src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap"
     ></script>
+    <script>
+      const deletePoint = (mapID, mapTitle) => {
+        console.log("MAP:", mapID, mapTitle);
+        $.ajax({
+          url: `/maps/delete/${mapID}/points/${mapTitle}`,
+          type: "POST",
+          success: function (result) {},
+        });
+      };
+    </script>
   </body>
 </html>

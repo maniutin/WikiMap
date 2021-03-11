@@ -116,7 +116,11 @@ module.exports = (db) => {
 
     res.redirect("/");
   });
-
+  //delete point on a map
+  router.post("/delete/:mapID/points/:title", (req, res) => {
+    const mapID = req.params.mapID;
+    const mapTitle = req.params.title;
+  });
   router.get("/:mapID", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
     const queryParams = [req.params.mapID];
@@ -235,14 +239,6 @@ module.exports = (db) => {
       .then((response) => res.send(response.data.results[0].formatted_address))
       .catch((err) => res.send(err));
   });
-
-  //delete point on a map
-  // app.post("/urls/:shortURL/delete", (req, res) => {
-  //   if (urlDatabase[req.params.shortURL].userID === req.session.user_id) {
-  //     delete urlDatabase[req.params.shortURL];
-  //   }
-  //   res.redirect("/urls");
-  // });
 
   return router;
 };

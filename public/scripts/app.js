@@ -1,63 +1,55 @@
 $(() => {
   setTimeout(() => {
-    console.log('app.js is ready!');
+    console.log("app.js is ready!");
 
     // const map = $('#map-viewport');
-    const mapID = $('#mapID').html();
-    const favBtn = $('.favMap'); // Favourites button '<3'
-    const locBtn = $('.addLoc'); // button for 'Add Location'
-    const userName = $('#userName').html(); // hidden p tag containing current user
-    const userID = $('#userID').html(); // hidden p tag containing current user
+    const mapID = $("#mapID").html();
+    const favBtn = $(".favMap"); // Favourites button '<3'
+    const locBtn = $(".addLoc"); // button for 'Add Location'
+    const userName = $("#userName").html(); // hidden p tag containing current user
+    const userID = $("#userID").html(); // hidden p tag containing current user
 
-    favBtn.on('click', (e) => {
+    favBtn.on("click", (e) => {
       e.preventDefault();
 
       let classes = Object.values(favBtn[0].classList);
 
-      if (!classes.includes('favourited')) {
+      if (!classes.includes("favourited")) {
         $.ajax({
           method: "POST",
           url: `/users/${userID}/favourites`,
-          data: { mapID: mapID }
+          data: { mapID: mapID },
         })
-        .done(response => {
-          isFav = true; // ensures you can't click favourite twice
-          console.log(response);
-          favBtn.addClass('favourited');
-          alert("Map added to favourites!");
-        })
-        .fail(err => console.log(err));
+          .done((response) => {
+            isFav = true; // ensures you can't click favourite twice
+            console.log(response);
+            favBtn.addClass("favourited");
+            alert("Map added to favourites!");
+          })
+          .fail((err) => console.log(err));
 
         favBtn.blur();
       } else {
         favBtn.blur();
-        alert('This map was already added to your favourites!');
+        alert("This map was already added to your favourites!");
       }
-
     });
 
-
-    locBtn.on("click", function(event) {
-
-      const $addLocation = $('#addLocation');
+    locBtn.on("click", function (event) {
+      const $addLocation = $("#addLocation");
 
       if (userName) {
         console.log(userName);
         $addLocation.slideToggle({
           duration: 400,
-          start: function() {
-            $(this).css('display', 'flex');
-          }
+          start: function () {
+            $(this).css("display", "flex");
+          },
         });
-        $('#location').focus();
+        $("#location").focus();
       } else {
         alert("You must be a registered user to contribute to a map!");
       }
-
     });
-
-
-
-
   }, 100);
-})
+});
