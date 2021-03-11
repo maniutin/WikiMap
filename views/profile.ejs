@@ -46,16 +46,16 @@
           <% } %>
           <% for (const ownerMap of ownerMaps) { %>
             <div class="mb-3">
-              <header>
-                <h5><%= ownerMap.title %></h5>
-                <span>Category: </span>
-                <small class="badge bg-info text-dark">
-                  <%= ownerMap.category %>
-                </small>
-              </header>
               <div class="profile-map">
                 <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
                 <div class="profile-map-content">
+                  <header>
+                    <h5><%= ownerMap.title %></h5>
+                    <span>Category: </span>
+                    <small class="badge bg-info text-dark">
+                      <%= ownerMap.category %>
+                    </small>
+                  </header>
                   <%= ownerMap.description %>
                 </div>
                 <div class="profile-map-btns">
@@ -71,17 +71,19 @@
           <% } %>
           <% for (const favMap of favouriteMaps) { %>
             <div class="mb-3">
-              <header>
-                <h5><%= favMap.title %></h5>
-                <span>Category: </span>
-                <small class="badge bg-info text-dark">
-                  <%= favMap.category %>
-                </small>
-              </header>
               <div class="profile-map">
                 <img src="<%= favMap.map_image_url %>" alt="<%= favMap.title %>" class="profile-map-img">
                 <div class="profile-map-content">
-                  <%= favMap.description %>
+                  <header>
+                    <h5><%= favMap.title %></h5>
+                    <span>Category: </span>
+                    <small class="badge bg-info text-dark">
+                      <%= favMap.category %>
+                    </small>
+                  </header>
+                  <div>
+                    <%= favMap.description %>
+                  </div>
                 </div>
                 <div class="profile-map-btns">
                   <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>">View</a>
@@ -97,16 +99,17 @@
           <% } %>
           <% for (const contributionMap of contributionMaps) { %>
             <div class="mb-3">
-              <header>
-                <h5><%= contributionMap.title %></h5>
-                <span>Category: </span>
-                <small class="badge bg-info text-dark">
-                  <%= contributionMap.category %>
-                </small>
-              </header>
               <div class="profile-map">
                 <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
                 <div class="profile-map-content">
+                  <header>
+                    <h5><%= contributionMap.title %></h5>
+                    <span>Category: </span>
+                    <small class="badge bg-info text-dark">
+                      <%= contributionMap.category %>
+                    </small>
+                  </header>
+
                   <%= contributionMap.description %>
                 </div>
                 <div class="profile-map-btns">

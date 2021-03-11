@@ -71,16 +71,16 @@ const renderFavourites = (favouriteObjs) => {
 const createFavouriteElement = (favouriteObj) => {
   return `
   <div class="mb-3">
-    <header>
-      <h5>${favouriteObj.title}</h5>
-      <span>Category: </span>
-      <small class="badge bg-info text-dark">
-        ${favouriteObj.category}
-      </small>
-    </header>
     <div class="profile-map">
       <img src="${favouriteObj.map_image_url}" alt="${favouriteObj.title}" class="profile-map-img">
       <div class="profile-map-content">
+        <header>
+          <h5>${favouriteObj.title}</h5>
+          <span>Category: </span>
+          <small class="badge bg-info text-dark">
+            ${favouriteObj.category}
+          </small>
+        </header>
         ${favouriteObj.description}
       </div>
       <div class="profile-map-btns">
