@@ -1,3 +1,8 @@
+body {
+  background-color: #B3D781;
+  background-image: url('https://www.transparenttextures.com/patterns/groovepaper.png');
+}
+
 h2 {
   width: 100%;
   text-align: center;
@@ -89,6 +94,15 @@ h2 {
         border: 1px solid cadetblue;
       }
     }
+  }
+
+  .markerImg:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+  .markerH4:hover {
+    color:rgb(24, 165, 24);
+    cursor: pointer;
   }
 
   aside {
