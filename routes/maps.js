@@ -164,14 +164,14 @@ module.exports = (db) => {
         // Update map marker in db
         db.query(queryString, queryParams)
           .then((edit) => {
-            console.log(edit.rows);
+            res.json({});
           })
           .catch((err) => {
             console.error("query update error:", err);
           });
       })
       .catch((err) => {
-        console.log("Geocode error: ", err);
+        console.log("Geocode error: ", err.response);
       });
   });
 
