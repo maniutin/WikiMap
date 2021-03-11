@@ -1,17 +1,18 @@
 tbody {
-  background-color: gainsboro;
 
   td {
 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 300px;
+    height: 350px;
+    padding: 1em;
 
 
     .map-info {
       display: flex;
       align-items: center;
+      margin-bottom: 0.8em;
       h2 {
         a {
           color: #244751;
@@ -21,21 +22,22 @@ tbody {
           text-decoration: none;
         }
       }
-      img {
-        width: 100px;
-        height: 100px;
+      .imgContainer {
         margin-right: 1em;
-
+        width: 250px;
+        img {
+          max-width: 100%;
+        }
       }
     }
 
     .favMap {
-      width: 5%;
+      width: 42px;
       border: 2px solid cadetblue;
       border-radius: 50%;
       background-color: mediumturquoise;
       font-size: 1.5em;
-      margin-top: 5px;
+      margin-bottom: 5px;
       .fa-heart {
         color: rgba(247, 50, 1, 0.482);
         border: 0px;
@@ -49,6 +51,10 @@ tbody {
         color: rgb(247, 50, 1);
         border: 0px;
       }
+    }
+    small.badge {
+      width: fit-content;
+      background-color: rgba(0, 139, 139, 0.454);
     }
     .mapID,
     .userID {

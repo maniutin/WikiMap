@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Wiki Maps</title>
-
+    <title>Wiki Maps - Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/maps.css" type="text/css" />
+    <link rel="icon" type="image/ico" href="/images/map.ico"/>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -30,23 +31,25 @@
 
     <main class="show-maps">
       <section id="map-container">
-        <table class="table">
+        <table class="table table-striped">
           <tbody>
             <% for (const map of maps) { %>
             <tr>
               <td>
                 <div class="map-info">
-                  <img src="<%= map.map_image_url %>" />
+                  <div class="imgContainer"><img src="<%= map.map_image_url %>" /></div>
                   <h2>
                     <a href="/maps/<%= map.id %>"><%= map.title %></a> by
                     <a href="/maps"><%= map.name %></a>
                   </h2>
                 </div>
-                <button class="favMap" data-placement="top" title="Add Map to Favourites!">
-                  <i class="fa fa-heart"></i>
-                </button>
-                <p><%= map.description %></p>
-                <small><%= map.category %></small>
+                <div>
+                  <p><%= map.description %></p>
+                  <button class="favMap" data-placement="top" title="Add Map to Favourites!">
+                    <i class="fa fa-heart"></i>
+                  </button>
+                </div>
+                <small class="badge text-dark"><%= map.category %></small>
                 <small class='mapID'><%= map.id %></small>
                 <small class='userID'><%= userID %></small>
               </td>

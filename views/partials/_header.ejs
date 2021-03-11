@@ -1,12 +1,18 @@
-<header>
-    <nav class="navbar navbar-light bg-light">
-      <div><a href="/maps">WikiMap</a>
-
+<header class="partial">
+    <nav class="navbar navbar-light">
+      <div class="navlinks">
+        <a href="/maps">WikiMap</a>
+        <% if (user) { %>
         <a href="/users/<%= user %>/favourites">Favourites</a>
         <a href="/users/<%= user %>/maps">My Maps</a>
         <a href="/maps/new">New Map</a>
+        <% } else { %>
+        <a href="#">Favourites</a>
+        <a href="#">My Maps</a>
+        <a href="#">New Map</a>
+        <% } %>
       </div>
-        <div>
+      <div>
         <% if (!user) { %>
         <a href="/login">Login</a>
         <a href="/register">Register</a>
@@ -15,11 +21,7 @@
           <form method="POST" action="/logout" class="form-inline">
             <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">Logout</button>
           </form>
-          <% } %>
-
-              </div>
-            </form>
-
+        <% } %>
+      </div>
     </nav>
-  </div>
 </header>

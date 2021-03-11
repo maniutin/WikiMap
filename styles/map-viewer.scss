@@ -1,6 +1,7 @@
 h2 {
-  width: 66%;
-  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  margin: 1em 0;
 }
 
 .container {
@@ -8,6 +9,7 @@ h2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 
   #map-viewport {
@@ -37,9 +39,12 @@ h2 {
     button {
       border: 2px solid cadetblue;
       border-radius: 50%;
-      background-color: mediumturquoise;
       font-size: 1.5em;
+      color: #244751;
+
       .fa-heart {
+        font-size: 1em;
+        text-align: center;
         color: rgba(247, 50, 1, 0.482);
         border: 0px;
       }
