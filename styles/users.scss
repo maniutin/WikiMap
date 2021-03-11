@@ -1,15 +1,17 @@
+body {
+  background-color: #b3d781;
+  background-image: url("https://www.transparenttextures.com/patterns/groovepaper.png");
+}
 #my-maps:hover {
   cursor: pointer;
 }
 
 #my-favourites:hover {
   cursor: pointer;
-
 }
 
 #my-contributions:hover {
   cursor: pointer;
-
 }
 
 main {
@@ -29,7 +31,6 @@ main {
     section {
       flex-direction: column;
       padding: 1em;
-
     }
 
     .profile-map {
@@ -59,21 +60,17 @@ main {
         }
         .btn-primary {
           width: 30%;
-
         }
         .remove-fav {
           width: 70%;
-
         }
       }
     }
-
   }
 }
 
 .show {
   display: flex;
-
 }
 
 .hide {
@@ -81,7 +78,7 @@ main {
 }
 
 .active {
-  color: #D36135;
+  color: #d36135;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -98,7 +95,7 @@ main {
         display: flex;
 
         .profile-map-img {
-          width: 20%
+          width: 20%;
         }
 
         .profile-map-content {
@@ -111,7 +108,6 @@ main {
           div {
             width: 70%;
           }
-
         }
         .profile-map-btns {
           width: 20%;
@@ -127,8 +123,6 @@ main {
           }
         }
       }
-
     }
   }
 }
-
