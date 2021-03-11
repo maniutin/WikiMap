@@ -82,7 +82,6 @@ $(() => {
         title: $editPointBtn.siblings(".title-field").val(),
         description: $editPointBtn.siblings(".description-field").val(),
       };
-      console.log("BTN DATA: ", $editPointBtn.data("pointId"));
       $.ajax({
         url: `/maps/edit/${$editPointBtn.data(
           "mapId"
