@@ -8,7 +8,7 @@ $(() => {
     const locBtn = $(".addLoc"); // button for 'Add Location'
     const userName = $("#userName").html(); // hidden p tag containing current user
     const userID = $("#userID").html(); // hidden p tag containing current user
-    const pointEditBtn = $("#edit-point-btn"); // edit point button
+    const pointEditBtn = $(".edit-point-btn"); // edit point button
 
     favBtn.on("click", (e) => {
       e.preventDefault();
@@ -54,7 +54,7 @@ $(() => {
     });
 
     pointEditBtn.on("click", function (event) {
-      const $editPoint = $("#edit-point-form");
+      const $editPoint = $(".edit-point-form");
 
       if (userName) {
         console.log(userName);
