@@ -1,9 +1,9 @@
 /*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into api/users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
+* All routes for Users are defined here
+* Since this file is loaded in server.js into api/users,
+*   these routes are mounted onto /users
+* See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
+*/
 
 const express = require("express");
 const router = express.Router();
@@ -11,13 +11,14 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/:userId/maps", (req, res) => {
     const currentUser = req.session.user_id;
-    console.log(currentUser);
-    const templateVars = {
-      user: currentUser,
-    };
+    if (!currentUser) {
+      return res.redirect("/");
+    }
+    const templateVars = {};
 
     const queries = [
-      `SELECT maps.*, users.name FROM maps JOIN users ON owner_id = users.id WHERE owner_id = $1;`,
+      `SELECT * FROM users WHERE id = $1;`,
+      `SELECT * FROM maps WHERE owner_id = $1;`,
       `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`,
       `SELECT DISTINCT map_points.user_id AS user_id, maps.id AS map_id, maps.title AS title, maps.description AS description, maps.category AS category, maps.map_image_url AS map_image
       FROM map_points JOIN maps ON map_id = maps.id WHERE user_id = $1;`
@@ -28,17 +29,20 @@ module.exports = (db) => {
     Promise.all([
       db.query(queries[0], queryParams),
       db.query(queries[1], queryParams),
-      db.query(queries[2], queryParams)
+      db.query(queries[2], queryParams),
+      db.query(queries[3], queryParams)
     ])
     .then(([
+      usersResponse,
       mapsResponse,
       favouritesResponse,
       contributionResponse
     ]) => {
+      templateVars.user = usersResponse.rows[0].name;
       templateVars.ownerMaps = mapsResponse.rows;
       templateVars.favouriteMaps = favouritesResponse.rows;
-      templateVars.contributionMaps = contributionResponse.rows;templateVars.user = mapsResponse.rows[0].name;
-      console.log("TEMPLATE: ", templateVars.ownerMaps[0].name)
+      templateVars.contributionMaps = contributionResponse.rows;
+      console.log(templateVars);
       res.render("profile", templateVars);
     })
     .catch(err => {
@@ -49,6 +53,7 @@ module.exports = (db) => {
 
   });
 
+  // Can remove this route, its in the above route
   router.get("/:userId/favourites", (req, res) => {
     const currentUser = req.session.user_id;
     // const currentUser = req.params.userId;
@@ -96,6 +101,29 @@ module.exports = (db) => {
     // )
     //   .then((res) => console.log("RES: ", res.rows))
     //   .catch((err) => console.error("query insert error:", err));
+  });
+
+  router.post("/favourites/delete", (req, res) => {
+    const currentUser = req.session.user_id ? req.session.user_id : 0;
+    if (!currentUser) {
+      return res.redirect("/");
+    }
+    const mapID = req.body.mapID;
+
+    const queries = [
+      `DELETE FROM favourites WHERE user_id = $1 AND map_id = $2 RETURNING favourites;`,
+      `SELECT favourites.*, maps.* FROM favourites JOIN maps ON map_id = maps.id WHERE user_id = $1;`
+    ];
+    const queryParams = [currentUser, mapID];
+
+    db.query(queries[0], queryParams)
+    .then(() => {
+      db.query(queries[1], [queryParams[0]])
+      .then((remainingRes) => {
+        res.send(remainingRes.rows);
+      })
+    })
+    .catch((err) => console.error("query insert error:", err));
   });
 
   // // skeleton code
