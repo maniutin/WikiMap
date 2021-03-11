@@ -159,7 +159,7 @@ module.exports = (db) => {
         title = $3,
         description = $4,
         address = $5
-        WHERE map_id = 1;
+        WHERE map_points.id = ${req.params.title};
         `;
         // Update map marker in db
         db.query(queryString, queryParams)
