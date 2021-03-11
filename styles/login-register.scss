@@ -1,0 +1,27 @@
+.pageTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10em;
+}
+
+.pageTitle h1 {
+  margin: 1em;
+}
+
+#exampleInputEmail1 {
+  width: 300px;
+}
+#exampleInputPassword1 {
+  width: 300px;
+}
+
+.btn-primary {
+  width: 300px;
+}
+
+#register-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

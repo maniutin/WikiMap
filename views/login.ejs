@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/maps.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/login-register.css" type="text/css" />
     <link rel="icon" type="image/ico" href="/images/map.ico" />
     <link
       rel="stylesheet"
@@ -30,10 +31,13 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Rubik:ital,wght@0,300;0,500;1,300;1,500&display=swap"
       rel="stylesheet"
     />
+    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="/scripts/favourite.js"></script>
   </head>
   <body>
     <%- include('partials/_header') %>
     <div class="pageTitle">
+      <h1>Login</h1>
       <form id="register-form" method="POST" action="/login">
         <div class="form-group">
           <input
@@ -54,7 +58,9 @@
             placeholder="Password"
           />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary rounded-pill">
+          Login
+        </button>
       </form>
     </div>
   </body>
