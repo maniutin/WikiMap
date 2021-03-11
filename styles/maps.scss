@@ -4,19 +4,23 @@ h1.pageTitle {
 }
 
 .map-view {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
   .map-element {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 350px;
     padding: 1em;
-
+    border: solid black 5px;
     .map-info {
       display: flex;
       align-items: center;
       margin-bottom: 0.8em;
       .map-info-text {
         display: flex;
+
         a {
           color: #244751;
         }

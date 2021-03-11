@@ -39,43 +39,39 @@
 
     <main class="show-maps">
       <section id="map-container">
-        <div>
-          <div>
-            <% for (const map of maps) { %>
-            <div class="map-view">
-              <div class="map-element">
-                <div class="map-info">
-                  <div class="imgContainer">
-                    <img src="<%= map.map_image_url %>" />
-                  </div>
-                  <h2 class="map-info-text">
-                    <b
-                      ><a class="map-title" href="/maps/<%= map.id %>"
-                        ><%= map.title %></a
-                      ></b
-                    >
-                    <p class="by">by</p>
-                    <a class="map-creator" href="/maps"><%= map.name %></a>
-                  </h2>
-                </div>
-                <div>
-                  <p><%= map.description %></p>
-                  <button
-                    class="favMap"
-                    data-placement="top"
-                    title="Add Map to Favourites!"
-                  >
-                    <i class="fa fa-heart"></i>
-                  </button>
-                </div>
-                <small class="badge text-dark"><%= map.category %></small>
-                <small class="mapID"><%= map.id %></small>
-                <small class="userID"><%= userID %></small>
+        <% for (const map of maps) { %>
+        <div class="map-view">
+          <div class="map-element">
+            <div class="map-info">
+              <div class="imgContainer">
+                <img src="<%= map.map_image_url %>" />
               </div>
+              <h2 class="map-info-text">
+                <b
+                  ><a class="map-title" href="/maps/<%= map.id %>"
+                    ><%= map.title %></a
+                  ></b
+                >
+                <p class="by">by</p>
+                <a class="map-creator" href="/maps"><%= map.name %></a>
+              </h2>
             </div>
-            <% } %>
+            <div>
+              <p><%= map.description %></p>
+              <button
+                class="favMap"
+                data-placement="top"
+                title="Add Map to Favourites!"
+              >
+                <i class="fa fa-heart"></i>
+              </button>
+            </div>
+            <small class="badge text-dark"><%= map.category %></small>
+            <small class="mapID"><%= map.id %></small>
+            <small class="userID"><%= userID %></small>
           </div>
         </div>
+        <% } %>
       </section>
     </main>
   </body>
