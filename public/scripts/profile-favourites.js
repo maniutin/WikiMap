@@ -1,8 +1,6 @@
 $(document).ready(function() {
 
   const loadFavourites = (mapId) => {
-    let $removeFav = $(".remove-fav");
-
     $.ajax({
       method: "POST",
       url: "/users/favourites/delete",
@@ -18,26 +16,19 @@ $(document).ready(function() {
   };
   const $favouritesSection = $("#favourite-maps-container");
   $favouritesSection.on("click",(event) => {
-    event.preventDefault();
     const mapId = event.target.value
     if (event.target.className === "btn btn-danger remove-fav") {
+      event.preventDefault();
       console.log("favourite removed");
       $("#favourite-maps-container").empty();
       loadFavourites(mapId);
     }
   })
-  // $(".remove-fav").on("click", (event) => {
-  //   console.log("clicked");
-  //   event.preventDefault();
-  //   $("#favourite-maps-container").empty();
-  //   loadFavourites();
-  // })
 
 
   const $myMaps = $("#owner-maps-container");
   const $favouriteMaps = $("#favourite-maps-container");
   const $contributionMaps = $("#contribution-maps-container");
-
 
   $("#my-maps").on("click", () => {
     $myMaps.addClass("show");
