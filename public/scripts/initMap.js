@@ -22,14 +22,18 @@ function initMap() {
           position: position,
           map: map,
         });
+        markerInfo = new google.maps.InfoWindow({
+          content: `<h4>${point.title}</h4>` +
+                   `<div class='markerInfo'>` +
+                   `<div class='imgContainer'><img style='width:100px;' src='${point.image}'></div>` +
+                   `<div><b>${point.address}<br><br></b>` +
+                   `<p>${point.descr}</p></div></div>`,
+          position: position,
+        });
+        // Click marker event
         marker.addListener("click", (e) => {
-          markerInfo = new google.maps.InfoWindow({
-            content: `${point.title} @ ${point.address}`,
-            position: position,
-          });
           markerInfo.open(map);
-          map.setZoom(13);
-          map.setCenter(marker.getPosition());
+          map.setZoom(12);
         });
 
       }

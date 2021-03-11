@@ -93,28 +93,48 @@ module.exports = (db) => {
   });
 
   router.post("/new", (req, res) => {
-    // const currentUser = req.session.userId;
-    // if (!currentUser) {
-    //   return res.redirect("/")
-    // }
-    const data = req.body;
-    const queryParams = [req.session.user_id];
-    // console.log(data);
+    const currentUser = req.session.user_id;
 
-    for (const key of Object.keys(data)) {
-      queryParams.push(data[key]);
+    if (!currentUser) {
+      return res.redirect("/");
     }
 
-    const queryString = `
-    INSERT INTO maps (owner_id, title, category, description, map_image_url)
-    VALUES ($1, $2, $3, $4, $5);
-    `;
+    const data = req.body;
 
-    db.query(queryString, queryParams)
-      .then((res) => console.log(res.rows))
-      .catch((err) => console.error("query insert error:", err));
-
-    res.redirect("/");
+    axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+        params: {
+          address: data.address,
+          key: dbParams.api,
+        },
+      })
+      .then((response) => {
+        const coords = response.data.results[0].geometry.location;
+        const queryParams = [
+          currentUser,
+          data["map-title"],
+          data["map-category"],
+          data["map-description"],
+          coords.lat,
+          coords.lng,
+          data["map-img-url"],
+        ];
+        const queryString = `
+        INSERT INTO maps (owner_id, title, category, description, start_lat, start_long, map_image_url)
+        VALUES ($1, $2, $3, $4, $5, $6, $7);
+        `;
+        // Insert into Maps
+        db.query(queryString, queryParams)
+          .then((insertRes) => {
+            console.log("Successful insertion", insertRes.rows);
+            res.redirect("/");
+          })
+          .catch((err) => console.error("query insert error:", err));
+      })
+      .catch((err) => {
+        console.log("Geocode error: ", err);
+        res.redirect(`/maps/new`);
+      });
   });
 
   //delete point on a map
@@ -262,11 +282,12 @@ module.exports = (db) => {
           coords.lng,
           data.markerTitle,
           data.markerDesc,
+          data.img,
           address,
         ];
         const queryString = `
-        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
-        VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+        INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, map_point_image_url, address)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
         // Insert new map marker into db
         db.query(queryString, queryParams)
           .then((insert) => {

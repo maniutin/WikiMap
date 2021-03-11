@@ -22,7 +22,7 @@ CREATE TABLE maps (
   category VARCHAR(255) NOT NULL,
   start_lat DECIMAL NOT NULL DEFAULT 43.67967373431558,
   start_long DECIMAL NOT NULL DEFAULT -79.35131027709444,
-  map_image_url VARCHAR(255) NOT NULL DEFAULT 'https://short.xcoder.io/WXjAKP5'
+  map_image_url VARCHAR(255) NOT NULL DEFAULT 'https://images.unsplash.com/photo-1420582282039-a6d11404cb66?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'
 );
 
 
@@ -57,5 +57,3 @@ CREATE TABLE point_favourites (
 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO labber;
-GRANT ALL ON sequence users_id_seq to labber;
-GRANT ALL ON sequence map_points_id_seq to labber;
