@@ -3,7 +3,12 @@
 header.partial {
   margin-bottom: 1em;
 }
-
+#exampleInputEmail1 {
+  width: 200px;
+}
+#exampleInputPassword1 {
+  width: 200px;
+}
 div.navlinks {
   display: flex;
   justify-content: space-evenly;
