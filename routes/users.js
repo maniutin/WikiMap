@@ -79,6 +79,7 @@ module.exports = (db) => {
       return res.redirect("/");
     }
     const mapID = req.body.mapID;
+    console.log('mapID = ', mapID);
 
     const queryString = `INSERT INTO favourites (user_id, map_id) VALUES ($1, $2);`;
     const queryParams = [currentUser, mapID];
