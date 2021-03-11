@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/maps.css" type="text/css" />
     <link rel="stylesheet" href="/styles/maps-new.css" type="text/css" />
     <link rel="icon" type="image/ico" href="/images/map.ico" />
     <link
@@ -28,56 +29,55 @@
   <body>
     <%- include('partials/_header') %>
 
-    <main class="pageTitle">
-      <div class="map-new">
-        <div>
-          <h1>Create New Map</h1>
-        </div>
-        <div>
-          <form action="/maps/new" method="POST">
-            <div class="mb-3">
-              <label for="map-title">Map Title</label>
-              <input type="text" name="map-title" placeholder="Map Name" />
-            </div>
-            <div class="mb-3">
-              <label for="map-category">Category</label>
-              <select name="map-category" id="map-category">
-                <option value="">Please Select a Category...</option>
-                <option value="City">City</option>
-                <option value="Food">Food</option>
-                <option value="Nature">Nature</option>
-                <option value="Outdoor-Rec">Outdoor Recreation</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="map-description">Description</label>
-              <textarea
-                name="map-description"
-                id="map-description"
-                rows="3"
-                placeholder="Map Description"
-              ></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="address">Starting Address</label>
-              <input
-                type="text"
-                name="address"
-                placeholder="1 yonge street, Toronto"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="map-img-url">Thumbnail Photo URL</label>
-              <input
-                type="text"
-                name="map-img-url"
-                placeholder="Map thumbnail url"
-              />
-            </div>
-            <button type="submit" class="btn btn-primary">Create Map</button>
-          </form>
-        </div>
+    <main>
+      <h1 class="pageTitle">Create New Map</h1>
+      <div class="map-new shadow-sm p-3 mb-5 bg-white rounded">
+        <form action="/maps/new" method="POST">
+          <div class="mb-3 form-group">
+            <label for="map-title" class="col-3">Map Title</label>
+            <input type="text" name="map-title" placeholder="Map Name" class=" form-control"/>
+          </div>
+          <div class="mb-3 form-group">
+            <label for="map-category" class="col-3">Category</label>
+            <select name="map-category" id="map-category" class=" form-control">
+              <option value="" disabled >Please Select a Category...</option>
+              <option value="City">City</option>
+              <option value="Food">Food</option>
+              <option value="Nature">Nature</option>
+              <option value="Outdoor-Rec">Outdoor Recreation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="mb-3 form-group">
+            <label for="map-description" class="col-3">Description</label>
+            <textarea
+              name="map-description"
+              id="map-description"
+              rows="3"
+              placeholder="Map Description"
+              class=" form-control"
+            ></textarea>
+          </div>
+          <div class="mb-3 form-group">
+            <label for="address" class="col-3">Starting Address</label>
+            <input
+              type="text"
+              name="address"
+              placeholder="1 yonge street, Toronto"
+              class=" form-control"
+            />
+          </div>
+          <div class="mb-3 form-group">
+            <label for="map-img-url" class="col-3">Thumbnail Photo URL</label>
+            <input
+              type="text"
+              name="map-img-url"
+              placeholder="Map thumbnail url"
+              class=" form-control"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary ">Create Map</button>
+        </form>
       </div>
     </main>
   </body>

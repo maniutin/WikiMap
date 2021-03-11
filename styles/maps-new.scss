@@ -3,9 +3,39 @@ main {
   margin: auto;
 
   .map-new {
+    width: 100%;
     margin: auto;
     padding: 1em;
+    border: rgba(146, 146, 146, 0.185) 1px solid;
+    border-radius: 9px;
+    form {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem auto;
+      width: 100%;
 
+      div.form-group {
+        display: flex;
+        width: 90%;
+      }
+
+      button.btn {
+        align-self: center;
+      }
+    }
   }
 
+}
+
+@media only screen and (min-width: 1024px) {
+  .map-new {
+    form {
+      align-items: flex-end;
+      div {
+        .form-control {
+          width: 50%;
+        }
+      }
+    }
+  }
 }
