@@ -95,7 +95,7 @@
                         type="button"
                         class="btn btn-primary edit-point"
                         data-map-id="<%= map.id %>"
-                        data-point-title="<%= point.title %>"
+                        data-point-id="<%= point.id %>"
                       >
                         Edit Point
                       </button>
@@ -106,7 +106,7 @@
                   </button>
 
                   <button
-                    onclick="deletePoint('<%= map.id %>', '<%= point.title %>')"
+                    onclick="deletePoint('<%= map.id %>', '<%= point.id %>')"
                     type="button"
                     class="btn btn-danger delete-point"
                   >
@@ -143,24 +143,24 @@
         });
       };
 
-      const editPoint = (mapID, pointTitle) => {
-        const data = {
-          address: $(".address-field").val(),
-          title: $(".title-field").val(),
-          description: $(".description-field").val(),
-        };
-        $.ajax({
-          url: `/maps/edit/${mapID}/points/${pointTitle}`,
-          type: "POST",
-          data: data,
-          success: function (result) {
-            window.location.reload();
-          },
-          error: function (err) {
-            console.log("ERROR");
-          },
-        });
-      };
+      // const editPoint = (mapID, pointTitle) => {
+      //   const data = {
+      //     address: $(".address-field").val(),
+      //     title: $(".title-field").val(),
+      //     description: $(".description-field").val(),
+      //   };
+      //   $.ajax({
+      //     url: `/maps/edit/${mapID}/points/${pointTitle}`,
+      //     type: "POST",
+      //     data: data,
+      //     success: function (result) {
+      //       window.location.reload();
+      //     },
+      //     error: function (err) {
+      //       console.log("ERROR");
+      //     },
+      //   });
+      // };
     </script>
   </body>
 </html>

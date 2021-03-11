@@ -137,25 +137,22 @@ module.exports = (db) => {
   });
 
   //delete point on a map
-  router.post("/delete/:mapID/points/:title", (req, res) => {
+  router.post("/delete/:mapID/points/:id", (req, res) => {
     const mapID = req.params.mapID;
-    const pointTitle = req.params.title;
-    const queryParams = [pointTitle];
-    const queryString = `DELETE FROM map_points WHERE title = $1`;
+    const pointId = req.params.id;
+    const queryParams = [pointId];
+    const queryString = `DELETE FROM map_points WHERE map_points.id = $1`;
     db.query(queryString, queryParams)
       .then((response) => res.json({}))
       .catch((err) => console.error("query insert error:", err));
   });
 
   // Edit Point
-  router.post("/edit/:mapID/points/:title", (req, res) => {
+  router.post("/edit/:mapID/points/:id", (req, res) => {
     const newAddress = req.body.address;
     const newTitle = req.body.title;
     const newDescription = req.body.description;
-    const pointTitle = req.params.title;
-    console.log("ADDRESS: ", newAddress);
-    // const queryParams = [newAddress, newTitle, newDescription];
-
+    const pointId = req.params.id;
     axios
       .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
         params: {
@@ -171,7 +168,7 @@ module.exports = (db) => {
           newTitle,
           newDescription,
           newAddress,
-          pointTitle,
+          pointId,
         ];
         const queryString = `UPDATE map_points
         SET latitude = $1,
@@ -179,9 +176,8 @@ module.exports = (db) => {
         title = $3,
         description = $4,
         address = $5
-        WHERE map_points.title = $6;
+        WHERE map_points.id = $6;
         `;
-        console.log("QUERY STR: ", queryString);
         // Update map marker in db
         db.query(queryString, queryParams)
           .then((edit) => {

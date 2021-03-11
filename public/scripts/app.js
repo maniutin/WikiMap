@@ -74,6 +74,7 @@ $(() => {
         alert("You must be a registered user to contribute to a map!");
       }
     });
+
     submitEditPointBtn.on("click", function (event) {
       const $editPointBtn = $(this);
       const data = {
@@ -81,11 +82,11 @@ $(() => {
         title: $editPointBtn.siblings(".title-field").val(),
         description: $editPointBtn.siblings(".description-field").val(),
       };
-      console.log("BTN DATA: ", $editPointBtn.data("mapId"));
+      console.log("BTN DATA: ", $editPointBtn.data("pointId"));
       $.ajax({
         url: `/maps/edit/${$editPointBtn.data(
           "mapId"
-        )}/points/${$editPointBtn.data("pointTitle")}`,
+        )}/points/${$editPointBtn.data("pointId")}`,
         type: "POST",
         data: data,
         success: function (result) {
