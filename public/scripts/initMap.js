@@ -6,7 +6,7 @@ function initMap() {
       url: `/maps/${mapID}/initMap`
     })
     .done((data) => {
-      console.log("Got some data! ", data);
+      // console.log("Got some data! ", data);
       // The location of start coordinates for map
       const startCoordinates = { lat: Number(data.startLat), lng: Number(data.startLng) };
       // The map, centered at start coordinates
@@ -14,29 +14,72 @@ function initMap() {
         zoom: 8,
         center: startCoordinates,
       });
-      // Place map points (markers) for this map, and set click listeners for each point
-      for (const point of data.points) {
+
+      const windowArr = [];
+
+      const findMarker = (marker) => {
+        // console.log("Finding the latitude:", marker.position.lat());
+        let markerLat = marker.position.lat();
+        // console.log("Finding the longitude:", marker.position.lng());
+        let markerLng = marker.position.lng();
+        return { lat: markerLat, lng: markerLng };
+      }
+
+      const closeAllWindows = (windowArr) => {
+        for (const marker of windowArr) {
+          marker.close();
+        }
+      }
+
+      // Place map data.points[i]s (markers) for this map, and set click listeners for each data.point
+      for (let i = 0; i < data.points.length; i++) {
         let markerInfo;
-        let position = { lat: Number(point.latitude), lng: Number(point.longitude) }
+        let position = { lat: Number(data.points[i].latitude), lng: Number(data.points[i].longitude) }
         let marker = new google.maps.Marker({
           position: position,
           map: map,
         });
+        // Generate new info window for each of the marker positions
         markerInfo = new google.maps.InfoWindow({
-          content: `<h4>${point.title}</h4>` +
+          content: `<h4>${data.points[i].title}</h4>` +
                    `<div class='markerInfo'>` +
-                   `<div class='imgContainer'><img style='width:100px;' src='${point.image}'></div>` +
-                   `<div><b>${point.address}<br><br></b>` +
-                   `<p>${point.descr}</p></div></div>`,
+                   `<div class='imgContainer'><img style='width:100px;' src='${data.points[i].image}'></div>` +
+                   `<div><b>${data.points[i].address}<br><br></b>` +
+                   `<p>${data.points[i].descr}</p></div></div>`,
           position: position,
         });
+
+        // push each infoWindow to an array to make closing all easier
+        windowArr.push(markerInfo);
+
         // Click marker event
         marker.addListener("click", (e) => {
+          closeAllWindows(windowArr);
           markerInfo.open(map);
-          map.setZoom(12);
+          if (map.getZoom() < 12) {
+            map.setZoom(12);
+          }
+        });
+
+        // Get all img and h4 elements in the map points aside section by class
+        let $markerImg = $('.markerImg');
+        let $markerH4 = $('.markerH4');
+
+        // Click handlers for each Image and Title in the scroll box of markers
+        $markerImg[i].addEventListener("click", (e) => {
+          $(document).scrollTop(50);
+          closeAllWindows(windowArr);
+          markerInfo.open(map);
+        });
+        $markerH4[i].addEventListener("click", (e) => {
+          $(document).scrollTop(50);
+          closeAllWindows(windowArr);
+          markerInfo.open(map);
         });
 
       }
+
+
       // Create the initial InfoWindow.
       let infoWindow = new google.maps.InfoWindow({
         content: "Click the map to find a location!",
