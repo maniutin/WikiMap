@@ -45,20 +45,22 @@
             <h3>No maps created. Add a new map <a href="/maps/new">here</a></h3>
           <% } %>
           <% for (const ownerMap of ownerMaps) { %>
-            <header>
-              <h5><%= ownerMap.title %></h5>
-              <span>Category: </span>
-              <small class="badge bg-info text-dark">
-                <%= ownerMap.category %>
-              </small>
-            </header>
-            <div class="profile-map mb-3">
-              <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
-              <div class="profile-map-content">
-                <%= ownerMap.description %>
-              </div>
-              <div class="profile-map-btns">
-                <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
+            <div class="mb-3">
+              <header>
+                <h5><%= ownerMap.title %></h5>
+                <span>Category: </span>
+                <small class="badge bg-info text-dark">
+                  <%= ownerMap.category %>
+                </small>
+              </header>
+              <div class="profile-map">
+                <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img">
+                <div class="profile-map-content">
+                  <%= ownerMap.description %>
+                </div>
+                <div class="profile-map-btns">
+                  <a class="btn btn-primary" href="/maps/<%= ownerMap.id %>">View</a>
+                </div>
               </div>
             </div>
           <% } %>
@@ -68,7 +70,7 @@
             <h3>You have no favourites. View maps <a href="/">here</a></h3>
           <% } %>
           <% for (const favMap of favouriteMaps) { %>
-            <div>
+            <div class="mb-3">
               <header>
                 <h5><%= favMap.title %></h5>
                 <span>Category: </span>
@@ -94,20 +96,22 @@
             <h3>You have no contributions. View maps <a href="/">here</a></h3>
           <% } %>
           <% for (const contributionMap of contributionMaps) { %>
-            <header>
-              <h5><%= contributionMap.title %></h5>
-              <span>Category: </span>
-              <small class="badge bg-info text-dark">
-                <%= contributionMap.category %>
-              </small>
-            </header>
-            <div class="profile-map">
-              <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
-              <div class="profile-map-content">
-                <%= contributionMap.description %>
-              </div>
-              <div class="profile-map-btns">
-                <a class="btn btn-primary" href="/maps/<%= contributionMap.map_id %>">View</a>
+            <div class="mb-3">
+              <header>
+                <h5><%= contributionMap.title %></h5>
+                <span>Category: </span>
+                <small class="badge bg-info text-dark">
+                  <%= contributionMap.category %>
+                </small>
+              </header>
+              <div class="profile-map">
+                <img src="<%= contributionMap.map_image %>" alt="<%= contributionMap.title %>" class="profile-map-img">
+                <div class="profile-map-content">
+                  <%= contributionMap.description %>
+                </div>
+                <div class="profile-map-btns">
+                  <a class="btn btn-primary" href="/maps/<%= contributionMap.map_id %>">View</a>
+                </div>
               </div>
             </div>
           <% } %>

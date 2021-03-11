@@ -48,8 +48,16 @@ main {
         padding: 1em;
       }
       .profile-map-btns {
-        width: 50%;
+        width: 40%;
         display: flex;
+        justify-content: end;
+        margin-bottom: 1rem;
+
+        .btn {
+          width: 50%;
+          margin: auto;
+          margin-left: 0.5rem;
+        }
       }
     }
 
@@ -93,9 +101,11 @@ main {
         .profile-maps-content {
           width: 70%
         }
-        .profile-maps-btns {
-          width: 100%;
+        .profile-map-btns {
+          width: 70%;
           flex-direction: row;
+          margin-bottom: 0;
+          margin-right: 0.5rem;
         }
       }
 

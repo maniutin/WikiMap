@@ -70,21 +70,23 @@ const renderFavourites = (favouriteObjs) => {
 
 const createFavouriteElement = (favouriteObj) => {
   return `
-  <header>
-    <h5>${favouriteObj.title}</h5>
-    <span>Category: </span>
-    <small class="badge bg-info text-dark">
-      ${favouriteObj.category}
-    </small>
-  </header>
-  <div class="profile-map">
-    <img src="${favouriteObj.map_image_url}" alt="${favouriteObj.title}" class="profile-map-img">
-    <div class="profile-map-content">
-      ${favouriteObj.description}
-    </div>
-    <div class="profile-map-btns">
-      <a class="btn btn-primary" href="/maps/${favouriteObj.map_id}">View</a>
-      <button class="btn btn-danger remove-fav" value="${favouriteObj.map_id}">Remove Favourite</button>
+  <div class="mb-3">
+    <header>
+      <h5>${favouriteObj.title}</h5>
+      <span>Category: </span>
+      <small class="badge bg-info text-dark">
+        ${favouriteObj.category}
+      </small>
+    </header>
+    <div class="profile-map">
+      <img src="${favouriteObj.map_image_url}" alt="${favouriteObj.title}" class="profile-map-img">
+      <div class="profile-map-content">
+        ${favouriteObj.description}
+      </div>
+      <div class="profile-map-btns">
+        <a class="btn btn-primary" href="/maps/${favouriteObj.map_id}">View</a>
+        <button class="btn btn-danger remove-fav" value="${favouriteObj.map_id}">Remove Favourite</button>
+      </div>
     </div>
   </div>`;
 };
