@@ -152,7 +152,8 @@ module.exports = (db) => {
     const newAddress = req.body.address;
     const newTitle = req.body.title;
     const newDescription = req.body.description;
-    console.log(req.params);
+    const pointTitle = req.params.title;
+    console.log("ADDRESS: ", newAddress);
     // const queryParams = [newAddress, newTitle, newDescription];
 
     axios
@@ -170,16 +171,17 @@ module.exports = (db) => {
           newTitle,
           newDescription,
           newAddress,
+          pointTitle,
         ];
-
         const queryString = `UPDATE map_points
         SET latitude = $1,
         longitude = $2,
         title = $3,
         description = $4,
         address = $5
-        WHERE map_points.id = ${req.params.title};
+        WHERE map_points.title = $6;
         `;
+        console.log("QUERY STR: ", queryString);
         // Update map marker in db
         db.query(queryString, queryParams)
           .then((edit) => {

@@ -9,6 +9,7 @@ $(() => {
     const userName = $("#userName").html(); // hidden p tag containing current user
     const userID = $("#userID").html(); // hidden p tag containing current user
     const pointEditBtn = $(".edit-point-btn"); // edit point button
+    const submitEditPointBtn = $(".edit-point");
 
     favBtn.on("click", (e) => {
       e.preventDefault();
@@ -58,7 +59,7 @@ $(() => {
     });
 
     pointEditBtn.on("click", function (event) {
-      const $editPoint = $(".edit-point-form");
+      const $editPoint = $(this).siblings(".edit-point-form");
 
       if (userName) {
         console.log(userName);
@@ -72,6 +73,28 @@ $(() => {
       } else {
         alert("You must be a registered user to contribute to a map!");
       }
+    });
+    submitEditPointBtn.on("click", function (event) {
+      const $editPointBtn = $(this);
+      const data = {
+        address: $editPointBtn.siblings(".address-field").val(),
+        title: $editPointBtn.siblings(".title-field").val(),
+        description: $editPointBtn.siblings(".description-field").val(),
+      };
+      console.log("BTN DATA: ", $editPointBtn.data("mapId"));
+      $.ajax({
+        url: `/maps/edit/${$editPointBtn.data(
+          "mapId"
+        )}/points/${$editPointBtn.data("pointTitle")}`,
+        type: "POST",
+        data: data,
+        success: function (result) {
+          window.location.reload();
+        },
+        error: function (err) {
+          console.log("ERROR");
+        },
+      });
     });
   }, 100);
 });
