@@ -116,11 +116,18 @@ module.exports = (db) => {
 
     res.redirect("/");
   });
+
   //delete point on a map
   router.post("/delete/:mapID/points/:title", (req, res) => {
     const mapID = req.params.mapID;
-    const mapTitle = req.params.title;
+    const pointTitle = req.params.title;
+    const queryParams = [pointTitle];
+    const queryString = `DELETE FROM map_points WHERE title = $1`;
+    db.query(queryString, queryParams)
+      .then((response) => res.redirect("back"))
+      .catch((err) => console.error("query insert error:", err));
   });
+
   router.get("/:mapID", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
     const queryParams = [req.params.mapID];

@@ -59,7 +59,7 @@
           <tbody>
             <% for (const point of points) { %>
             <tr>
-              <div><%= point.title %></div>
+              <!-- <div><%= point.title %></div> -->
               <td>
                 <div class="marker-info">
                   <img src="<%= point.image %>" />
@@ -73,7 +73,7 @@
                     <button type="button" class="btn btn-primary">Edit</button>
                   </form>
                   <button
-                    onclick="deletePoint('<%= map.id %>', '<%= map.title %>')"
+                    onclick="deletePoint('<%= map.id %>', '<%= point.title %>')"
                     type="button"
                     class="btn btn-danger delete-point"
                   >
@@ -97,10 +97,9 @@
       src="https://maps.googleapis.com/maps/api/js?key=<%= key %>&callback=initMap"
     ></script>
     <script>
-      const deletePoint = (mapID, mapTitle) => {
-        console.log("MAP:", mapID, mapTitle);
+      const deletePoint = (mapID, pointTitle) => {
         $.ajax({
-          url: `/maps/delete/${mapID}/points/${mapTitle}`,
+          url: `/maps/delete/${mapID}/points/${pointTitle}`,
           type: "POST",
           success: function (result) {},
         });
