@@ -128,6 +128,53 @@ module.exports = (db) => {
       .catch((err) => console.error("query insert error:", err));
   });
 
+  // Edit Point
+  router.post("/edit/:mapID/points/:title", (req, res) => {
+    const newAddress = req.body.address;
+    const newTitle = req.body.title;
+    const newDescription = req.body.description;
+    console.log(req.params);
+    // const queryParams = [newAddress, newTitle, newDescription];
+
+    axios
+      .get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+        params: {
+          address: newAddress,
+          key: dbParams.api,
+        },
+      })
+      .then((response) => {
+        const coords = response.data.results[0].geometry.location;
+        const queryParams = [
+          coords.lat,
+          coords.lng,
+          newTitle,
+          newDescription,
+          newAddress,
+        ];
+
+        const queryString = `UPDATE map_points
+        SET latitude = $1,
+        longitude = $2,
+        title = $3,
+        description = $4,
+        address = $5
+        WHERE map_id = 1;
+        `;
+        // Update map marker in db
+        db.query(queryString, queryParams)
+          .then((edit) => {
+            console.log(edit.rows);
+          })
+          .catch((err) => {
+            console.error("query update error:", err);
+          });
+      })
+      .catch((err) => {
+        console.log("Geocode error: ", err);
+      });
+  });
+
   router.get("/:mapID", (req, res) => {
     const userID = req.session.user_id ? req.session.user_id : 0;
     const queryParams = [req.params.mapID];
@@ -146,6 +193,7 @@ module.exports = (db) => {
         const map = all[0].rows[0];
         const user = all[1].rows;
         const points = all[2].rows;
+        console.log(points);
         let templateVars = {
           map: map,
           points: points,

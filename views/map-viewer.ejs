@@ -41,7 +41,7 @@
           <i class="fa fa-heart"></i>
         </button>
       </div>
-
+      <!-- Add Point Form -->
       <div id="addLocation" class="location-form">
         <form method="POST" action="/maps/<%= map.id %>/edit">
           <label for="address">Address/Location</label>
@@ -69,18 +69,28 @@
                 <small><%= point.descr %></small>
                 <% if (userID) { %>
                 <div>
+                  <!-- EDIT POINT FORM -->
                   <div id="edit-point-form" class="location-form">
-                    <form method="POST" action="/maps/<%= map.id %>/edit">
+                    <form>
                       <label for="address">Address/Location</label>
-                      <input id="location" name="address" type="text" />
+                      <input id="address-field" name="address" type="text" />
                       <label for="markerTitle">Title</label>
-                      <input name="markerTitle" />
+                      <input id="title-field" name="markerTitle" />
                       <label for="markerDesc">Description</label>
-                      <textarea name="markerDesc"></textarea>
-                      <button class="btn btn-primary">Add Location</button>
+                      <textarea
+                        id="description-field"
+                        name="markerDesc"
+                      ></textarea>
+                      <button
+                        onclick="editPoint('<%= map.id %>', '<%= point.title %>')"
+                        type="button"
+                        class="btn btn-primary"
+                      >
+                        Edit Point
+                      </button>
                     </form>
                   </div>
-                  <form method="POST" action="/maps/<%= map.id %>/edit">
+                  <form>
                     <button
                       id="edit-point-btn"
                       type="button"
@@ -118,6 +128,25 @@
         $.ajax({
           url: `/maps/delete/${mapID}/points/${pointTitle}`,
           type: "POST",
+          success: function (result) {
+            window.location.reload();
+          },
+          error: function (err) {
+            console.log("ERROR");
+          },
+        });
+      };
+
+      const editPoint = (mapID, pointTitle) => {
+        const data = {
+          address: $("#address-field").val(),
+          title: $("#title-field").val(),
+          description: $("#description-field").val(),
+        };
+        $.ajax({
+          url: `/maps/edit/${mapID}/points/${pointTitle}`,
+          type: "POST",
+          data: data,
           success: function (result) {
             window.location.reload();
           },
