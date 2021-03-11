@@ -101,7 +101,12 @@
         $.ajax({
           url: `/maps/delete/${mapID}/points/${pointTitle}`,
           type: "POST",
-          success: function (result) {},
+          success: function (result) {
+            window.location.reload();
+          },
+          error: function (err) {
+            console.log("ERROR");
+          },
         });
       };
     </script>

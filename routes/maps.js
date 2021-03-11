@@ -124,7 +124,7 @@ module.exports = (db) => {
     const queryParams = [pointTitle];
     const queryString = `DELETE FROM map_points WHERE title = $1`;
     db.query(queryString, queryParams)
-      .then((response) => res.redirect("back"))
+      .then((response) => res.json({}))
       .catch((err) => console.error("query insert error:", err));
   });
 
