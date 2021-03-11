@@ -56,8 +56,8 @@
                 <a class="map-creator" href="/maps"><%= map.name %></a>
               </h2>
             </div>
-            <div>
-              <p><%= map.description %></p>
+            <p><%= map.description %></p>
+            <div class="footer">
               <button
                 class="favMap"
                 data-placement="top"
@@ -65,8 +65,8 @@
               >
                 <i class="fa fa-heart"></i>
               </button>
+              <h4><div class="badge text-dark"><%= map.category %></div></h4>
             </div>
-            <small class="badge text-dark"><%= map.category %></small>
             <small class="mapID"><%= map.id %></small>
             <small class="userID"><%= userID %></small>
           </div>

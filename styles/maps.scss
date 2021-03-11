@@ -3,80 +3,88 @@ h1.pageTitle {
   padding-bottom: 14px;
 }
 
-.map-view {
+#map-container {
   display: flex;
-  flex-direction: row;
-  width: 20%;
-  .map-element {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 350px;
-    padding: 1em;
-    border: solid black 5px;
-    .map-info {
+  flex-direction: column;
+  align-items: center;
+  .map-view {
+    width: 70%;
+    .map-element {
       display: flex;
-      align-items: center;
-      margin-bottom: 0.8em;
-      .map-info-text {
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 350px;
+      padding: 1em;
+      border: solid black 5px;
+      .map-info {
         display: flex;
-
-        a {
-          color: #244751;
+        align-items: center;
+        margin-bottom: 0.8em;
+        .map-info-text {
+          display: flex;
+          justify-content: center;
+          a {
+            color: #244751;
+          }
+          a:hover {
+            color: #0fbeee;
+            text-decoration: none;
+          }
         }
-        a:hover {
-          color: #0fbeee;
-          text-decoration: none;
+        .map-title {
+          font-family: "Rubik", sans-serif;
+          font-weight: bold;
+        }
+        .imgContainer {
+          margin-right: 1em;
+          width: 250px;
+          img {
+            max-width: 100%;
+          }
+        }
+        .by {
+          font-family: "Rubik", sans-serif;
+          font-weight: 300;
+          margin: 0px 5px 0px 5px;
+        }
+        .map-creator {
+          font-family: "Rubik", sans-serif;
         }
       }
-      .map-title {
-        font-family: "Rubik", sans-serif;
-        font-weight: bold;
-      }
-      .imgContainer {
-        margin-right: 1em;
-        width: 250px;
-        img {
-          max-width: 100%;
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        .favMap {
+          width: 42px;
+          border: 2px solid cadetblue;
+          border-radius: 50%;
+          background-color: mediumturquoise;
+          font-size: 1.5em;
+          margin-bottom: 5px;
+          .fa-heart {
+            color: rgba(247, 50, 1, 0.482);
+            border: 0px;
+          }
+          .fa-heart:hover {
+            color: rgb(247, 50, 1);
+          }
+        }
+        .favourited {
+          .fa-heart {
+            color: rgb(247, 50, 1);
+            border: 0px;
+          }
+        }
+        .badge {
+          width: fit-content;
+          height: fit-content;
+          background-color: rgba(0, 139, 139, 0.454);
         }
       }
-      .by {
-        font-family: "Rubik", sans-serif;
-        font-weight: 300;
+      .mapID,
+      .userID {
+        display: none;
       }
-      .map-creator {
-        font-family: "Rubik", sans-serif;
-      }
-    }
-
-    .favMap {
-      width: 42px;
-      border: 2px solid cadetblue;
-      border-radius: 50%;
-      background-color: mediumturquoise;
-      font-size: 1.5em;
-      margin-bottom: 5px;
-      .fa-heart {
-        color: rgba(247, 50, 1, 0.482);
-        border: 0px;
-      }
-      .fa-heart:hover {
-        color: rgb(247, 50, 1);
-      }
-    }
-    .favourited {
-      .fa-heart {
-        color: rgb(247, 50, 1);
-        border: 0px;
-      }
-    }
-    small.badge {
-      width: fit-content;
-      background-color: rgba(0, 139, 139, 0.454);
-    }
-    .mapID,
-    .userID {
-      display: none;
     }
   }
 }
