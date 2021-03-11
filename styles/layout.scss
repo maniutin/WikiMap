@@ -18,6 +18,7 @@ header.partial {
 
 .pageTitle {
   margin-top: 100px;
+  font-family: "Rubik", sans-serif;
 }
 
 nav.navbar {
@@ -46,6 +47,10 @@ header > nav {
   h4 {
     color: #244751;
   }
+}
+.map-title {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
 }
 
 button:focus {

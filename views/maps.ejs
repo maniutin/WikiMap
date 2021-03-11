@@ -49,7 +49,12 @@
                     <img src="<%= map.map_image_url %>" />
                   </div>
                   <h2>
-                    <a href="/maps/<%= map.id %>"><%= map.title %></a> by
+                    <b
+                      ><a class="map-title" href="/maps/<%= map.id %>"
+                        ><%= map.title %></a
+                      ></b
+                    >
+                    by
                     <a href="/maps"><%= map.name %></a>
                   </h2>
                 </div>
