@@ -42,7 +42,7 @@
         </button>
       </div>
 
-      <div id="addLocation">
+      <div id="addLocation" class="location-form">
         <form method="POST" action="/maps/<%= map.id %>/edit">
           <label for="address">Address/Location</label>
           <input id="location" name="address" type="text" />
@@ -69,8 +69,25 @@
                 <small><%= point.descr %></small>
                 <% if (userID) { %>
                 <div>
+                  <div id="edit-point-form" class="location-form">
+                    <form method="POST" action="/maps/<%= map.id %>/edit">
+                      <label for="address">Address/Location</label>
+                      <input id="location" name="address" type="text" />
+                      <label for="markerTitle">Title</label>
+                      <input name="markerTitle" />
+                      <label for="markerDesc">Description</label>
+                      <textarea name="markerDesc"></textarea>
+                      <button class="btn btn-primary">Add Location</button>
+                    </form>
+                  </div>
                   <form method="POST" action="/maps/<%= map.id %>/edit">
-                    <button type="button" class="btn btn-primary">Edit</button>
+                    <button
+                      id="edit-point-btn"
+                      type="button"
+                      class="btn btn-primary"
+                    >
+                      Edit
+                    </button>
                   </form>
                   <button
                     onclick="deletePoint('<%= map.id %>', '<%= point.title %>')"

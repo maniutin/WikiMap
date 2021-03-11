@@ -8,6 +8,7 @@ $(() => {
     const locBtn = $(".addLoc"); // button for 'Add Location'
     const userName = $("#userName").html(); // hidden p tag containing current user
     const userID = $("#userID").html(); // hidden p tag containing current user
+    const pointEditBtn = $("#edit-point-btn"); // edit point button
 
     favBtn.on("click", (e) => {
       e.preventDefault();
@@ -41,6 +42,23 @@ $(() => {
       if (userName) {
         console.log(userName);
         $addLocation.slideToggle({
+          duration: 400,
+          start: function () {
+            $(this).css("display", "flex");
+          },
+        });
+        $("#location").focus();
+      } else {
+        alert("You must be a registered user to contribute to a map!");
+      }
+    });
+
+    pointEditBtn.on("click", function (event) {
+      const $editPoint = $("#edit-point-form");
+
+      if (userName) {
+        console.log(userName);
+        $editPoint.slideToggle({
           duration: 400,
           start: function () {
             $(this).css("display", "flex");
