@@ -30,7 +30,13 @@ $(document).ready(function() {
   const $favouriteMaps = $("#favourite-maps-container");
   const $contributionMaps = $("#contribution-maps-container");
 
-  $("#my-maps").on("click", () => {
+  $("#my-maps").on("click", (e) => {
+    console.log($(this))
+    if (!$("#my-maps").hasClass("active")) {
+      $("#my-maps").addClass("active")
+      $("#my-favourites").removeClass("active")
+      $("#my-contributions").removeClass("active")
+    }
     $myMaps.addClass("show");
     $myMaps.removeClass("hide");
     $favouriteMaps.addClass("hide");
@@ -38,7 +44,14 @@ $(document).ready(function() {
     $contributionMaps.addClass("hide");
     $contributionMaps.removeClass("show");
   })
+
   $("#my-favourites").on("click", () => {
+    console.log($(this))
+    if (!$("#my-favourites").hasClass("active")) {
+      $("#my-favourites").addClass("active")
+      $("#my-maps").removeClass("active")
+      $("#my-contributions").removeClass("active")
+    }
     $myMaps.addClass("hide");
     $myMaps.removeClass("show");
     $favouriteMaps.addClass("show");
@@ -46,7 +59,14 @@ $(document).ready(function() {
     $contributionMaps.addClass("hide");
     $contributionMaps.removeClass("show");
   })
+
   $("#my-contributions").on("click", () => {
+    console.log($(this))
+    if (!$("#my-contributions").hasClass("active")) {
+      $("#my-contributions").addClass("active")
+      $("#my-maps").removeClass("active")
+      $("#my-favourites").removeClass("active")
+    }
     $myMaps.addClass("hide");
     $myMaps.removeClass("show");
     $favouriteMaps.addClass("hide");
