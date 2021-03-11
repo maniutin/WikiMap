@@ -8,11 +8,11 @@ $(() => {
 
     favBtn.on('click', (e) => {
       e.preventDefault();
-      console.log(isUser);
 
       let thisBtn = $(e.target.parentElement);
-      let mapID = thisBtn.siblings('.mapID').html();
+      let mapID = thisBtn.parent().siblings('.mapID').html();
       let classes = Object.values(thisBtn[0].classList);
+      console.log('mapID: ', mapID);
 
       if (!classes.includes('favourited')) {
         $.ajax({
