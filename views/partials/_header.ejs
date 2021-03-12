@@ -2,30 +2,38 @@
   <nav class="navbar navbar-light">
     <div class="navlinks">
       <a href="/maps" id="wiki-logo">WikiMaps</a>
-      <% if (user) { %>
-      <a href="/users/<%= user %>/favourites">Favourites</a>
-      <a href="/users/<%= user %>/maps">My Maps</a>
-      <a href="/maps/new">New Map</a>
-      <% } else { %>
-      <a href="#">Favourites</a>
-      <a href="#">My Maps</a>
-      <a href="#">New Map</a>
-      <% } %>
+      <div class="main-navigation">
+        <% if (user) { %>
+        <a href="/users/<%= user %>/maps">My Maps</a>
+        <a href="/maps/new">New Map</a>
+        <% } else { %>
+        <a href="#">My Maps</a>
+        <a href="#">New Map</a>
+        <% } %>
+      </div>
     </div>
     <div>
       <% if (!user) { %>
       <a href="/login">Login</a>
       <a href="/register">Register</a>
       <% } else { %>
-      <label for="user" style="margin-bottom: 0"
-        >Logged In As: <a href="/maps"><%= user %></a></label
-      >
-      <form method="POST" action="/logout" class="form-inline">
-        <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">
-          Logout
-        </button>
-      </form>
-      <% } %>
+      <div class="logged-user-options">
+        <label for="user" style="margin-bottom: 0"
+          >Logged In As:
+          <a href="/users/<%= user %>/maps"><%= user %></a></label
+        >
+        <form
+          id="logout-btn"
+          method="POST"
+          action="/logout"
+          class="form-inline"
+        >
+          <button type="submit" class="btn btn-outline-danger my-2 my-sm-0">
+            Logout
+          </button>
+        </form>
+        <% } %>
+      </div>
     </div>
   </nav>
 </header>

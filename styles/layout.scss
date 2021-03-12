@@ -2,7 +2,7 @@
 
 header.partial {
   margin-bottom: 1em;
-  height: 80px;
+  // height: 80px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -13,7 +13,7 @@ header.partial {
 
   #wiki-logo {
     font-family: "Fredoka One", cursive;
-    // font-size: 1.2rem;
+    font-size: 1.7rem;
   }
 }
 body {
@@ -26,12 +26,22 @@ body {
 }
 
 nav.navbar {
+  align-items: center;
   div.navlinks {
     display: flex;
     justify-content: space-evenly;
     a {
-      margin: 1em;
       color: #244751;
+    }
+  }
+  .main-navigation {
+    margin: 10px;
+  }
+  .logged-user-options {
+    display: flex;
+    align-items: center;
+    #logout-btn {
+      margin-left: 10px;
     }
   }
 }
@@ -51,7 +61,7 @@ button:focus {
   box-shadow: none;
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 768px) {
   header.partial {
     height: 100px;
   }
@@ -66,7 +76,14 @@ button:focus {
       // justify-content: space-evenly;
       a {
         margin: 1em;
-        color: #e40a0a;
+      }
+    }
+    .logged-user-options {
+      display: flex;
+      flex-direction: column;
+
+      #logout-btn {
+        margin-left: 10px;
       }
     }
   }
