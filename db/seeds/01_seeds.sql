@@ -14,11 +14,15 @@ VALUES (1, 'Healthy Food', 'Healthy food spots in Tor', 'Food', 43.6796737343155
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
 VALUES (2, 'BC Hikes', 'Great weekend Hiking trips', 'Nature', 54.08602088317381, -126.16173755038751, 'https://images.unsplash.com/photo-1470770903676-69b98201ea1c');
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
-VALUES (3, 'Sport Fields', 'Places to meet and have fun with friends', 'Nature', 43.39013188839061, -80.06310397360107, 'https://images.unsplash.com/photo-1500871872539-d3fff9af3ce7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D');
+VALUES (3, 'Sport Fields', 'Places to meet and have fun with friends', 'Nature', 43.39013188839061, -80.06310397360107, 'https://images.unsplash.com/photo-1500871872539-d3fff9af3ce7');
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
 VALUES (1, 'Parquor Spots', 'Cityscapes for ideal parqouring', 'Outdoor Recreation', 51.50280339972994, -0.2474303699636878, 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd');
 INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
 VALUES (4, 'Parquor Spots', 'Cityscapes for ideal parqouring', 'Outdoor Recreation', 51.50280339972994, -0.2474303699636878, 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd');
+INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
+VALUES (2, 'Star Gazing', 'Salvia vaporware listicle franzen. Swag crucifix deep v small batch yuccie photo booth selfies pabst narwhal poke. Church-key pitchfork williamsburg banh mi VHS cronut gochujang. ', 'Outdoor Recreation', 43.900366, -79.328427, 'https://images.unsplash.com/photo-1527492662722-dbaf97270863');
+INSERT INTO maps (owner_id, title, description, category, start_lat, start_long, map_image_url)
+VALUES (2, 'Hakka Food', 'Roof party typewriter skateboard, gluten-free microdosing raclette narwhal live-edge. Bushwick jianbing helvetica pinterest. Blue bottle chartreuse seitan prism deep v direct trade schlitz typewriter tumblr drinking vinegar ', 'Food', 51.50280339972994, -0.2474303699636878, 'https://images.unsplash.com/photo-1548943487-a2e4e43b4853');
 
 INSERT INTO map_points (user_id, map_id, latitude, longitude, title, description, address)
 VALUES (2, 1, 43.68234793251599, -79.32528046252345, 'Carrer de Sardenya', 'The healthiest food in Toronto, hands down', '1153 Craven Rd, Toronto, ON M4J 4V7, Canada');
