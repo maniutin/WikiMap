@@ -61,6 +61,16 @@ $(() => {
     pointEditBtn.on("click", function (event) {
       const $editPoint = $(this).siblings(".edit-point-form");
 
+      // Grab current details
+      let $title = $(this).parents('.markerTd').find('.markerH4').html();
+      let $address = $(this).parents('.markerTd').find('.markerAddress').html();
+      let $desc = $(this).parents('.markerTd').find('.markerDesc').html();
+
+      // Autofill edit form from current data
+      $(this).siblings('div.location-form').find('.address-field').val($address);
+      $(this).siblings('div.location-form').find('.title-field').val($title);
+      $(this).siblings('div.location-form').find('.description-field').val($desc);
+
       if (userName) {
         console.log(userName);
         $editPoint.slideToggle({
@@ -69,7 +79,6 @@ $(() => {
             $(this).css("display", "flex");
           },
         });
-        $("#location").focus();
       } else {
         alert("You must be a registered user to contribute to a map!");
       }
