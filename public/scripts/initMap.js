@@ -11,7 +11,7 @@ function initMap() {
       const startCoordinates = { lat: Number(data.startLat), lng: Number(data.startLng) };
       // The map, centered at start coordinates
       const map = new google.maps.Map(document.getElementById("map-viewport"), {
-        zoom: 8,
+        zoom: 10,
         center: startCoordinates,
       });
 
