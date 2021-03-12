@@ -3,11 +3,9 @@
     <div class="navlinks">
       <a href="/maps" id="wiki-logo">WikiMaps</a>
       <% if (user) { %>
-      <a href="/users/<%= user %>/favourites">Favourites</a>
       <a href="/users/<%= user %>/maps">My Maps</a>
       <a href="/maps/new">New Map</a>
       <% } else { %>
-      <a href="#">Favourites</a>
       <a href="#">My Maps</a>
       <a href="#">New Map</a>
       <% } %>
