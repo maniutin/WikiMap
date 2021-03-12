@@ -52,31 +52,6 @@ module.exports = (db) => {
       });
   });
 
-  // Can remove this route, its in the above route
-  router.get("/:userId/favourites", (req, res) => {
-    const currentUser = req.session.user_id;
-    // const currentUser = req.params.userId;
-    console.log(currentUser);
-    const templateVars = {
-      user: currentUser,
-    };
-
-    const queryString = `SELECT favourites.*, maps.*, users.name FROM favourites JOIN maps ON map_id = maps.id JOIN users on users.id = user_id WHERE user_id = $1;`;
-    const queryParams = [currentUser];
-
-    db.query(queryString, queryParams)
-      .then((favouritesResponse) => {
-        templateVars.favourites = favouritesResponse.rows;
-        templateVars.user = favouritesResponse.rows[0].name;
-
-        console.log(templateVars);
-        res.render("favourites", templateVars);
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
   router.post("/:userId/favourites", (req, res) => {
     console.log("got the post req!");
     const currentUser = req.session.user_id ? req.session.user_id : 0;
@@ -126,14 +101,5 @@ module.exports = (db) => {
       .catch((err) => console.error("query insert error:", err));
   });
 
-  // // skeleton code
-  // router.get("/api", (req, res) => {
-  //   db.query(`SELECT * FROM users;`)
-  //     .then(data => {
-  //       const users = data.rows;
-  //       // res.json({ users });
-  //       return users;
-  //     })
-  // });
   return router;
 };
