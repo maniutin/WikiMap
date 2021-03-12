@@ -11,7 +11,7 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
-  thumbnail_url VARCHAR(255) NOT NULL DEFAULT '/../../public/images/profile-hex.png'
+  thumbnail_url VARCHAR(255) DEFAULT '/../../public/images/profile-hex.png'
 );
 
 CREATE TABLE maps (
