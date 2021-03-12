@@ -8,11 +8,16 @@ h1.pageTitle {
 }
 
 #map-container {
-  display: flex;
-  flex-direction: column;
+  position: relative;
   align-items: center;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
   .map-view {
-    width: 75%;
+    width: 45%;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
     .map-element:hover {
       box-shadow: 1px 1px 1px 1px #c6cbe1;
     }
@@ -101,6 +106,16 @@ h1.pageTitle {
       .userID {
         display: none;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #map-container {
+    display: flex;
+    flex-direction: column;
+    .map-view {
+      width: 75%;
     }
   }
 }
