@@ -44,7 +44,11 @@
           <div class="map-element">
             <div class="map-info">
               <div class="imgContainer">
+              <% if (!map.map_image_url) { %>
+                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" />
+              <% } else { %>
                 <img src="<%= map.map_image_url %>" />
+              <% } %>
               </div>
               <h2 class="map-info-text">
                 <b

@@ -55,11 +55,11 @@
           <% } %> <% for (const ownerMap of ownerMaps) { %>
           <div class="mb-3">
             <div class="profile-map">
-              <img
-                src="<%= ownerMap.map_image_url %>"
-                alt="<%= ownerMap.title %>"
-                class="profile-map-img"
-              />
+              <% if (!ownerMap.map_image_url) { %>
+                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80" alt="<%= ownerMap.title %>" class="profile-map-img" />
+              <% } else { %>
+                <img src="<%= ownerMap.map_image_url %>" alt="<%= ownerMap.title %>" class="profile-map-img"/>
+              <% } %>
               <div class="profile-map-content">
                 <header>
                   <h5><%= ownerMap.title %></h5>
