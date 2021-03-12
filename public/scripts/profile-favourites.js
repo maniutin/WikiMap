@@ -25,7 +25,7 @@ $(document).ready(function() {
     }
   })
 
-
+  // Profile navigation between "my maps"/"my favourites"/"my contributions"
   const $myMaps = $("#owner-maps-container");
   const $favouriteMaps = $("#favourite-maps-container");
   const $contributionMaps = $("#contribution-maps-container");

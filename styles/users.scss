@@ -33,12 +33,15 @@ main {
       padding: 1em;
     }
 
+    .profile-map:hover {
+      box-shadow: 1px 1px 1px 1px #c6cbe1;
+    }
+
     .profile-map {
-      border: black 1px solid;
+      border: rgba(146, 146, 146, 0.185) 1px solid;
       border-radius: 8px;
       width: 100%;
       overflow: hidden;
-      // display: flex;
 
       .profile-map-img {
         width: 100%;
