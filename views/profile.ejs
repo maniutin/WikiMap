@@ -85,11 +85,17 @@
           <% } %> <% for (const favMap of favouriteMaps) { %>
           <div class="mb-3">
             <div class="profile-map">
-              <img
+              <% if (!favMap.map_image_url) { %>
+                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+                alt="<%= favMap.title %>"
+                class="profile-map-img" />
+              <% } else { %>
+                <img
                 src="<%= favMap.map_image_url %>"
                 alt="<%= favMap.title %>"
                 class="profile-map-img"
               />
+              <% } %>
               <div class="profile-map-content">
                 <header>
                   <h5><%= favMap.title %></h5>
@@ -121,11 +127,19 @@
           <% } %> <% for (const contributionMap of contributionMaps) { %>
           <div class="mb-3">
             <div class="profile-map">
-              <img
+
+              <% if (!contributionMap.map_image_url) { %>
+                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+                alt="<%= contributionMap.title %>"
+                class="profile-map-img" />
+              <% } else { %>
+                <img
                 src="<%= contributionMap.map_image %>"
                 alt="<%= contributionMap.title %>"
                 class="profile-map-img"
               />
+              <% } %>
+
               <div class="profile-map-content">
                 <header>
                   <h5><%= contributionMap.title %></h5>

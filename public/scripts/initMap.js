@@ -43,7 +43,7 @@ function initMap() {
         markerInfo = new google.maps.InfoWindow({
           content: `<h4>${data.points[i].title}</h4>` +
                    `<div class='markerInfo'>` +
-                   `<div class='imgContainer'><img style='width:100px;' src='${data.points[i].image}'></div>` +
+                   `<div class='imgContainer'><img style='width:100px;' src='${data.points[i].image ? data.points[i].image : 'https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80'}'></div>` +
                    `<div><b>${data.points[i].address}<br><br></b>` +
                    `<p>${data.points[i].descr}</p></div></div>`,
           position: position,
