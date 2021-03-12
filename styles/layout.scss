@@ -33,9 +33,13 @@ nav.navbar {
     a {
       color: #244751;
     }
+    .new-map-symbol {
+      display: none;
+    }
   }
   .main-navigation {
     margin: 10px;
+    margin-left: 20px;
   }
   .logged-user-options {
     display: flex;
@@ -62,25 +66,37 @@ button:focus {
 }
 
 @media only screen and (max-width: 768px) {
-  header.partial {
-    height: 100px;
-  }
+  // header.partial {
+  //   height: 100px;
+  // }
 
   .pageTitle {
     margin-top: 120px;
   }
 
   nav.navbar {
+    .main-navigation {
+      margin-left: 40px;
+    }
     div.navlinks {
-      display: block;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       // justify-content: space-evenly;
       a {
-        margin: 1em;
+        // margin: 1em;
+      }
+      .new-map-text {
+        display: none;
+      }
+      .new-map-symbol {
+        display: flex;
+        font-size: 20pt;
       }
     }
     .logged-user-options {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
 
       #logout-btn {
         margin-left: 10px;
