@@ -104,7 +104,7 @@
                     <%= favMap.category %>
                   </small>
                 </header>
-                <div><%= favMap.description %></div>
+                <p><%= favMap.description %></p>
               </div>
               <div class="profile-map-btns">
                 <a class="btn btn-primary" href="/maps/<%= favMap.map_id %>"
@@ -124,12 +124,13 @@
         <section id="contribution-maps-container" class="hide">
           <% if (!contributionMaps.length) { %>
           <h3>You have no contributions. View maps <a href="/">here</a></h3>
-          <% } %> <% for (const contributionMap of contributionMaps) { %>
+          <% } %>
+          <% for (const contributionMap of contributionMaps) { %>
           <div class="mb-3">
             <div class="profile-map">
 
-              <% if (!contributionMap.map_image_url) { %>
-                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb?ixid=MXwxMjA3fDB8MHxwaG90by1[…]VufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+              <% if (!contributionMap.map_image) { %>
+                <img src="https://images.unsplash.com/photo-1553547358-e8a4ee2dcfeb"
                 alt="<%= contributionMap.title %>"
                 class="profile-map-img" />
               <% } else { %>
@@ -148,8 +149,7 @@
                     <%= contributionMap.category %>
                   </small>
                 </header>
-
-                <%= contributionMap.description %>
+                <p><%= contributionMap.description %></p>
               </div>
               <div class="profile-map-btns">
                 <a

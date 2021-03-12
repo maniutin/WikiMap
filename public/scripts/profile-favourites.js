@@ -101,7 +101,7 @@ const createFavouriteElement = (favouriteObj) => {
             ${favouriteObj.category}
           </small>
         </header>
-        ${favouriteObj.description}
+        <p>${favouriteObj.description}</p>
       </div>
       <div class="profile-map-btns">
         <a class="btn btn-primary" href="/maps/${favouriteObj.map_id}">View</a>
