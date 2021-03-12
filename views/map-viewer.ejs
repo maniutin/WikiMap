@@ -63,7 +63,7 @@
           <label for="markerTitle">Title</label>
           <input name="markerTitle" />
           <label for="markerDesc">Description</label>
-          <textarea name="markerDesc"></textarea>
+          <textarea name="markerDesc" maxlength="100"></textarea>
           <label for="img">Location Image URL</label>
           <input id="marker-img" name="img" type="text" />
           <button class="btn btn-primary">Add Location</button>
@@ -76,12 +76,14 @@
             <% for (const point of points) { %>
             <tr>
               <!-- <div><%= point.title %></div> -->
-              <td>
+              <td class='markerTd'>
                 <div class="marker-info">
                   <img class="markerImg" src="<%= point.image %>" />
-                  <h4 class="markerH4"><%= point.title %></h4>
+                  <div class="markerBP">
+                    <h4 class="markerH4"><%= point.title %></h4>
+                    <p class="markerAddress"><%= point.address %></p>
+                  </div>
                 </div>
-                <p><%= point.address %></p>
                 <small><%= point.descr %></small>
                 <% if (userID) { %>
                 <div>

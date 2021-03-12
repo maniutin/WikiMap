@@ -3,10 +3,10 @@ body {
   background-image: url('https://www.transparenttextures.com/patterns/groovepaper.png');
 }
 
-h2 {
+h2.pageTitle {
   width: 100%;
   text-align: center;
-  margin: 1em 0;
+  margin-bottom: 20px;
 }
 
 .container {
@@ -27,8 +27,7 @@ h2 {
         width: 100px;
         margin-right: 1em;
         img {
-          max-width:100%;
-          max-height:100%;
+          object-fit: scale-down;
         }
       }
       div {
@@ -101,7 +100,7 @@ h2 {
     cursor: pointer;
   }
   .markerH4:hover {
-    color:rgb(24, 165, 24);
+    color:rgb(100, 179, 11);
     cursor: pointer;
   }
 
@@ -112,20 +111,42 @@ h2 {
     overflow: scroll;
 
     tbody {
+      .markerTd {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
       .marker-info {
+        margin-bottom: 10px;
         display: flex;
         align-items: center;
         img {
-          width: 100px;
-          height: 100px;
+          width: 150px;
+          height: 150px;
         }
-        h4 {
-          margin-left: 1em;
+        div.markerBP {
+          margin-left: 20px;
+          h4 {
+            font-family: "Rubik", sans-serif;
+            font-size: 2vw;
+          }
+          p.markerAddress {
+            margin-top: 12px;
+            font-size: 2vw;
+          }
         }
       }
-      p {
-        margin-top: 10px;
+
+      .markerTd > small {
+        border: 2px dotted grey;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        line-height: 1.5em;
+        padding: 1em;
+        overflow: scroll;
+        font-size: 1.25vw;
       }
+
     }
   }
 }
@@ -134,4 +155,14 @@ h2 {
 #userID,
 #userName {
   display: none;
+}
+
+
+@media only screen and (min-width: 992px) {
+
+
+  div.markerBP {
+    margin-right: 50px;
+  }
+
 }
